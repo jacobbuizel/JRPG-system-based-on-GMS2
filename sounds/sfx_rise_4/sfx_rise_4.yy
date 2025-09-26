@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sfx_rise_4",
+  "audioGroupId":{
+    "name":"audiogroup_SFX",
+    "path":"audiogroups/audiogroup_SFX",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":0.980479,
+  "name":"sfx_rise_4",
+  "parent":{
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfx_rise_4.ogg",
+  "type":1,
+  "volume":1.0,
+}

@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sfx_success",
+  "audioGroupId":{
+    "name":"audiogroup_SFX",
+    "path":"audiogroups/audiogroup_SFX",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":2.969354,
+  "name":"sfx_success",
+  "parent":{
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfx_success.ogg",
+  "type":1,
+  "volume":1.0,
+}

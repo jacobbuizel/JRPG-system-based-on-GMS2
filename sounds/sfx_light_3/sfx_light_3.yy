@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"sfx_light_3",
+  "audioGroupId":{
+    "name":"audiogroup_SFX",
+    "path":"audiogroups/audiogroup_SFX",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":1.103438,
+  "name":"sfx_light_3",
+  "parent":{
+    "name":"SFX",
+    "path":"folders/Sounds/SFX.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"sfx_light_3.ogg",
+  "type":1,
+  "volume":1.0,
+}
