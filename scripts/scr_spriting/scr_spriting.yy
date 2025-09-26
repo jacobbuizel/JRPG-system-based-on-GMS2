@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_spriting",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_spriting",
+  "parent":{
+    "name":"rootscr",
+    "path":"folders/Scripts/rootscr.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

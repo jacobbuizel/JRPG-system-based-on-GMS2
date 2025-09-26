@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_msg",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_msg",
+  "parent":{
+    "name":"msg",
+    "path":"folders/Scripts/msg.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

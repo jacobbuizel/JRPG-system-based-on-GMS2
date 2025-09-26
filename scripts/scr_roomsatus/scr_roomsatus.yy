@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_roomsatus",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_roomsatus",
+  "parent":{
+    "name":"rootscr",
+    "path":"folders/Scripts/rootscr.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

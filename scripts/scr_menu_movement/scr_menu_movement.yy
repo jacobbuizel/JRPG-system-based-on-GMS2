@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_menu_movement",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_menu_movement",
+  "parent":{
+    "name":"rootscr",
+    "path":"folders/Scripts/rootscr.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

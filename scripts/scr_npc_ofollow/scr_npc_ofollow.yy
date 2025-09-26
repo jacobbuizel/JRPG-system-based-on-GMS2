@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_npc_ofollow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_npc_ofollow",
+  "parent":{
+    "name":"npc_behavior",
+    "path":"folders/Scripts/npc_behavior.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

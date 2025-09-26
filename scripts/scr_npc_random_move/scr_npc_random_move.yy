@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_npc_random_move",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_npc_random_move",
+  "parent":{
+    "name":"npc_behavior",
+    "path":"folders/Scripts/npc_behavior.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

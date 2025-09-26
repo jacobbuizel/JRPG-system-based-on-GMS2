@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_item_script_execute",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_item_script_execute",
+  "parent":{
+    "name":"rootscr",
+    "path":"folders/Scripts/rootscr.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

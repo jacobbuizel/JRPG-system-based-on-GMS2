@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_msg_game",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_msg_game",
+  "parent":{
+    "name":"for_translate",
+    "path":"folders/Scripts/for_translate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
