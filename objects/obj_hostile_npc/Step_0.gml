@@ -1,0 +1,54 @@
+if !global.pause && !global.talking
+{
+	scr_npc_behavior();
+	scr_movement();
+	if collision_circle(x,y,256,follow_target,false,true)
+	{
+		follow_timer = follow_timer_max;
+	}
+	
+	if follow_timer > 0
+	{
+		follow_timer--
+		if place_meeting(x,y,obj_player)
+		{
+			path_end();
+			npc_behavior = 0; //与玩家碰撞后待机
+		}
+		else
+		{
+			npc_behavior = npc_default_behavior_a;
+		}
+	}
+	else if npc_behavior == npc_default_behavior_a
+	{
+		vs -= acc*1.1;
+		if vs <= 0
+		{
+			path_end();
+			npc_behavior = npc_default_behavior;
+		}
+	}
+	else
+	{
+		path_end();
+		npc_behavior = npc_default_behavior;
+	}
+	
+	
+	//精灵贴图设置
+	sprtime--;
+	if sprtime<=0
+	{
+		++spranimation_time;
+		if spranimation_time >= maxframe
+		{
+			spranimation_time = 0;
+		}
+		sprtime = 5;
+	}
+}
+if global.pause || global.talking
+{
+	path_end();
+}

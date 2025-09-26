@@ -1,0 +1,1 @@
+draw_sprite_ext(equip_id.spr,0,x,y,0.125,0.125,0,c_white,1);
