@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"dis_scr_gamerule",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"dis_scr_gamerule",
+  "parent":{
+    "name":"rootscr",
+    "path":"folders/Scripts/rootscr.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
