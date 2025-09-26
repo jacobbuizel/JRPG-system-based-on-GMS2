@@ -1,0 +1,82 @@
+c_name			0名字
+race_id			1种族id
+sub_race_id		2亚种id
+class_id		3职业id
+sub_class_id	4子职id
+xp				5经验
+str				6力量
+dex				7敏捷
+con				8体质
+int				9智力
+wis				10感知
+cha				11魅力
+spd				12速度
+alignment_id	13阵营
+HD				14生命骰类型
+HDN				15生命骰总数
+CR				16等级
+MP				17法力值
+race			18种族字符串
+sub_race		19亚种字符串
+class			20职业字符串
+sub_class		21子职字符串
+str_m			22力量调整值
+dex_m			23敏捷调整值
+con_m			24体质调整值
+int_m			25智力调整值
+wis_m			26感知调整值
+cha_m			27魅力调整值
+alignment		28阵营字符串
+level			29等级
+PRO_B			30熟练调整值
+AC				31防御等级
+AC_C			32当前防御等级
+HP				33生命值
+HP_C			34当前生命值
+MP_C			35当前法力值
+descr			36描述
+art				37立绘
+portrait		38头像
+main_h			39主手
+sec_h			40副手
+armor			41护甲
+accessoryA		42配饰a
+accessoryB		43配饰b
+accessoryC		44配饰c
+ammunitionA		45弹药a
+ammunitionB		46弹药b
+ammunitionC		47弹药c
+ammunitionD		48弹药d
+以上字段后面的两个数字全部废弃了，因为已经从ds表格转换成struct了，之所以保留是因为麻烦+修复遗留代码会用到
+
+法术等级和消耗MP量
+1	1
+2	2
+3	4
+4	5
+5	7
+6	8
+7	9
+8	11
+9	12
+人物等级 可施展法术等级 最大MP值
+1	1	2
+2	1	3
+3	2	5
+4	2	6
+5	3	8
+6	3	9
+7	4	12
+8	4	15
+9	5	16
+10	5	20
+11	6	24
+12	6	25
+13	7	30
+14	7	35
+15	8	36
+16	8	42
+17	9	48
+18	9	49
+19	9	56
+20	9	63

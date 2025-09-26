@@ -1,0 +1,1 @@
+msg_id = "test_npc_2";

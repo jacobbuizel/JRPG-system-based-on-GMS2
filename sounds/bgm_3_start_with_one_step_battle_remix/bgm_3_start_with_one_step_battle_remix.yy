@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"bgm_3_start_with_one_step_battle_remix",
+  "audioGroupId":{
+    "name":"audiogroup_BGM_2",
+    "path":"audiogroups/audiogroup_BGM_2",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":72.8276,
+  "name":"bgm_3_start_with_one_step_battle_remix",
+  "parent":{
+    "name":"BGM",
+    "path":"folders/Sounds/BGM.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"bgm_3_start_with_one_step_battle_remix.ogg",
+  "type":1,
+  "volume":1.0,
+}

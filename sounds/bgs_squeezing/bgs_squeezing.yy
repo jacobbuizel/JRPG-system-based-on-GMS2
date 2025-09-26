@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"bgs_squeezing",
+  "audioGroupId":{
+    "name":"audiogroup_BGS",
+    "path":"audiogroups/audiogroup_BGS",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":4.487229,
+  "name":"bgs_squeezing",
+  "parent":{
+    "name":"BGS",
+    "path":"folders/Sounds/BGS.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"bgs_squeezing.ogg",
+  "type":1,
+  "volume":1.0,
+}

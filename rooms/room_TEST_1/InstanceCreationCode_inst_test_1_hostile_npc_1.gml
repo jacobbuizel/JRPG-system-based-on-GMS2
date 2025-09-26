@@ -1,0 +1,1 @@
+npc_default_behavior_a = 5;

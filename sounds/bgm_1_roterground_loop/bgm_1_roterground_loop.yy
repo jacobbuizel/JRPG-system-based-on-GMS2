@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"bgm_1_roterground_loop",
+  "audioGroupId":{
+    "name":"audiogroup_BGM",
+    "path":"audiogroups/audiogroup_BGM",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":72.00118,
+  "name":"bgm_1_roterground_loop",
+  "parent":{
+    "name":"BGM",
+    "path":"folders/Sounds/BGM.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"bgm_1_roterground_loop.ogg",
+  "type":1,
+  "volume":1.0,
+}
