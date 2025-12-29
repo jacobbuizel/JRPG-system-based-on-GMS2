@@ -33,9 +33,6 @@ add_roomsatus(0,0,20);
 //8物品状态
 add_roomsatus(0,0,20);
 
-//9物品状态
-add_roomsatus(0,0,20);
-
 //测试房间2状态---------------
 //1npc_5状态
 add_roomsatus(1,0,0);
