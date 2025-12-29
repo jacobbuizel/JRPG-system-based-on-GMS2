@@ -294,10 +294,10 @@ var armor = 0 //护甲
 var accessoryA = 0 //配饰a
 var accessoryB = 0 //配饰b
 var accessoryC = 0 //配饰c
-var ammunitionA = 0 //弹药a
-var ammunitionB = 0 //弹药b
-var ammunitionC = 0 //弹药c
-var ammunitionD = 0 //弹药d
+var ammunitionA = 0 //弹药a 已弃用，此处仅做防崩溃的保留
+var ammunitionB = 0 //弹药b 已弃用，此处仅做防崩溃的保留
+var ammunitionC = 0 //弹药c 已弃用，此处仅做防崩溃的保留
+var ammunitionD = 0 //弹药d 已弃用，此处仅做防崩溃的保留
 
 return {
 		c_name			: c_name,
