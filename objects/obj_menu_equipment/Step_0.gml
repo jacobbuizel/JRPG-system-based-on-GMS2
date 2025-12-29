@@ -17,15 +17,17 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		menu_cloes = true;
 		audio_play_sound(sfx_deselect,9,false);
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		audio_play_sound(sfx_select,9,false);
 		global.sub_menu = 2;
 		switch(pos)
@@ -42,9 +44,38 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 	}
 }
 //装备栏子菜单
-else if global.sub_menu == 2 && global.talking != true && menu_anm <= 2 && menu_cloes == false
+else if global.sub_menu >= 2 && global.talking != true && menu_anm <= 2 && menu_cloes == false
 {
-	if !equip_empty
+	//部位选择菜单
+	if global.sub_menu == 2
+	{
+		//切换部位
+		e_pos_row += dpkey - upkey;
+        e_pos_col += lpkey - rpkey;
+		
+		//音效
+		if dpkey || upkey || rpkey || lpkey
+		{
+			audio_play_sound(sfx_click,9,false);
+		}
+		
+		//确保部位选择框在合法范围内
+        if (e_pos_row >= 3) e_pos_row = 0;
+        if (e_pos_row < 0) e_pos_row = 2;
+        if (e_pos_col >= 2) e_pos_col = 0;
+        if (e_pos_col < 0) e_pos_col = 1;
+		
+		//确认键（选择装备部位）
+        if akey && !equip_empty && !key_cooldown[0]
+		{
+			key_cooldown[0]=1;
+            //切换到装备选择界面
+            audio_play_sound(sfx_select, 9, false);
+			global.sub_menu++;
+        }
+	}
+	//装备背包菜单
+	if global.sub_menu == 3
 	{
 		//切换选项
 		if(ds_grid_height(equipment)>1)
@@ -170,22 +201,77 @@ else if global.sub_menu == 2 && global.talking != true && menu_anm <= 2 && menu_
 		}
 		
 		//选择物品
-		if akey
+		if akey && !key_cooldown[0]
 		{
-			global.sub_menu = 2;
+			key_cooldown[0]=1;
 			audio_play_sound(sfx_select,9,false);
+			global.sub_menu++;
 		}
 	}
-	
-	//关闭菜单
-	if bkey
+	//选中物品
+	if global.sub_menu == 4
 	{
-		global.sub_menu = 1;
-		menu_level = 0;
+		//切换选项
+		pos_eq += dpkey - upkey;
+		if dpkey || upkey
+		{
+			audio_play_sound(sfx_click,9,false);
+		}
+	
+		if pos_eq >= op_length_eq
+		{
+			pos_eq=0;
+		}
+		if pos_eq < 0
+		{
+			pos_eq = op_length_eq-1;
+		}
+
+		//应用选项
+		if akey && !key_cooldown[0]
+		{
+			key_cooldown[0]=1;
+			var _equipment = load_equipment(equip_pos+equip_scroll_a);
+			switch(pos_eq)
+			{
+			case 0:
+				//装备
+				audio_play_sound(sfx_select,9,false);
+				global.sub_menu-=2;
+				break;
+			case 1:
+				//丢弃
+				audio_play_sound(sfx_select,9,false);
+				//判断是否可丢弃
+				if _equipment.discardable!=1
+				{
+					create_msg_box("undiscardable");
+					global.sub_menu--;
+					pos_eq = 0;
+				}
+				else
+				{
+					scr_discard_equipment();
+					if equip_empty
+					{
+						global.sub_menu--;
+					}
+					global.sub_menu--;
+					pos_eq = 0;
+				}
+				break;
+			}
+		}
+	}
+	//关闭菜单
+	if bkey && !key_cooldown[0]
+	{
+		key_cooldown[0]=1;
 		audio_play_sound(sfx_deselect,9,false);
+		global.sub_menu--;
+		pos_eq = 0;
 	}
 }
-
 
 if menu_cloes = false
 {

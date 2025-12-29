@@ -85,16 +85,6 @@ else if global.sub_menu >= 2
 	draw_text(_x,_y,"配饰:");
 	_x -= op_border*7
 	_y += op_border;
-	draw_text(_x,_y,"弹药:");
-	_x += op_border*7
-	draw_text(_x,_y,"弹药:");
-	_x -= op_border*7
-	_y += op_border;
-	draw_text(_x,_y,"弹药:");
-	_x += op_border*7
-	draw_text(_x,_y,"弹药:");
-	_x -= op_border*7
-	_y += op_border;
 	if _chara.str_m >= 0
 	{
 		draw_text(_x,_y,"力量:"+string(_chara.str)+"(+"+string(_chara.str_m)+")");
@@ -164,6 +154,16 @@ else if global.sub_menu >= 2
 	_x -= op_border*5;
 	_y += op_border;
 	
+	//绘制选框
+	_x = _ox+op_border*3;
+	_y = _oy+op_border*2;
+	if global.sub_menu != 2
+	{
+		draw_set_colour(c_gray);
+	}
+	draw_rectangle(_x+(e_pos_col*(op_border*7)),_y+(e_pos_row*op_border),_x+(e_pos_col*(op_border*7)+op_border*4.8),_y+op_border+((e_pos_row*op_border)),true);
+	draw_set_colour(c_white);
+	
 	//绘制装备栏
 	_ox += width/2-op_border*3;
 	_x = _ox;
@@ -180,6 +180,7 @@ else if global.sub_menu >= 2
 	draw_text(_x,_y,"总重量")
 	_x = _ox;
 	_y += op_border;
+	//绘制选框
 	if !equip_empty
 	{
 		var _equipment = 0;
@@ -200,7 +201,12 @@ else if global.sub_menu >= 2
 			_y += op_border;
 		}
 		_y = _oy+op_border*2;
-		draw_rectangle(_x,_y+(equip_pos*op_border),_x+width/2+op_border,_y+op_border+((equip_pos*op_border)),true)
+		if global.sub_menu < 3
+		{
+			draw_set_colour(c_gray);
+		}
+		draw_rectangle(_x,_y+(equip_pos*op_border),_x+width/2+op_border,_y+op_border+((equip_pos*op_border)),true);
+		draw_set_colour(c_white);
 		_x += 790;
 		_y = _oy-op_border;
 		
@@ -312,4 +318,34 @@ else if global.sub_menu >= 2
 		draw_text(_x,_y,string_wrap(_equipment.descr,480));
 	}
 	_ox -= width/2-op_border*3;
+}
+if global.sub_menu == 4
+{
+	//动态菜单高度以及宽度
+	var _new_w = 0;
+	for (var i=0;i<op_length_eq;i++)
+	{
+		var _op_w = string_width(op_option_eq[i])
+		_new_w = max(_new_w,_op_w);
+	}
+	var o_width = _new_w + op_border*2;
+	var o_height = op_border*2 + string_height(op_option_eq[0]) + (op_length_eq-1)*op_space;
+
+	//绘制菜单背景
+	draw_sprite_stretched(spr_msgbox,image_index,736+op_border,op_border*7+(equip_pos*op_border),o_width,o_height);
+
+	//绘制选项
+	draw_set_font(font0);
+	draw_set_valign(fa_top);
+	draw_set_halign(fa_left);
+
+	for (var i=0;i<op_length_eq;i++)
+	{
+		var _c = c_white;
+		if pos_eq == i
+		{
+			_c = c_yellow;
+		}
+		draw_text_color(736+op_border*2,op_border*7+(equip_pos*op_border)+op_border+(op_space*i),op_option_eq[i],_c,_c,_c,_c,1);
+	}
 }

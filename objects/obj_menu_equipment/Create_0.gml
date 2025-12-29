@@ -17,6 +17,10 @@ sort = 0;
 //长按切换按键
 pos = 0;
 
+//装备部位选框
+e_pos_row = 0;
+e_pos_col = 0;
+
 //菜单动画
 menu_anm = 800;
 menu_cloes = false;
@@ -26,8 +30,16 @@ equip_pos = 0;
 equip_scroll_a = 0;
 equipmentEND = min(ds_grid_height(equipment),10);
 
+//角色总数
 op_length = 2;
+
 menu_level = 0;
+
+//装备互动
+op_option_eq[0] = "装备";
+op_option_eq[1] = "丢弃";
+op_length_eq = array_length(op_option_eq);
+pos_eq = 0;
 
 if(ds_grid_get(equipment,0,0)==0)
 {
