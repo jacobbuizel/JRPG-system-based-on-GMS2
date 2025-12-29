@@ -43,11 +43,11 @@ function scr_item_script_execute(_scr) {
     }
 
     // 确保现在 _fn_index 是数字
-    if (!is_real(_fn_index))
+    /*if (!is_real(_fn_index)) //这段代码目前弃用了，理由是新Runtime中asset_get_index()返回的不是Number或者String了。
 	{
         show_debug_message("scr_item_script_execute: 无效的脚本标识，类型不是 Number 或 String");
         return undefined;
-    }
+    }*/
 
     // --- 根据参数数量调用 script_execute（支持 0..10 个参数） ---
     var n = array_length(_args_array);
