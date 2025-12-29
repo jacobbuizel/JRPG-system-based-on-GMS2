@@ -38,15 +38,17 @@ if global.sub_menu == 1
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
-		alarm[0] = 1;
+		key_cooldown[0]=1;
 		audio_play_sound(sfx_deselect,9,false);
+		instance_destroy(self);
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		switch(pos)
 		{
 		case 0:	

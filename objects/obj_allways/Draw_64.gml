@@ -1,10 +1,14 @@
 scr_keyboard_check();
+draw_set_color(c_white);
+draw_set_font(font0);
+draw_set_valign(fa_top);
+var _x=x,_y=y,_screen_w=window_get_width(),_screen_h=window_get_height();
+draw_set_halign(fa_right);
+draw_text(_screen_w,_y,"游戏BY:Jacob_chou，目前为测试阶段");
+draw_set_halign(fa_left);
 //debug界面
 if global.debug = true
 {
-	var _x=x,_y=y;
-	draw_set_color(c_white);
-	draw_set_font(font0);
 	draw_text(_x,_y,"fps:"+string(fps));
 	_y += 32;
 	draw_text(_x,_y,"上下左右键移动。按ESC键退出。按住shift键奔跑。");
@@ -104,6 +108,6 @@ if global.debug = true
 	}
 	draw_text(_x,_y,string(dice_r));
 	_y += 32;
-	draw_text(_x,_y,string(""));
+	draw_text(_x,_y,string(global.sub_menu));
 	_y += 32;
 }

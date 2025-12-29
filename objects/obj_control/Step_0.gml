@@ -90,3 +90,9 @@ yckey = keyboard_check(ord("V")) || gamepad_button_check(0, gp_face4);
 escckey = keyboard_check(vk_escape);
 f5ckey = keyboard_check(vk_f5);
 shfckey = keyboard_check(vk_shift);
+
+for(var _i = 0;_i < array_length(key_cooldown);_i++)
+{
+	key_cooldown[_i]--;
+	key_cooldown[_i] = max(0,key_cooldown[_i]);
+}

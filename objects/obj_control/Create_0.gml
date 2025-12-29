@@ -1,4 +1,4 @@
-globalvar lstx,lsty,lkey,rkey,ukey,dkey,lpkey,rpkey,upkey,dpkey,stick_moved,lrkey,rrkey,urkey,drkey,akey,bkey,xkey,ykey,esckey,f1key,f2key,f3key,f4key,f5key,f6key,f12key,ackey,bckey,xckey,yckey,escckey,f5ckey,shfckey;
+globalvar lstx,lsty,lkey,rkey,ukey,dkey,lpkey,rpkey,upkey,dpkey,stick_moved,lrkey,rrkey,urkey,drkey,akey,bkey,key_cooldown,xkey,ykey,esckey,f1key,f2key,f3key,f4key,f5key,f6key,f12key,ackey,bckey,xckey,yckey,escckey,f5ckey,shfckey;
 
 lstx = 0;
 lsty = 0;
@@ -34,3 +34,5 @@ yckey = 0;
 escckey = 0;
 f5ckey = 0;
 shfckey = 0;
+key_cooldown[0] = 0;
+key_cooldown[1] = 0;

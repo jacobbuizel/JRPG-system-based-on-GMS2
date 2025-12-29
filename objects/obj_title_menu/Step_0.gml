@@ -35,8 +35,9 @@ if !roomgoto && global.sub_menu == 0
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		switch(pos)
 		{
 		case 0:
@@ -74,8 +75,9 @@ if !roomgoto && global.sub_menu == 0
 		}
 	}
 	//返回
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		pos = 4;
 		audio_play_sound(sfx_deselect,9,false);
 	}

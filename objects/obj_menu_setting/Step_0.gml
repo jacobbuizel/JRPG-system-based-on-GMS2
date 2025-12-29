@@ -40,12 +40,13 @@ if global.sub_menu == 1 && menu_wait==0
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		audio_play_sound(sfx_deselect,9,false);
 		if menu_level <= 0
 		{
-			alarm[0] = 1;
+			instance_destroy(self);
 		}
 		else
 		{
@@ -66,8 +67,9 @@ if global.sub_menu == 1 && menu_wait==0
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		var _sml = menu_level;
 		switch(menu_level)
 		{
@@ -83,11 +85,12 @@ if global.sub_menu == 1 && menu_wait==0
 				//自动奔跑
 				if global.auto_run
 				{
-					alarm[1] = 1;
+					global.auto_run = false;
+					op_option[0,1] = "自动奔跑:关";
 				}
 				else
 				{
-					alarm[1] = 1;
+					global.auto_run = true;
 					op_option[0,1] = "自动奔跑:开";
 				}
 				break;
@@ -96,7 +99,7 @@ if global.sub_menu == 1 && menu_wait==0
 				break;
 			case 3:
 				//返回
-				alarm[0] = 1;
+				instance_destroy(self);
 				break;
 			}
 			break;

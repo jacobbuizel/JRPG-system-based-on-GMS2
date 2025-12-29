@@ -16,15 +16,17 @@ if global.sub_menu == 1 && menu_anm <= 2 && menu_cloes == false
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		menu_cloes = true;
 		audio_play_sound(sfx_deselect,9,false);
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		audio_play_sound(sfx_select,9,false);
 		global.sub_menu = 2;
 		switch(pos)
@@ -43,8 +45,9 @@ if global.sub_menu == 1 && menu_anm <= 2 && menu_cloes == false
 
 if global.sub_menu == 2
 {
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		global.sub_menu = 1;
 		menu_level = 0;
 		audio_play_sound(sfx_deselect,9,false);

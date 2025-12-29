@@ -26,15 +26,17 @@ if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_cloes
 		break;
 	}
 	
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		menu_cloes = true;
 		audio_play_sound(sfx_deselect,9,false);
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		audio_play_sound(sfx_select,9,false);
 		
 		switch(pos)

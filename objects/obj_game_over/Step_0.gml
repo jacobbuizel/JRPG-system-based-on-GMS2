@@ -17,8 +17,9 @@ if !roomgoto && global.sub_menu == 0
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		switch(pos)
 		{
 		case 0:

@@ -35,8 +35,9 @@ if !roomgoto
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		switch(pos)
 		{
 		case 0:
@@ -57,8 +58,9 @@ if !roomgoto
 		}
 	}
 	//返回
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		if pos != 2
 		{
 			pos = 2;

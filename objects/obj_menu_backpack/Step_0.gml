@@ -142,16 +142,18 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 		}
 		
 		//选择物品
-		if akey
+		if akey && !key_cooldown[0]
 		{
+			key_cooldown[0]=1;
 			global.sub_menu = 2;
 			audio_play_sound(sfx_select,9,false);
 		}
 	}
 	
 	//关闭菜单
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		menu_cloes = true;
 		audio_play_sound(sfx_deselect,9,false);
 	}
@@ -174,16 +176,18 @@ else if global.sub_menu == 2 && global.talking != true && menu_anm <= 2 && menu_
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		global.sub_menu = 1;
 		pos = 0;
 		audio_play_sound(sfx_deselect,9,false);
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		var _inventory = load_inventory(item_pos+item_scroll_a);
 		switch(pos)
 		{
@@ -301,8 +305,9 @@ else if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_
 	discard_amount = digits[0]*100 + digits[1]*10 + digits[2];
 	
     //确认丢弃
-    if akey
-    {
+    if akey && !key_cooldown[0]
+	{
+		key_cooldown[0]=1;
         var max_amount = _inventory.amount;
         if discard_amount > max_amount
 		{
@@ -322,8 +327,9 @@ else if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_
     }
 
     //按B取消
-    if bkey
-    {
+    if bkey && !key_cooldown[0]
+	{
+		key_cooldown[0]=1;
         global.sub_menu = 2;
     }
 }

@@ -38,15 +38,17 @@ if global.sub_menu == 1 && global.talking != true
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
-		alarm[0] = 1;
+		key_cooldown[0]=1;
+		instance_destroy(self);
 		audio_play_sound(sfx_deselect,9,false);
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		switch(pos)
 		{
 		case 0:	
@@ -61,7 +63,7 @@ if global.sub_menu == 1 && global.talking != true
 			else
 			{
 				audio_play_sound(sfx_deselect,9,false);
-				alarm[1] = 1;
+				create_msg_box("noresting");
 			}
 			break;
 		case 1:
@@ -76,7 +78,7 @@ if global.sub_menu == 1 && global.talking != true
 			else
 			{
 				audio_play_sound(sfx_deselect,9,false);
-				alarm[1] = 1;
+				create_msg_box("noresting");
 			}
 			break;
 		}

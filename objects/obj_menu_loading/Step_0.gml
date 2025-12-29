@@ -107,8 +107,9 @@ if !roomgoto && global.talking != true
 			}
 		}
 		
-		if akey
+		if akey && !key_cooldown[0]
 		{
+			key_cooldown[0]=1;
 			if ((room_get_name(room) == "room_TITLE") || (room_get_name(room) == "room_game_over"))
 			{
 				var _new_op_option_1 = [];
@@ -119,7 +120,7 @@ if !roomgoto && global.talking != true
 				op_length_1 = array_length(op_option_1);
 				if !(op_option[pos+scroll_a] = "存档"+string(pos+scroll_a)+" 空")
 				{
-					alarm[0]=2;
+					global.sub_menu++;
 					audio_play_sound(sfx_select,9,false);
 				}
 				else
@@ -148,12 +149,13 @@ if !roomgoto && global.talking != true
 					op_option_1 = _new_op_option_1;
 					op_length_1 = array_length(op_option_1);
 				}
-				alarm[0]=2;
+				global.sub_menu++;
 				audio_play_sound(sfx_select,9,false);
 			}
 		}
-		if bkey
+		if bkey && !key_cooldown[0]
 		{
+			key_cooldown[0]=1;
 			menu_cloes = true;
 			audio_play_sound(sfx_deselect,9,false);
 		}
@@ -177,17 +179,19 @@ if !roomgoto && global.talking != true
 			pos_1 = op_length_1-1;
 		}
 
-		if bkey
+		if bkey && !key_cooldown[0]
 		{
-			alarm[1]=2;
+			key_cooldown[0]=1;
+			global.sub_menu--;
 			pos_1 = 0;
 			audio_play_sound(sfx_deselect,9,false);
 		}
 
 		//应用选项
-		if akey
+		if akey && !key_cooldown[0]
 		{
-			alarm[0]=2;
+			key_cooldown[0]=1;
+			global.sub_menu++;
 			audio_play_sound(sfx_select,9,false);
 		}
 	}
@@ -210,16 +214,18 @@ if !roomgoto && global.talking != true
 			pos_2 = op_length_2-1;
 		}
 
-		if bkey
+		if bkey && !key_cooldown[0]
 		{
-			alarm[1]=2;
+			key_cooldown[0]=1;
+			global.sub_menu--;
 			pos_2 = 1;
 			audio_play_sound(sfx_deselect,9,false);
 		}
 
 		//应用选项
-		if akey
+		if akey && !key_cooldown[0]
 		{
+			key_cooldown[0]=1;
 			if op_option_2[pos_2] == "确认"
 			{
 				switch(op_option_1[pos_1])
@@ -352,7 +358,7 @@ if !roomgoto && global.talking != true
 			}
 			else
 			{
-				alarm[1]=2;
+				global.sub_menu--;
 				pos_2 = 1;
 				audio_play_sound(sfx_deselect,9,false);
 			}

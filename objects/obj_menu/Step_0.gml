@@ -49,50 +49,51 @@ if global.sub_menu == 0 && menu_anm <= 2 && menu_cloes == false
 	}
 
 	//应用选项
-	if akey
+	if akey && !key_cooldown[0]
 	{
+		key_cooldown[0]=1;
 		var _sml = menu_level;
+		audio_play_sound(sfx_select,9,false);
 		switch(pos)
 		{
 		case 0:
 			//返回游戏
-			alarm[0]=1;
+			menu_cloes = true;
 			break;
 		case 1:
 			//背包
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_backpack);
 			break;
 		case 2:
 			//人物状态
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_charsatus);
 			break;
 		case 3:
 			//武器&防具
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_equipment);
 			break;
 		case 4:
 			//技能&法术
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_skill);
 			break;
 		case 5:
 			//日志
-			alarm[0]=1;
 			break;
 		case 6:
 			//休息
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_resting);
 			break;
 		case 7:
 			//设置
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_setting);
 			break;
 		case 8:
 			//保存
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_loading);
 			break;
 		case 9:
 			//退出游戏
-			alarm[0]=1;
+			instance_create_layer(0,0,"Instances",obj_menu_exit);
 			break;
 		}
 		if _sml != menu_level
