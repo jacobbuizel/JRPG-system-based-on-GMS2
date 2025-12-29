@@ -2,11 +2,11 @@
   "$GMProject":"v1",
   "%Name":"hgame",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
-    {"$GMAudioGroup":"","%Name":"audiogroup_BGM","name":"audiogroup_BGM","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
-    {"$GMAudioGroup":"","%Name":"audiogroup_SFX","name":"audiogroup_SFX","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
-    {"$GMAudioGroup":"","%Name":"audiogroup_BGS","name":"audiogroup_BGS","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
-    {"$GMAudioGroup":"","%Name":"audiogroup_BGM_2","name":"audiogroup_BGM_2","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_BGM","exportDir":"","name":"audiogroup_BGM","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_SFX","exportDir":"","name":"audiogroup_SFX","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_BGS","exportDir":"","name":"audiogroup_BGS","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_BGM_2","exportDir":"","name":"audiogroup_BGM_2","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -68,7 +68,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.13.1.193",
+    "IDEVersion":"2024.14.2.213",
   },
   "name":"hgame",
   "resources":[
@@ -119,7 +119,7 @@
     {"id":{"name":"dis_scr_keyboard_check","path":"scripts/dis_scr_keyboard_check/dis_scr_keyboard_check.yy",},},
     {"id":{"name":"scr_character","path":"scripts/scr_character/scr_character.yy",},},
     {"id":{"name":"scr_dice","path":"scripts/scr_dice/scr_dice.yy",},},
-    {"id":{"name":"scr_discarditem","path":"scripts/scr_discarditem/scr_discarditem.yy",},},
+    {"id":{"name":"scr_discard_inventory","path":"scripts/scr_discard_inventory/scr_discard_inventory.yy",},},
     {"id":{"name":"scr_equipment","path":"scripts/scr_equipment/scr_equipment.yy",},},
     {"id":{"name":"scr_interacting","path":"scripts/scr_interacting/scr_interacting.yy",},},
     {"id":{"name":"scr_item_script_execute","path":"scripts/scr_item_script_execute/scr_item_script_execute.yy",},},
@@ -141,7 +141,6 @@
     {"id":{"name":"scr_saving_system","path":"scripts/scr_saving_system/scr_saving_system.yy",},},
     {"id":{"name":"scr_spriting","path":"scripts/scr_spriting/scr_spriting.yy",},},
     {"id":{"name":"scr_string","path":"scripts/scr_string/scr_string.yy",},},
-    {"id":{"name":"scr_useitem","path":"scripts/scr_useitem/scr_useitem.yy",},},
     {"id":{"name":"use_item_1","path":"scripts/use_item_1/use_item_1.yy",},},
     {"id":{"name":"use_item_2","path":"scripts/use_item_2/use_item_2.yy",},},
     {"id":{"name":"use_item_apple","path":"scripts/use_item_apple/use_item_apple.yy",},},
