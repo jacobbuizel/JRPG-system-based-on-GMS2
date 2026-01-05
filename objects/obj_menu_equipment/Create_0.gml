@@ -31,7 +31,7 @@ equip_scroll_a = 0;
 equipmentEND = min(ds_grid_height(equipment),10);
 
 //角色总数
-op_length = 2;
+op_length = global.totalchara;
 
 menu_level = 0;
 
@@ -40,6 +40,10 @@ op_option_eq[0] = "装备";
 op_option_eq[1] = "丢弃";
 op_length_eq = array_length(op_option_eq);
 pos_eq = 0;
+op_option_slot_eq[0] = "卸下";
+op_option_slot_eq[1] = "切换";
+op_length_slot_eq = array_length(op_option_slot_eq);
+pos_slot_eq = 0;
 
 if(ds_grid_get(equipment,0,0)==0)
 {

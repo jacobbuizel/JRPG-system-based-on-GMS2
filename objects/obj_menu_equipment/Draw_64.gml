@@ -17,7 +17,7 @@ if global.sub_menu == 1
 	
 	//绘制角色图
 	var _chara = 0;
-	_chara = load_chara(global.player1);
+	_chara = load_chara(global.player[0]);
 	if _chara.portrait
 	{
 		draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
@@ -35,7 +35,7 @@ if global.sub_menu == 1
 	_x-=128 + op_border/2;
 
 	_chara = 0;
-	_chara = load_chara(global.player2);
+	_chara = load_chara(global.player[1]);
 	if _chara.portrait
 	{
 		draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
@@ -58,32 +58,96 @@ else if global.sub_menu >= 2
 	draw_sprite_stretched(spr_msgbox,image_index,_x,_y,width/2-op_border*3,height);
 	_x += op_border;
 	_y += op_border;
-	var _chara = 0;
-	switch menu_level
-	{
-	case 0:
-		_chara = load_chara(global.player1);
-		break;
-	case 1:
-		_chara = load_chara(global.player2);
-		break;	
-	}
+	var _chara = load_chara(global.player[menu_level]);
 	draw_text(_x,_y,_chara.c_name);
 	_y += op_border;
+	
+	//绘制装备部位
 	draw_text(_x,_y,"主手:");
-	_x += op_border*7
+	if _chara.main_h == 0
+	{
+		_x += op_border*4
+		draw_text(_x,_y,"空");
+		_x += op_border*3
+	}
+	else
+	{
+		_x += op_border*2
+		draw_text(_x,_y,_chara.main_h.e_name);
+		_x += op_border*5
+	}
 	draw_text(_x,_y,"副手:");
-	_x -= op_border*7
+	if _chara.sec_h == 0
+	{
+		_x += op_border*4
+		draw_text(_x,_y,"空");
+		_x += op_border*3
+	}
+	else
+	{
+		_x += op_border*2
+		draw_text(_x,_y,_chara.sec_h.e_name);
+		_x += op_border*5
+	}
+	_x -= op_border*14
 	_y += op_border;
 	draw_text(_x,_y,"护甲:");
-	_x += op_border*7
+	if _chara.armor == 0
+	{
+		_x += op_border*4
+		draw_text(_x,_y,"空");
+		_x += op_border*3
+	}
+	else
+	{
+		_x += op_border*2
+		draw_text(_x,_y,_chara.armor.e_name);
+		_x += op_border*5
+	}
 	draw_text(_x,_y,"配饰:");
-	_x -= op_border*7
+	if _chara.accessoryA == 0
+	{
+		_x += op_border*4
+		draw_text(_x,_y,"空");
+		_x += op_border*3
+	}
+	else
+	{
+		_x += op_border*2
+		draw_text(_x,_y,_chara.accessoryA.e_name);
+		_x += op_border*5
+	}
+	_x -= op_border*14
 	_y += op_border;
 	draw_text(_x,_y,"配饰:");
-	_x += op_border*7
+	if _chara.accessoryB == 0
+	{
+		_x += op_border*4
+		draw_text(_x,_y,"空");
+		_x += op_border*3
+	}
+	else
+	{
+		_x += op_border*2
+		draw_text(_x,_y,_chara.accessoryB.e_name);
+		_x += op_border*5
+	}
 	draw_text(_x,_y,"配饰:");
-	_x -= op_border*7
+	if _chara.accessoryC == 0
+	{
+		_x += op_border*4
+		draw_text(_x,_y,"空");
+		_x += op_border*3
+	}
+	else
+	{
+		_x += op_border*2
+		draw_text(_x,_y,_chara.accessoryC.e_name);
+		_x += op_border*5
+	}
+	_x -= op_border*14
+	
+	//绘制属性
 	_y += op_border;
 	if _chara.str_m >= 0
 	{
@@ -180,7 +244,7 @@ else if global.sub_menu >= 2
 	draw_text(_x,_y,"总重量")
 	_x = _ox;
 	_y += op_border;
-	//绘制选框
+	//绘制物品列表
 	if !equip_empty
 	{
 		var _equipment = 0;
@@ -264,7 +328,7 @@ else if global.sub_menu >= 2
 	}
 	_x = _ox+op_border;
 	_y = _oy+(op_border*12);
-	draw_text(_x,_y,"团队负重:"+string(global.item_w)+"/"+string(load_chara(global.player1).str*5+load_chara(global.player2).str*5)+"磅")
+	draw_text(_x,_y,"团队负重:"+string(global.item_w)+"/"+string(load_chara(global.player[0]).str*5+load_chara(global.player[1]).str*5)+"磅")
 	if global.overweight
 	{
 		_x += op_border*16+18;
@@ -318,6 +382,36 @@ else if global.sub_menu >= 2
 		draw_text(_x,_y,string_wrap(_equipment.descr,480));
 	}
 	_ox -= width/2-op_border*3;
+}
+if global.sub_menu == 2.5
+{
+	//动态菜单高度以及宽度
+	var _new_w = 0;
+	for (var i=0;i<op_length_slot_eq;i++)
+	{
+		var _op_w = string_width(op_option_slot_eq[i])
+		_new_w = max(_new_w,_op_w);
+	}
+	var o_width = _new_w + op_border*2;
+	var o_height = op_border*2 + string_height(op_option_slot_eq[0]) + (op_length_slot_eq-1)*op_space;
+
+	//绘制菜单背景
+	draw_sprite_stretched(spr_msgbox,image_index,736+op_border,op_border*7+(equip_pos*op_border),o_width,o_height);
+
+	//绘制选项
+	draw_set_font(font0);
+	draw_set_valign(fa_top);
+	draw_set_halign(fa_left);
+
+	for (var i=0;i<op_length_slot_eq;i++)
+	{
+		var _c = c_white;
+		if pos_slot_eq == i
+		{
+			_c = c_yellow;
+		}
+		draw_text_color(736+op_border*2,op_border*7+(equip_pos*op_border)+op_border+(op_space*i),op_option_slot_eq[i],_c,_c,_c,_c,1);
+	}
 }
 if global.sub_menu == 4
 {
