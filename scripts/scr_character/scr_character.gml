@@ -387,17 +387,14 @@ function load_chara(_id){
 	var _chara = ds_grid_get(chara_status, 1, _row);
 	
 	//修正运行时的数据（如当前HP、属性调整值的刷新等）
-	for (var i=0;i<global.totalchara;i++)
-	{
-		_chara.str_m = (_chara.str div 2) - 5;
-		_chara.dex_m = (_chara.dex div 2) - 5;
-		_chara.con_m = (_chara.con div 2) - 5;
-		_chara.int_m = (_chara.int div 2) - 5;
-		_chara.wis_m = (_chara.wis div 2) - 5;
-		_chara.cha_m = (_chara.cha div 2) - 5;
-		_chara.PRO_B = (_chara.level div 5) + 2;
-		_chara.HP_C = clamp(_chara.HP_C, 0, _chara.HP);
-		_chara.MP_C = clamp(_chara.MP_C, 0, _chara.MP);
-	}
+	_chara.str_m = (_chara.str div 2) - 5;
+	_chara.dex_m = (_chara.dex div 2) - 5;
+	_chara.con_m = (_chara.con div 2) - 5;
+	_chara.int_m = (_chara.int div 2) - 5;
+	_chara.wis_m = (_chara.wis div 2) - 5;
+	_chara.cha_m = (_chara.cha div 2) - 5;
+	_chara.PRO_B = (_chara.level div 5) + 2;
+	_chara.HP_C = clamp(_chara.HP_C, 0, _chara.HP);
+	_chara.MP_C = clamp(_chara.MP_C, 0, _chara.MP);
 	return _chara;
 }

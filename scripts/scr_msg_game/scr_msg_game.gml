@@ -10,7 +10,7 @@ switch(_msg_id)
 			create_msg("获得了"+string(global.g_msg_name)+"×"+string(global.g_msg_amount)+"。");
 		break;
 	case "HPTO0":
-			create_msg(string(load_chara(global.player1).c_name)+"一行人倒下了...");
+			create_msg(string(load_chara(global.player[0]).c_name)+"一行人倒下了...");
 			create_msg("......");
 		break;
 	case "noresting":
@@ -32,7 +32,7 @@ switch(_msg_id)
 			create_msg("丢弃了"+string(global.g_msg_amount)+"个"+string(global.g_msg_name)+"。");
 		break;
 	case "item_full":
-			create_msg(string(load_chara(global.player1).c_name)+"不能再获得更多该物品了。");
+			create_msg(string(load_chara(global.player[0]).c_name)+"不能再获得更多该物品了。");
 		break;
 	
 		
@@ -135,7 +135,7 @@ switch(_msg_id)
 			{
 				create_msg("前面的道路很危险，请收下这个吧。",0,"送东西的npc",spr_e_player2,0);
 				create_msg("获得了"+string(global.g_msg_name)+"。");
-				create_msg("但是"+string(load_chara(global.player1).c_name)+"不能再获得更多的"+string(global.g_msg_name)+"了。",);
+				create_msg("但是"+string(load_chara(global.player[0]).c_name)+"不能再获得更多的"+string(global.g_msg_name)+"了。",);
 				create_msg("嗯...也许你可以晚点再来？",0,"送东西的npc",spr_e_player2,0);
 				break;
 			}

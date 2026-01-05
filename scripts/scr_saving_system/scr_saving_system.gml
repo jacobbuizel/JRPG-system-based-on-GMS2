@@ -35,8 +35,10 @@ global.saveDATA.playerSY = obj_player.y;
 global.saveDATA.partnerSX = obj_partner.x;
 global.saveDATA.partnerSY = obj_partner.y;
 
-global.saveDATA.player1 = global.player1
-global.saveDATA.player2 = global.player2
+for (var i = 0; i < global.totalchara; i++)
+{
+	global.saveDATA.player[i] = global.player[i]
+}
 
 array_push(_saveArr,global.saveDATA);
 
