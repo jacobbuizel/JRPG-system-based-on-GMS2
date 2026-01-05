@@ -11,7 +11,7 @@ op_space = 32;
 //长按切换按键
 pos = 0;
 
-pos_chara = global.player1;
+pos_chara = global.player[0];
 
 //菜单动画
 menu_anm = 800;

@@ -144,7 +144,7 @@ if !empty
 _x = _ox;
 _y = _oy+(op_border*17);
 
-draw_text(_x,_y,"团队负重:"+string(global.item_w)+"/"+string(load_chara(global.player1).str*5+load_chara(global.player2).str*5)+"磅")
+draw_text(_x,_y,"团队负重:"+string(global.item_w)+"/"+string(load_chara(global.player[0]).str*5+load_chara(global.player[1]).str*5)+"磅")
 if global.overweight
 {
 	_x += op_border*15+18;

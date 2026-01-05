@@ -20,7 +20,7 @@ for(var i=0;i<ds_grid_height(equipment);i++)
 	var _equipment = load_equipment(i);
 	global.item_w += _equipment.amount*_equipment.weight;
 }
-if load_chara(global.player1).str*5+load_chara(global.player2).str*5 < global.item_w
+if load_chara(global.player[0]).str*5+load_chara(global.player[1]).str*5 < global.item_w
 {
 	global.overweight = true;
 }

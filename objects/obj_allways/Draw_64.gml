@@ -31,9 +31,9 @@ if global.debug = true
 	}
 	_y += 32;
 	var _chara_1 = 0;
-	_chara_1 = load_chara(global.player1);
+	_chara_1 = load_chara(global.player[0]);
 	var _chara_2 = 0;
-	_chara_2 = load_chara(global.player2);
+	_chara_2 = load_chara(global.player[1]);
 	draw_text(_x,_y,"玩家1HP:"+string(_chara_1.HP_C)+"/"+string(_chara_1.HP)+" 玩家2HP:"+string(_chara_2.HP_C)+"/"+string(_chara_2.HP));
 	_y += 32;
 	draw_text(_x,_y,"游戏时长:");
@@ -110,4 +110,5 @@ if global.debug = true
 	_y += 32;
 	draw_text(_x,_y,string(global.sub_menu));
 	_y += 32;
+	draw_text(_x,_y,string(load_chara(global.player[0]).main_h));
 }

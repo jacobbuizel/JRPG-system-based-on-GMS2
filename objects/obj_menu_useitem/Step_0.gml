@@ -16,15 +16,7 @@ if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_cloes
 		pos = op_length-1;
 	}
 	
-	switch pos
-	{
-		default:
-			pos_chara = global.player1;
-		break;
-		case 1:
-			pos_chara = global.player2;
-		break;
-	}
+	pos_chara = global.player[pos];
 	
 	if bkey && !key_cooldown[0]
 	{

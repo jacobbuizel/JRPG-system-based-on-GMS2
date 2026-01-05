@@ -6,9 +6,9 @@ add_chara_id(0);
 add_chara_id(1);
 add_chara_id(2);
 
-global.player1 = 1;
-global.player2 = 2;
+global.player[0] = 1;
+global.player[1] = 2;
 
-global.totalchara = 2;
+global.totalchara = array_length(global.player);
 
 load = false;

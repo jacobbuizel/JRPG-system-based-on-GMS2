@@ -19,36 +19,25 @@ if global.sub_menu == 1
 	
 	//绘制角色图
 	var _chara = 0;
-	_chara = load_chara(global.player1);
-	if _chara.portrait
+	for (var i = 0; i < global.totalchara; i++)
 	{
-		draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
-	}
-	else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-	draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-	_x += 128 + op_border/2;
-	draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
-	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC_C)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
-	_y += op_border;
-	draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
+		_chara = load_chara(global.player[i]);
+		if _chara.portrait
+		{
+			draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
+		}
+		else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
+		draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
+		_x += 128 + op_border/2;
+		draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
+		_y += op_border;
+		draw_text(_x,_y,"AC:"+string(_chara.AC_C)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
+		_y += op_border;
+		draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
 		
-	_y+=op_border*3;
-	_x-=128 + op_border/2;
-
-	_chara = load_chara(global.player2);
-	if _chara.portrait
-	{
-		draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
+		_y+=op_border*3;
+		_x-=128 + op_border/2;
 	}
-	else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-	draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-	_x += 128 + op_border/2;
-	draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
-	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC_C)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
-	_y += op_border;
-	draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
 }
 else if global.sub_menu == 2
 {
@@ -56,22 +45,10 @@ else if global.sub_menu == 2
 	_x = _ox+op_border;
 	_y = _oy+op_border;
 	var _chara = 0;
-	switch menu_level
+	_chara = load_chara(global.player[menu_level]);
+	if _chara.art
 	{
-	case 0:
-		_chara = load_chara(global.player1);
-		if _chara.art
-		{
-			draw_sprite_ext(_chara.art,1,_x,_y,1,1,0,c_white,1);
-		}
-		break;
-	case 1:
-		_chara = load_chara(global.player2);
-		if _chara.art
-		{
-			draw_sprite_ext(_chara.art,1,_x,_y,1,1,0,c_white,1);
-		}
-		break;
+		draw_sprite_ext(_chara.art,1,_x,_y,1,1,0,c_white,1);
 	}
 	_x += op_border+536;
 	draw_text(_x,_y,_chara.c_name);

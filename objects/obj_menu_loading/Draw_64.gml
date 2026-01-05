@@ -71,8 +71,7 @@ if op_option[pos+scroll_a] != "存档"+string(pos+scroll_a)+" 空"
 			partnerSX : 0,
 			partnerSY : 0,
 			
-			player1 : 0,
-			player2 : 0
+			player : 0
 		}
 	
 	//读取存档预览
@@ -88,8 +87,8 @@ if op_option[pos+scroll_a] != "存档"+string(pos+scroll_a)+" 空"
 	
 	//绘制角色队伍
 	var players = [
-		_saveDATA_P_D.player1,
-		_saveDATA_P_D.player2
+		_saveDATA_P_D.player[0],
+		_saveDATA_P_D.player[1]
 	];
 	
 	var _chara_data = _saveDATA_P_D.Schara_status;

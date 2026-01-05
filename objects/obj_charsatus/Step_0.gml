@@ -10,12 +10,14 @@ if load
 		ds_grid_set(chara_status, 1, i, _struct);
 	}
 
-	global.player1 = global.saveDATA.player1;
-	global.player2 = global.saveDATA.player2;
+	for (var i = 0; i < global.totalchara; i++)
+	{
+		global.player[i] = global.saveDATA.player[i];
+	}
 }
 
 //判断是否游戏结束
-if load_chara(global.player1).HP_C<=0 && load_chara(global.player2).HP_C<=0 && !global.talking && !global.gameover && !global.pause
+if load_chara(global.player[0]).HP_C<=0 && load_chara(global.player[1]).HP_C<=0 && !global.talking && !global.gameover && !global.pause
 {
 	create_msg_box("HPTO0");
 	global.gameover = true;

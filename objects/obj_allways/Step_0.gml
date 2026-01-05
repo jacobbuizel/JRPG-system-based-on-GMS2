@@ -57,9 +57,9 @@ if xkey && global.debug
 }
 if f2key && global.debug
 {
-	var _chara = load_chara(global.player1);
+	var _chara = load_chara(global.player[0]);
 	_chara.HP_C=0;
-	_chara = load_chara(global.player2);
+	_chara = load_chara(global.player[1]);
 	_chara.HP_C=0;
 }
 if f3key && global.debug
@@ -68,10 +68,10 @@ if f3key && global.debug
 }
 if f4key && global.debug
 {
-	var _chara = load_chara(global.player1);
+	var _chara = load_chara(global.player[0]);
 	_chara.HP_C=1;
 	_chara.MP_C=1;
-	_chara = load_chara(global.player2);
+	_chara = load_chara(global.player[1]);
 	_chara.HP_C=1;
 	_chara.MP_C=1;
 }
