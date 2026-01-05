@@ -264,7 +264,8 @@ while(amount > 0)
 }
 global.g_msg_name = e_name;
 global.g_msg_amount = _amount;
-
+equipmentEND = min(ds_grid_height(equipment),17);
+equip_empty = false;
 return true;
 }
 
