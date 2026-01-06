@@ -265,7 +265,7 @@ else if global.sub_menu >= 2
 			_y += op_border;
 		}
 		_y = _oy+op_border*2;
-		if global.sub_menu < 3
+		if global.sub_menu < 4
 		{
 			draw_set_colour(c_gray);
 		}
@@ -383,7 +383,7 @@ else if global.sub_menu >= 2
 	}
 	_ox -= width/2-op_border*3;
 }
-if global.sub_menu == 2.5
+if global.sub_menu == 3
 {
 	//动态菜单高度以及宽度
 	var _new_w = 0;
@@ -413,7 +413,7 @@ if global.sub_menu == 2.5
 		draw_text_color(736+op_border*2,op_border*7+(equip_pos*op_border)+op_border+(op_space*i),op_option_slot_eq[i],_c,_c,_c,_c,1);
 	}
 }
-if global.sub_menu == 4
+if global.sub_menu == 5
 {
 	//动态菜单高度以及宽度
 	var _new_w = 0;
