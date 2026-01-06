@@ -1,15 +1,17 @@
 {
-  "$GMSound":"",
+  "$GMSound":"v2",
   "%Name":"bgm_2_roterground_musicbox_loop",
   "audioGroupId":{
     "name":"audiogroup_BGM",
     "path":"audiogroups/audiogroup_BGM",
   },
   "bitDepth":1,
-  "bitRate":128,
+  "channelFormat":1,
   "compression":0,
+  "compressionQuality":4,
   "conversionMode":0,
   "duration":31.998278,
+  "exportDir":"",
   "name":"bgm_2_roterground_musicbox_loop",
   "parent":{
     "name":"BGM",
@@ -20,6 +22,5 @@
   "resourceVersion":"2.0",
   "sampleRate":44100,
   "soundFile":"bgm_2_roterground_musicbox_loop.ogg",
-  "type":1,
   "volume":1.0,
 }
