@@ -40,12 +40,11 @@ if global.sub_menu == 0 && menu_anm <= 2 && menu_cloes == false
 		pos = op_length-1;
 	}
 
-	if bkey
+	if bkey && !key_cooldown[0]
 	{
-		{
-			audio_play_sound(sfx_select,9,false);
-			menu_cloes = true;
-		}
+		key_cooldown[0]=1;
+		audio_play_sound(sfx_select,9,false);
+		menu_cloes = true;
 	}
 
 	//应用选项
