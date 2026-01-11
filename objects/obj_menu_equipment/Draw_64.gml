@@ -63,147 +63,27 @@ else if global.sub_menu >= 2
 	_y += op_border;
 	
 	//绘制装备部位
-	draw_text(_x,_y,"主手:");
-	if _chara.main_h == 0
-	{
-		_x += op_border*4
-		draw_text(_x,_y,"空");
-		_x += op_border*3
-	}
-	else
-	{
-		_x += op_border*2
-		draw_text(_x,_y,_chara.main_h.e_name);
-		_x += op_border*5
-	}
-	draw_text(_x,_y,"副手:");
-	if _chara.sec_h == 0
-	{
-		_x += op_border*4
-		draw_text(_x,_y,"空");
-		_x += op_border*3
-	}
-	else
-	{
-		_x += op_border*2
-		draw_text(_x,_y,_chara.sec_h.e_name);
-		_x += op_border*5
-	}
-	_x -= op_border*14
+	draw_equipment_slot(_x,_y,"主手:",_chara.main_h,false);_x+=op_border*7;
+	draw_equipment_slot(_x,_y,"副手:",_chara.sec_h,_chara.main_h!=0 && _chara.main_h.equip_parts==0);
+	_x -= op_border*7
 	_y += op_border;
-	draw_text(_x,_y,"护甲:");
-	if _chara.armor == 0
-	{
-		_x += op_border*4
-		draw_text(_x,_y,"空");
-		_x += op_border*3
-	}
-	else
-	{
-		_x += op_border*2
-		draw_text(_x,_y,_chara.armor.e_name);
-		_x += op_border*5
-	}
-	draw_text(_x,_y,"配饰:");
-	if _chara.accessoryA == 0
-	{
-		_x += op_border*4
-		draw_text(_x,_y,"空");
-		_x += op_border*3
-	}
-	else
-	{
-		_x += op_border*2
-		draw_text(_x,_y,_chara.accessoryA.e_name);
-		_x += op_border*5
-	}
-	_x -= op_border*14
+	draw_equipment_slot(_x,_y,"护甲:",_chara.armor,false);_x+=op_border*7;
+	draw_equipment_slot(_x,_y,"配饰:",_chara.accessoryA,false);
+	_x -= op_border*7
 	_y += op_border;
-	draw_text(_x,_y,"配饰:");
-	if _chara.accessoryB == 0
-	{
-		_x += op_border*4
-		draw_text(_x,_y,"空");
-		_x += op_border*3
-	}
-	else
-	{
-		_x += op_border*2
-		draw_text(_x,_y,_chara.accessoryB.e_name);
-		_x += op_border*5
-	}
-	draw_text(_x,_y,"配饰:");
-	if _chara.accessoryC == 0
-	{
-		_x += op_border*4
-		draw_text(_x,_y,"空");
-		_x += op_border*3
-	}
-	else
-	{
-		_x += op_border*2
-		draw_text(_x,_y,_chara.accessoryC.e_name);
-		_x += op_border*5
-	}
-	_x -= op_border*14
+	draw_equipment_slot(_x,_y,"配饰:",_chara.accessoryB,false);_x+=op_border*7;
+	draw_equipment_slot(_x,_y,"配饰:",_chara.accessoryC,false);
+	_x -= op_border*7
 	
 	//绘制属性
 	_y += op_border;
-	if _chara.str_m >= 0
-	{
-		draw_text(_x,_y,"力量:"+string(_chara.str)+"(+"+string(_chara.str_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"力量:"+string(_chara.str)+"("+string(_chara.str_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.dex_m >= 0
-	{
-		draw_text(_x,_y,"敏捷:"+string(_chara.dex)+"(+"+string(_chara.dex_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"敏捷:"+string(_chara.dex)+"("+string(_chara.dex_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.con_m >= 0
-	{
-		draw_text(_x,_y,"体质:"+string(_chara.con)+"(+"+string(_chara.con_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"体质:"+string(_chara.con)+"("+string(_chara.con_m)+")");
-	}
-	_x -= op_border*10;
+	draw_menu_chara_attr(_x,_y,"力量",_chara.str,_chara.str_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"敏捷",_chara.dex,_chara.dex_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"体质",_chara.con,_chara.con_m);_x -= op_border*10;
 	_y += op_border;
-	if _chara.int_m >= 0
-	{
-		draw_text(_x,_y,"智力:"+string(_chara.int)+"(+"+string(_chara.int_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"智力:"+string(_chara.int)+"("+string(_chara.int_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.wis_m >= 0
-	{
-		draw_text(_x,_y,"感知:"+string(_chara.wis)+"(+"+string(_chara.wis_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"感知:"+string(_chara.wis)+"("+string(_chara.wis_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.cha_m >= 0
-	{
-		draw_text(_x,_y,"魅力:"+string(_chara.cha)+"(+"+string(_chara.cha_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"魅力:"+string(_chara.cha)+"("+string(_chara.cha_m)+")");
-	}
-	_x -= op_border*10;
+	draw_menu_chara_attr(_x,_y,"智力",_chara.int,_chara.int_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"感知",_chara.wis,_chara.wis_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"魅力",_chara.cha,_chara.cha_m);_x -= op_border*10;
 	_y += op_border;
 	draw_text(_x,_y,"AC:"+string(_chara.AC));
 	_x += op_border*5;

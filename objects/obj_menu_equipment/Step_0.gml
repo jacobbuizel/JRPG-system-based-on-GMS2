@@ -84,29 +84,46 @@ if(menu_anm <= 2 && menu_cloes == false)
 	        if akey && !key_cooldown[0]
 			{
 				key_cooldown[0]=1;
-				//确认当前槽是否为空
-				_e_slot_is_empty = (_slot_map[_e_slot_index] == 0);
-				
-				if _e_slot_is_empty
+				var _can_enter = true;
+				//判断主副手冲突
+				if(_e_slot_index==1)
 				{
-					if !equip_empty
-		            {
-						//切换到装备选择界面
-						global.sub_menu+=2;
-						audio_play_sound(sfx_select, 9, false);
+					if(_chara.main_h != 0 && _chara.main_h.equip_parts == 0)
+					{
+						_can_enter = false;
+					}
+				}
+				
+				if(_can_enter)
+				{
+					//确认当前槽是否为空
+					_e_slot_is_empty = (_slot_map[_e_slot_index] == 0);
+					
+					if _e_slot_is_empty
+					{
+						if !equip_empty
+					    {
+							//切换到装备选择界面
+							global.sub_menu+=2;
+							audio_play_sound(sfx_select, 9, false);
+						}
+						else
+						{
+							audio_play_sound(sfx_deselect, 9, false);
+						}
 					}
 					else
 					{
-						audio_play_sound(sfx_deselect, 9, false);
+						//切换卸下还是切换
+						global.sub_menu++;
+						audio_play_sound(sfx_select, 9, false);
 					}
 				}
 				else
 				{
-					//切换卸下还是切换
-					global.sub_menu++;
-					audio_play_sound(sfx_select, 9, false);
+					audio_play_sound(sfx_deselect, 9, false);
 				}
-	        }
+			}
 		}
 		//部位选择子菜单
 		if global.sub_menu == 3
@@ -334,10 +351,14 @@ if(menu_anm <= 2 && menu_cloes == false)
 				switch(pos_eq)
 				{
 				case 0:
+					if (!can_equipment_to_slot(_equipment, _e_slot_index, _chara))
+				    {
+				        audio_play_sound(sfx_deselect, 9, false);
+				        break;
+				    }
 					//装备
-					//记录旧装备和新装备
+					//记录旧装备
 					var _old_equip = _slot_map[_e_slot_index];
-					var _new_equip = load_equipment(equip_pos + equip_scroll_a);
 					//如果有旧装备则记录id
 					if (_old_equip != 0)
 					{
@@ -348,12 +369,12 @@ if(menu_anm <= 2 && menu_cloes == false)
 					//写入装备槽
 					switch (_e_slot_index)
 					{
-						case 0: _chara.main_h		= _new_equip; break;
-						case 1: _chara.sec_h		= _new_equip; break;
-						case 2: _chara.armor		= _new_equip; break;
-						case 3: _chara.accessoryA	= _new_equip; break;
-						case 4: _chara.accessoryB	= _new_equip; break;
-						case 5: _chara.accessoryC	= _new_equip; break;
+						case 0: _chara.main_h		= _equipment; break;
+						case 1: _chara.sec_h		= _equipment; break;
+						case 2: _chara.armor		= _equipment; break;
+						case 3: _chara.accessoryA	= _equipment; break;
+						case 4: _chara.accessoryB	= _equipment; break;
+						case 5: _chara.accessoryC	= _equipment; break;
 					}
 					//如果有旧装备则加回背包
 					if (_old_equip != 0)

@@ -271,36 +271,79 @@ return true;
 
 //加载装备数据
 function load_equipment(_id){
-	var _e_id = ds_grid_get(equipment,2,_id)
-	var _item = equipment_id(_e_id)
-	return {
-		e_name			: _item.e_name,
-		amount			: ds_grid_get(equipment,1,_id),
-		e_id			: _e_id,
-		cur_durability	: ds_grid_get(equipment,3,_id),
-		durability		: _item.durability,
-		weight			: _item.weight,
-		price			: _item.price,
-		rarity			: _item.rarity,
-		type_e			: _item.type_e,
-		type_descr		: _item.type_descr,
-		descr			: _item.descr,
-		spr				: _item.spr,
-		discardable		: _item.discardable,
-		consumables		: _item.consumables,
-		equip_parts		: _item.equip_parts,
-		stackable		: _item.stackable,
-		atk_bon			: _item.atk_bon,
-		atk_scale		: _item.atk_scale,
-		ac_bon			: _item.ac_bon,
-		sav_bon			: _item.sav_bon,
-		ac_base			: _item.ac_base,
-		resist			: _item.resist,
-		attr_mod		: _item.attr_mod,
-		on_equip_scr	: _item.on_equip_scr,
-		on_unequip_scr	: _item.on_unequip_scr,
-		on_attack_scr	: _item.on_attack_scr,
-		on_atkhit_scr	: _item.on_atkhit_scr,
-		on_hit_scr		: _item.on_hit_scr,
-	}
+var _e_id = ds_grid_get(equipment,2,_id)
+var _item = equipment_id(_e_id)
+return {
+	e_name			: _item.e_name,
+	amount			: ds_grid_get(equipment,1,_id),
+	e_id			: _e_id,
+	cur_durability	: ds_grid_get(equipment,3,_id),
+	durability		: _item.durability,
+	weight			: _item.weight,
+	price			: _item.price,
+	rarity			: _item.rarity,
+	type_e			: _item.type_e,
+	type_descr		: _item.type_descr,
+	descr			: _item.descr,
+	spr				: _item.spr,
+	discardable		: _item.discardable,
+	consumables		: _item.consumables,
+	equip_parts		: _item.equip_parts,
+	stackable		: _item.stackable,
+	atk_bon			: _item.atk_bon,
+	atk_scale		: _item.atk_scale,
+	ac_bon			: _item.ac_bon,
+	sav_bon			: _item.sav_bon,
+	ac_base			: _item.ac_base,
+	resist			: _item.resist,
+	attr_mod		: _item.attr_mod,
+	on_equip_scr	: _item.on_equip_scr,
+	on_unequip_scr	: _item.on_unequip_scr,
+	on_attack_scr	: _item.on_attack_scr,
+	on_atkhit_scr	: _item.on_atkhit_scr,
+	on_hit_scr		: _item.on_hit_scr,
+}
+}
+
+//判断槽位装备分类
+function can_equipment_to_slot(_equipment, _e_slot_index, _chara){
+if (_equipment == 0) return false;
+
+switch (_equipment.equip_parts)
+{
+    //双手武器
+    case 0:
+		//只能放主手
+		if (_e_slot_index != 0) return false;
+		//副手必须为空
+		if (_chara.sec_h != 0) return false;
+		return true;
+    //仅主手
+    case 1: return (_e_slot_index == 0);
+    //主手/副手
+    case 2: return (_e_slot_index == 0 || _e_slot_index == 1);
+    //护甲
+    case 3: return (_e_slot_index == 2);
+    //配饰
+    case 4: return (_e_slot_index >= 3 && _e_slot_index <= 5);
+}
+
+return false;
+}
+
+//绘制装备槽位
+function draw_equipment_slot(_x,_y,_label,_equip,_disabled)
+{
+    draw_text(_x,_y,_label);
+
+    if (_disabled)
+    {
+        draw_line_width(_x+op_border*2,_y+op_border/2-1,_x+op_border*7-8,_y+op_border/2-1,4);
+        return;
+    }
+
+    if (_equip == 0)
+        draw_text(_x+op_border*4,_y,"空");
+    else
+        draw_text(_x+op_border*2,_y,_equip.e_name);
 }
