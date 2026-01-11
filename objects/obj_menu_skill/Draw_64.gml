@@ -45,22 +45,10 @@ else if global.sub_menu == 2
 	_x = _ox+op_border;
 	_y = _oy+op_border;
 	var _chara = 0;
-	switch menu_level
+	_chara = load_chara(global.player[menu_level]);
+	if _chara.art
 	{
-	case 0:
-		_chara = load_chara(global.player[0]);
-		if _chara.art
-		{
-			draw_sprite_ext(_chara.art,1,_x,_y,1,1,0,c_white,1);
-		}
-		break;
-	case 1:
-		_chara = load_chara(global.player[1]);
-		if _chara.art
-		{
-			draw_sprite_ext(_chara.art,1,_x,_y,1,1,0,c_white,1);
-		}
-		break;
+		draw_sprite_ext(_chara.art,1,_x,_y,1,1,0,c_white,1);
 	}
 	_x += op_border+536;
 	draw_text(_x,_y,_chara.c_name);
@@ -91,63 +79,13 @@ else if global.sub_menu == 2
 
 	}
 	_y += op_border;
-	if _chara.str_m >= 0
-	{
-		draw_text(_x,_y,"力量:"+string(_chara.str)+"(+"+string(_chara.str_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"力量:"+string(_chara.str)+"("+string(_chara.str_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.dex_m >= 0
-	{
-		draw_text(_x,_y,"敏捷:"+string(_chara.dex)+"(+"+string(_chara.dex_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"敏捷:"+string(_chara.dex)+"("+string(_chara.dex_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.con_m >= 0
-	{
-		draw_text(_x,_y,"体质:"+string(_chara.con)+"(+"+string(_chara.con_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"体质:"+string(_chara.con)+"("+string(_chara.con_m)+")");
-	}
-	
-	_x -= op_border*10;
+	draw_menu_chara_attr(_x,_y,"力量",_chara.str,_chara.str_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"敏捷",_chara.dex,_chara.dex_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"体质",_chara.con,_chara.con_m);_x -= op_border*10;
 	_y += op_border;
-	
-	if _chara.int_m >= 0
-	{
-		draw_text(_x,_y,"智力:"+string(_chara.int)+"(+"+string(_chara.int_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"智力:"+string(_chara.int)+"("+string(_chara.int_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.wis_m >= 0
-	{
-		draw_text(_x,_y,"感知:"+string(_chara.wis)+"(+"+string(_chara.wis_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"感知:"+string(_chara.wis)+"("+string(_chara.wis_m)+")");
-	}
-	_x += op_border*5;
-	if _chara.cha_m >= 0
-	{
-		draw_text(_x,_y,"魅力:"+string(_chara.cha)+"(+"+string(_chara.cha_m)+")");
-	}
-	else
-	{
-		draw_text(_x,_y,"魅力:"+string(_chara.cha)+"("+string(_chara.cha_m)+")");
-	}
-	_x -= op_border*10;
+	draw_menu_chara_attr(_x,_y,"智力",_chara.int,_chara.int_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"感知",_chara.wis,_chara.wis_m);_x += op_border*5;
+	draw_menu_chara_attr(_x,_y,"魅力",_chara.cha,_chara.cha_m);_x -= op_border*10;
 	_y += op_border;
 	draw_text(_x,_y,"AC:"+string(_chara.AC));
 	_x += op_border*5;
