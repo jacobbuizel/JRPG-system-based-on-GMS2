@@ -31,7 +31,7 @@ if global.sub_menu == 1
 		_x += 128 + op_border/2;
 		draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
 		_y += op_border;
-		draw_text(_x,_y,"AC:"+string(_chara.AC_C)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
+		draw_text(_x,_y,"AC:"+string(_chara.AC)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
 		_y += op_border;
 		draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
 		

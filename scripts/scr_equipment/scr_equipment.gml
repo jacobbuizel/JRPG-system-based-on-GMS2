@@ -12,7 +12,7 @@ var _spr				= spr_equipment;	//装备贴图
 var _e_id				= 0;				//装备唯一ID
 var _discardable		= 1;				//是否可丢弃
 var _consumables		= 0;				//是否消耗品
-var _equip_parts		= 0;				//装备部位，0为双手都占用，1为仅主手（main_h），2为可主可副（main_h,sec_h），3为护甲（armor），4为配饰A到C（accessoryA,accessoryB,accessoryC），5为弹药A到D（ammunitionA,ammunitionB,ammunitionC,ammunitionD）
+var _equip_parts		= 0;				//装备部位，0为双手都占用，1为仅主手（main_h），2为可主可副（main_h,sec_h），3为护甲（armor），4为配饰A到C（accessoryA,accessoryB,accessoryC）
 var _durability			= -1;				//耐久度上限，负数为不可破坏，若为正数则需要配合特殊行为脚本使用
 var _stackable			= 0;				//是否可堆叠，0和1都为不可堆叠，大于1则为可堆叠的数量，建议不要大于999
 var _atk_bon			= 0;				//命中加值
@@ -20,8 +20,8 @@ var _atk_bon			= 0;				//命中加值
 var _atk_scale			= [1,1,0,{str:1,dex:0,con:0,int:0,wis:0,cha:0}];
 var _ac_bon				= 0;				//护盾加值
 var _sav_bon			= 0;				//豁免加值
-//基础护盾值[基础值(0则为不更改护盾值，高于0的数值会取代角色原来的护盾值所以默认最好不要低于10),使用属性值(0为不使用,>1为使用但限制特定值,由于不作弊的情况下一个属性值不太可能能叠到加值为10以上，所以需要不设护甲加值上限的情况下写10就可以了)]
-var _ac_base			= [0,{str:0,dex:1,con:0,int:0,wis:0,cha:0}];
+//基础护盾值[基础值(会取代角色原来的护盾值，所以默认最好不要低于10),使用属性值(0为不使用,>1为使用但限制特定值)]
+var _ac_base			= [10,{str:0,dex:99,con:0,int:0,wis:0,cha:0}];
 var _resist				= {					//装备该装备后针对某伤害的修正，0为免疫，0.5为抗性，1为无任何修正，2为易伤
 	damageBlunt:1,		//钝击
 	damagePuncture:1,	//穿刺
@@ -45,7 +45,7 @@ var _attr_mod			= {					//装备该装备后修改角色面板的情况，0为�
 	wis:0,
 	cha:0
 }
-//特殊行为脚本
+//特殊行为脚本，一般用于处理获取/失去技能，包括普通攻击也属于技能，不过技能系统还没完成，暂时无用
 var _on_equip_scr		= undefined;		//装备时
 var _on_unequip_scr		= undefined;		//移除时
 //战斗时的行为脚本
@@ -73,7 +73,6 @@ switch _id
 		_consumables		= 0;
 		_equip_parts		= 2;
 		_durability			= -1;
-		_stackable			= 0;
 		_atk_bon			= 0;
 		_atk_scale			= [1,4,0,{str:1,dex:0,con:0,int:0,wis:0,cha:0}];
 		break;
@@ -92,7 +91,6 @@ switch _id
 		_consumables		= 0;
 		_equip_parts		= 0;
 		_durability			= -1;
-		_stackable			= 0;
 		_atk_bon			= 0;
 		_atk_scale			= [1,8,0,{str:0,dex:1,con:0,int:0,wis:0,cha:0}];
 		break;
@@ -111,10 +109,9 @@ switch _id
 		_consumables		= 0;
 		_equip_parts		= 3;
 		_durability			= -1;
-		_stackable			= 0;
 		_ac_bon				= 0;
 		_sav_bon			= 0;
-		_ac_base			= [11,{str:0,dex:10,con:0,int:0,wis:0,cha:0}];
+		_ac_base			= [11,{str:0,dex:99,con:0,int:0,wis:0,cha:0}];
 		break;
 	
 	case 120:
@@ -128,34 +125,42 @@ switch _id
 		_spr				= spr_woodenshield;
 		_e_id				= 120;
 		_discardable		= 1;
-		_consumables		= 0;
 		_equip_parts		= 2;
 		_durability			= -1;
-		_stackable			= 0;
 		_atk_bon			= 0;
 		_atk_scale			= [1,1,0,{str:1,dex:0,con:0,int:0,wis:0,cha:0}];
 		_ac_bon				= 1;
 		_sav_bon			= 0;
-		_ac_base			= [0,{str:0,dex:0,con:0,int:0,wis:0,cha:0}];
 		break;
 	
-	case 150:
-		_e_name				= "弩矢";
-		_weight				= 0.075;
-		_price				= 0.05;
-		_rarity				= 0;
-		_type_e				= "CrossbowBolts";
-		_type_descr			= "弩矢";
-		_descr				= "用于弩一类武器的普通驽矢。";
-		_spr				= spr_crossbowbolts;
-		_e_id				= 150;
+	case 1000:
+		_e_name				= "防御护符";
+		_weight				= 0;
+		_price				= 1000;
+		_rarity				= 1;
+		_type_e				= "Accessory";
+		_type_descr			= "饰品";
+		_descr				= "着装后AC+1。";
+		_spr				= spr_accessory;
+		_e_id				= 1000;
 		_discardable		= 1;
-		_consumables		= 1;
-		_equip_parts		= 5;
-		_durability			= -1;
-		_stackable			= 80;
-		_atk_bon			= 0;
-		_atk_scale			= [0,0,0,{str:0,dex:0,con:0,int:0,wis:0,cha:0}];
+		_equip_parts		= 4;
+		_ac_bon				= 1;
+		break;
+	
+	case 1001:
+		_e_name				= "智力护符";
+		_weight				= 0;
+		_price				= 1000;
+		_rarity				= 1;
+		_type_e				= "Accessory";
+		_type_descr			= "饰品";
+		_descr				= "着装后智力+1。";
+		_spr				= spr_accessory;
+		_e_id				= 1001;
+		_discardable		= 1;
+		_equip_parts		= 4;
+		_attr_mod			= {str:0,dex:0,con:0,int:1,wis:0,cha:0};
 		break;
 }
 
@@ -247,8 +252,6 @@ while(amount > 0)
 	var _new_amount = min(amount,stackable);
 	amount -= _new_amount;
 	
-	show_debug_message(string(_new_amount));
-	
 	if(ds_grid_get(equipment,0,0)!=0)
 	{
 		ds_grid_resize(equipment,equipment_w,ds_grid_height(equipment)+1);
@@ -331,19 +334,83 @@ switch (_equipment.equip_parts)
 return false;
 }
 
-//绘制装备槽位
-function draw_equipment_slot(_x,_y,_label,_equip,_disabled)
+//获取已着装装备数据
+function get_equipped_item(_chara, _slot_index){
+switch (_slot_index)
 {
-    draw_text(_x,_y,_label);
+	case 0: return _chara.main_h;
+	case 1: return _chara.sec_h;
+	case 2: return _chara.armor;
+	case 3: return _chara.accessoryA;
+	case 4: return _chara.accessoryB;
+	case 5: return _chara.accessoryC;
+}
+return 0;
+}
 
-    if (_disabled)
-    {
-        draw_line_width(_x+op_border*2,_y+op_border/2-1,_x+op_border*7-8,_y+op_border/2-1,4);
-        return;
-    }
+//应用装备
+function apply_equipment(_chara, _slot_index, _new_eq){
+//获取当前装备
+var _old_eq = get_equipped_item(_chara, _slot_index);
 
-    if (_equip == 0)
-        draw_text(_x+op_border*4,_y,"空");
-    else
-        draw_text(_x+op_border*2,_y,_equip.e_name);
+//卸下旧装备，减去属性
+if (_old_eq)
+{
+	_chara.str -= _old_eq.attr_mod.str;
+	_chara.dex -= _old_eq.attr_mod.dex;
+	_chara.con -= _old_eq.attr_mod.con;
+	_chara.int -= _old_eq.attr_mod.int;
+	_chara.wis -= _old_eq.attr_mod.wis;
+	_chara.cha -= _old_eq.attr_mod.cha;
+}
+//装上新装备，增加属性
+if (_new_eq)
+{
+	_chara.str += _new_eq.attr_mod.str;
+	_chara.dex += _new_eq.attr_mod.dex;
+	_chara.con += _new_eq.attr_mod.con;
+	_chara.int += _new_eq.attr_mod.int;
+	_chara.wis += _new_eq.attr_mod.wis;
+	_chara.cha += _new_eq.attr_mod.cha;
+}
+//更新装备槽
+switch (_slot_index)
+{
+    case 0: _chara.main_h = _new_eq; break;
+    case 1: _chara.sec_h = _new_eq; break;
+    case 2: _chara.armor = _new_eq; break;
+    case 3: _chara.accessoryA = _new_eq; break;
+    case 4: _chara.accessoryB = _new_eq; break;
+    case 5: _chara.accessoryC = _new_eq; break;
+}
+recalc_AC(_chara);
+}
+
+//刷新角色AC
+function recalc_AC(_chara){
+//默认值
+var _ac = 10 + _chara.dex_m;
+
+//护甲槽
+if (_chara.armor)
+{
+    var _base = _chara.armor.ac_base[0];
+    var _attr = _chara.armor.ac_base[1];
+    _base += max(0,min(_chara.str_m,_attr.str));
+    _base += min(_chara.dex_m,_attr.dex);
+    _base += max(0,min(_chara.con_m,_attr.con));
+    _base += max(0,min(_chara.int_m,_attr.int));
+    _base += max(0,min(_chara.wis_m,_attr.wis));
+    _base += max(0,min(_chara.cha_m,_attr.cha));
+    _ac = _base;
+}
+
+//累加其他装备的ac_bon
+var slots = [_chara.main_h,_chara.sec_h,_chara.accessoryA,_chara.accessoryB,_chara.accessoryC];
+for (var i=0;i<array_length(slots);i++)
+{
+    if(slots[i]) _ac += slots[i].ac_bon;
+}
+	
+_chara.AC = _ac;
 }

@@ -36,12 +36,17 @@ op_length = global.totalchara;
 menu_level = 0;
 
 //装备互动
-op_option_eq[0] = "装备";
-op_option_eq[1] = "丢弃";
+op_option_eq = [
+	MENU_EQUIPMENT_INTERFACE.EQUIP,
+	MENU_EQUIPMENT_INTERFACE.DISCARD
+];
 op_length_eq = array_length(op_option_eq);
 pos_eq = 0;
-op_option_slot_eq[0] = "卸下";
-op_option_slot_eq[1] = "切换";
+op_option_slot_eq = [
+	MENU_EQUIPMENT_SLOT.UNEQUIP,
+	MENU_EQUIPMENT_SLOT.SWITCH,
+	MENU_EQUIPMENT_SLOT.DISCARD
+];
 op_length_slot_eq = array_length(op_option_slot_eq);
 pos_slot_eq = 0;
 

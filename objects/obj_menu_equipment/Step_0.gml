@@ -130,20 +130,26 @@ if(menu_anm <= 2 && menu_cloes == false)
 		{
 			if equip_empty
 			{
-				var _new_op_option_slot_eq = [];
-				_new_op_option_slot_eq[0] = "卸下";
+				var _new_op_option_slot_eq = [
+					MENU_EQUIPMENT_SLOT.UNEQUIP,
+					MENU_EQUIPMENT_SLOT.DISCARD
+				];
 				op_option_slot_eq = _new_op_option_slot_eq;
 				op_length_slot_eq = array_length(op_option_slot_eq);
 			}
 			else
 			{
-				var _new_op_option_slot_eq = [];
-				_new_op_option_slot_eq[0] = "卸下";
-				_new_op_option_slot_eq[1] = "切换";
+				var _new_op_option_slot_eq = [
+					MENU_EQUIPMENT_SLOT.UNEQUIP,
+					MENU_EQUIPMENT_SLOT.SWITCH,
+					MENU_EQUIPMENT_SLOT.DISCARD
+				];
 				op_option_slot_eq = _new_op_option_slot_eq;
 				op_length_slot_eq = array_length(op_option_slot_eq);
-				
-				//切换选项
+			}
+			//切换选项
+			if op_length_slot_eq > 1
+			{
 				pos_slot_eq += dpkey - upkey;
 				if dpkey || upkey
 				{
@@ -161,9 +167,9 @@ if(menu_anm <= 2 && menu_cloes == false)
 			//应用选项
 			if akey && !key_cooldown[0]
 			{
-				switch(pos_slot_eq)
+				switch(op_option_slot_eq[pos_slot_eq])
 				{
-				case 0:
+				case MENU_EQUIPMENT_SLOT.UNEQUIP:
 					//卸下装备
 					if (_slot_map[_e_slot_index] != 0)
 					{
@@ -171,20 +177,25 @@ if(menu_anm <= 2 && menu_cloes == false)
 						add_equipment_id(_change_e_id, 1);
 						equipmentEND = min(ds_grid_height(equipment),10);
 					}
-					switch (_e_slot_index)
-					{
-						case 0: _chara.main_h = 0; break;
-						case 1: _chara.sec_h = 0; break;
-						case 2: _chara.armor = 0; break;
-						case 3: _chara.accessoryA = 0; break;
-						case 4: _chara.accessoryB = 0; break;
-						case 5: _chara.accessoryC = 0; break;
-					}
+					apply_equipment(_chara,_e_slot_index,0);
 					global.sub_menu=2;
 					break;
-				case 1:
+				case MENU_EQUIPMENT_SLOT.SWITCH:
 					//切换装备
 					global.sub_menu=4;
+					break;
+				case MENU_EQUIPMENT_SLOT.DISCARD:
+					//丢弃装备
+					if get_equipped_item(_chara, _e_slot_index).discardable!=1
+					{
+						create_msg_box("undiscardable");
+					}
+					else
+					{
+						apply_equipment(_chara,_e_slot_index,0);
+					}
+					pos_slot_eq = 0;
+					global.sub_menu=2;
 					break;
 				}
 				audio_play_sound(sfx_select, 9, false);
@@ -342,15 +353,14 @@ if(menu_anm <= 2 && menu_cloes == false)
 			{
 				pos_eq = op_length_eq-1;
 			}
-
 			//应用选项
 			if akey && !key_cooldown[0]
 			{
 				key_cooldown[0]=1;
 				var _equipment = load_equipment(equip_pos+equip_scroll_a);
-				switch(pos_eq)
+				switch(op_option_eq[pos_eq])
 				{
-				case 0:
+				case MENU_EQUIPMENT_INTERFACE.EQUIP:
 					if (!can_equipment_to_slot(_equipment, _e_slot_index, _chara))
 				    {
 				        audio_play_sound(sfx_deselect, 9, false);
@@ -367,15 +377,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 					//去掉背包内的物品
 					scr_discard_equipment();
 					//写入装备槽
-					switch (_e_slot_index)
-					{
-						case 0: _chara.main_h		= _equipment; break;
-						case 1: _chara.sec_h		= _equipment; break;
-						case 2: _chara.armor		= _equipment; break;
-						case 3: _chara.accessoryA	= _equipment; break;
-						case 4: _chara.accessoryB	= _equipment; break;
-						case 5: _chara.accessoryC	= _equipment; break;
-					}
+					apply_equipment(_chara, _e_slot_index, _equipment);
 					//如果有旧装备则加回背包
 					if (_old_equip != 0)
 					{
@@ -388,7 +390,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 					equip_scroll_a = 0;
 					equipmentEND = min(ds_grid_height(equipment),10);
 					break;
-				case 1:
+				case MENU_EQUIPMENT_INTERFACE.DISCARD:
 					//丢弃
 					audio_play_sound(sfx_select,9,false);
 					//判断是否可丢弃
@@ -403,7 +405,8 @@ if(menu_anm <= 2 && menu_cloes == false)
 						scr_discard_equipment();
 						if equip_empty
 						{
-							global.sub_menu--;
+							global.sub_menu-=2;
+							pos_slot_eq = 0;
 						}
 						global.sub_menu--;
 						pos_eq = 0;
@@ -436,6 +439,8 @@ if(menu_anm <= 2 && menu_cloes == false)
 		}
 	}
 }
+
+//菜单动画控制
 if menu_cloes == false
 {
 	if menu_anm > 0

@@ -128,7 +128,7 @@ if op_option[pos+scroll_a] != "存档"+string(pos+scroll_a)+" 空"
 		_y += op_border;
 		draw_text(_x,_y,"等级"+string(c.level)+c.class_name+":"+c.sub_class_name);
 		_y += op_border;
-		draw_text(_x,_y,"AC:"+string(c.AC_C)+" HP:"+string(c.HP_C)+"/"+string(c.HP));
+		draw_text(_x,_y,"AC:"+string(c.AC)+" HP:"+string(c.HP_C)+"/"+string(c.HP));
 		_y += op_border;
 		draw_text(_x,_y,"MP:"+string(c.MP_C)+"/"+string(c.MP));
 

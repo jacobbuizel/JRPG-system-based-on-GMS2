@@ -102,13 +102,6 @@ if global.debug = true
 	_y += 32;
 	draw_text(_x,_y,"当前房间:"+room_get_name(room)+" 房间ID:"+string(global.roomid));
 	_y += 32;
-	if ykey
-	{
-		dice_r = d20c(0);
-	}
-	draw_text(_x,_y,string(dice_r));
-	_y += 32;
 	draw_text(_x,_y,string(global.sub_menu));
 	_y += 32;
-	draw_text(_x,_y,string(load_chara(global.player[0]).main_h));
 }

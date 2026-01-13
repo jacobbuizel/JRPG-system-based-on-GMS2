@@ -2,6 +2,7 @@
 var _x = 216;
 var _y = op_border*5+menu_anm;
 var _oy = _y,_ox = _x;
+var _e_slot_index = e_pos_row * 2 + e_pos_col;
 draw_set_font(font0);
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
@@ -27,7 +28,7 @@ if global.sub_menu == 1
 	_x += 128 + op_border/2;
 	draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
 	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC_C)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
+	draw_text(_x,_y,"AC:"+string(_chara.AC)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
 	_y += op_border;
 	draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
 		
@@ -45,7 +46,7 @@ if global.sub_menu == 1
 	_x += 128 + op_border/2;
 	draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
 	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC_C)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
+	draw_text(_x,_y,"AC:"+string(_chara.AC)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
 	_y += op_border;
 	draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
 }
@@ -63,16 +64,16 @@ else if global.sub_menu >= 2
 	_y += op_border;
 	
 	//绘制装备部位
-	draw_equipment_slot(_x,_y,"主手:",_chara.main_h,false);_x+=op_border*7;
-	draw_equipment_slot(_x,_y,"副手:",_chara.sec_h,_chara.main_h!=0 && _chara.main_h.equip_parts==0);
+	draw_eq_slot(_x,_y,"主手:",_chara.main_h,false);_x+=op_border*7;
+	draw_eq_slot(_x,_y,"副手:",_chara.sec_h,_chara.main_h!=0 && _chara.main_h.equip_parts==0);
 	_x -= op_border*7
 	_y += op_border;
-	draw_equipment_slot(_x,_y,"护甲:",_chara.armor,false);_x+=op_border*7;
-	draw_equipment_slot(_x,_y,"配饰:",_chara.accessoryA,false);
+	draw_eq_slot(_x,_y,"护甲:",_chara.armor,false);_x+=op_border*7;
+	draw_eq_slot(_x,_y,"配饰:",_chara.accessoryA,false);
 	_x -= op_border*7
 	_y += op_border;
-	draw_equipment_slot(_x,_y,"配饰:",_chara.accessoryB,false);_x+=op_border*7;
-	draw_equipment_slot(_x,_y,"配饰:",_chara.accessoryC,false);
+	draw_eq_slot(_x,_y,"配饰:",_chara.accessoryB,false);_x+=op_border*7;
+	draw_eq_slot(_x,_y,"配饰:",_chara.accessoryC,false);
 	_x -= op_border*7
 	
 	//绘制属性
@@ -183,7 +184,6 @@ else if global.sub_menu >= 2
 		
 			//绘制箭头
 		    var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
-		
 			if equip_pos+equip_scroll_a != 0
 			{
 			    // 上箭头（上下浮动）
@@ -221,45 +221,61 @@ else if global.sub_menu >= 2
 	_x = _ox;
 	_y = _oy+height/2+114;
 	draw_sprite_stretched(spr_msgbox,image_index,_x,_y,width/2+op_border*3,height/2-114);
-	if !equip_empty
+	if !equip_empty || global.sub_menu <= 3
 	{
 		_x += op_border;
 		_y += op_border;
+		//初始化装备绘制数据
 		var _equipment = 0;
 		_equipment = load_equipment(equip_pos+equip_scroll_a);
-		draw_sprite_ext(_equipment.spr,image_index,_x+5,_y+op_border*0.5,0.5,0.5,0,c_white,1);
-		draw_sprite_ext(spr_msge,image_index,_x+5,_y+op_border*0.5,0.25,0.25,0,c_white,1);
-		_x += op_border*4.8;
-		var _rarity = ""
-		switch _equipment.rarity
+		if(global.sub_menu <= 3)
 		{
-			default:
-				_rarity = "";
-				break;
-			case 0:
-				_rarity = "普通";
-				break;
-			case 1:
-				_rarity = "非普通";
-				break;
-			case 2:
-				_rarity = "珍惜";
-				break;
-			case 3:
-				_rarity = "极珍惜";
-				break;
-			case 4:
-				_rarity = "传说";
-				break;
-			case 5:
-				_rarity = "神器";
-				break;
+			switch (_e_slot_index)
+			{
+				case 0: _equipment = _chara.main_h; break;
+				case 1: _equipment = _chara.sec_h; break;
+				case 2: _equipment = _chara.armor; break;
+				case 3: _equipment = _chara.accessoryA; break;
+				case 4: _equipment = _chara.accessoryB; break;
+				case 5: _equipment = _chara.accessoryC; break;
+			}
 		}
-		draw_text(_x,_y,_equipment.e_name+" "+_rarity+_equipment.type_descr);
-		draw_text(_x+op_border*10,_y,"价格:"+string(_equipment.price)+"GP");
+		if _equipment
+		{
+			draw_sprite_ext(_equipment.spr,image_index,_x+5,_y+op_border*0.5,0.5,0.5,0,c_white,1);
+			draw_sprite_ext(spr_msge,image_index,_x+5,_y+op_border*0.5,0.25,0.25,0,c_white,1);
+			_x += op_border*4.8;
+			var _rarity = ""
+			switch _equipment.rarity
+			{
+				default:
+					_rarity = "";
+					break;
+				case 0:
+					_rarity = "普通";
+					break;
+				case 1:
+					_rarity = "非普通";
+					break;
+				case 2:
+					_rarity = "珍惜";
+					break;
+				case 3:
+					_rarity = "极珍惜";
+					break;
+				case 4:
+					_rarity = "传说";
+					break;
+				case 5:
+					_rarity = "神器";
+					break;
+			}
+			draw_text(_x,_y,_equipment.e_name+" "+_rarity+_equipment.type_descr);
+			draw_text(_x+op_border*10,_y,"价格:"+string(_equipment.price)+"GP");
 		
-		_y += op_border;
-		draw_text(_x,_y,string_wrap(_equipment.descr,480));
+			_y += op_border;
+			draw_text(_x,_y,string_wrap(_equipment.descr,480));
+		}
 	}
 	_ox -= width/2-op_border*3;
 }
@@ -269,14 +285,14 @@ if global.sub_menu == 3
 	var _new_w = 0;
 	for (var i=0;i<op_length_slot_eq;i++)
 	{
-		var _op_w = string_width(op_option_slot_eq[i])
+		var _op_w = string_width(menu_eq_slot_op_string(op_option_slot_eq[i]))
 		_new_w = max(_new_w,_op_w);
 	}
 	var o_width = _new_w + op_border*2;
-	var o_height = op_border*2 + string_height(op_option_slot_eq[0]) + (op_length_slot_eq-1)*op_space;
+	var o_height = op_border*2 + string_height(menu_eq_slot_op_string(op_option_slot_eq[0])) + (op_length_slot_eq-1)*op_space;
 
 	//绘制菜单背景
-	draw_sprite_stretched(spr_msgbox,image_index,736+op_border,op_border*7+(equip_pos*op_border),o_width,o_height);
+	draw_sprite_stretched(spr_msgbox,image_index,400+op_border+(e_pos_col*op_border*7),op_border*7+(e_pos_row*op_border),o_width,o_height);
 
 	//绘制选项
 	draw_set_font(font0);
@@ -290,7 +306,7 @@ if global.sub_menu == 3
 		{
 			_c = c_yellow;
 		}
-		draw_text_color(736+op_border*2,op_border*7+(equip_pos*op_border)+op_border+(op_space*i),op_option_slot_eq[i],_c,_c,_c,_c,1);
+		draw_text_color(400+op_border*2+(e_pos_col*op_border*7),op_border*7+(e_pos_row*op_border)+op_border+(op_space*i),menu_eq_slot_op_string(op_option_slot_eq[i]),_c,_c,_c,_c,1);
 	}
 }
 if global.sub_menu == 5
@@ -299,11 +315,11 @@ if global.sub_menu == 5
 	var _new_w = 0;
 	for (var i=0;i<op_length_eq;i++)
 	{
-		var _op_w = string_width(op_option_eq[i])
+		var _op_w = string_width(menu_eq_interface_op_string(op_option_eq[i]))
 		_new_w = max(_new_w,_op_w);
 	}
 	var o_width = _new_w + op_border*2;
-	var o_height = op_border*2 + string_height(op_option_eq[0]) + (op_length_eq-1)*op_space;
+	var o_height = op_border*2 + string_height(menu_eq_interface_op_string(op_option_eq[0])) + (op_length_eq-1)*op_space;
 
 	//绘制菜单背景
 	draw_sprite_stretched(spr_msgbox,image_index,736+op_border,op_border*7+(equip_pos*op_border),o_width,o_height);
@@ -320,6 +336,6 @@ if global.sub_menu == 5
 		{
 			_c = c_yellow;
 		}
-		draw_text_color(736+op_border*2,op_border*7+(equip_pos*op_border)+op_border+(op_space*i),op_option_eq[i],_c,_c,_c,_c,1);
+		draw_text_color(736+op_border*2,op_border*7+(equip_pos*op_border)+op_border+(op_space*i),menu_eq_interface_op_string(op_option_eq[i]),_c,_c,_c,_c,1);
 	}
 }
