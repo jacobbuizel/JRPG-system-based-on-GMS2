@@ -260,9 +260,9 @@ while(amount > 0)
 	var new_row = ds_grid_height(equipment)-1;
 		
 	//填充新组数据
-    ds_grid_set(equipment,0,new_row,e_name);
-    ds_grid_set(equipment,1,new_row,_new_amount);
-    ds_grid_set(equipment,2,new_row,e_id);
+	ds_grid_set(equipment,0,new_row,e_name);
+	ds_grid_set(equipment,1,new_row,_new_amount);
+	ds_grid_set(equipment,2,new_row,e_id);
 	ds_grid_set(equipment,3,new_row,cur_durability);
 }
 global.g_msg_name = e_name;
@@ -314,21 +314,21 @@ if (_equipment == 0) return false;
 
 switch (_equipment.equip_parts)
 {
-    //双手武器
-    case 0:
+	//双手武器
+	case 0:
 		//只能放主手
 		if (_e_slot_index != 0) return false;
 		//副手必须为空
 		if (_chara.sec_h != 0) return false;
 		return true;
-    //仅主手
-    case 1: return (_e_slot_index == 0);
-    //主手/副手
-    case 2: return (_e_slot_index == 0 || _e_slot_index == 1);
-    //护甲
-    case 3: return (_e_slot_index == 2);
-    //配饰
-    case 4: return (_e_slot_index >= 3 && _e_slot_index <= 5);
+	//仅主手
+	case 1: return (_e_slot_index == 0);
+	//主手/副手
+	case 2: return (_e_slot_index == 0 || _e_slot_index == 1);
+	//护甲
+	case 3: return (_e_slot_index == 2);
+	//配饰
+	case 4: return (_e_slot_index >= 3 && _e_slot_index <= 5);
 }
 
 return false;
@@ -376,12 +376,12 @@ if (_new_eq)
 //更新装备槽
 switch (_slot_index)
 {
-    case 0: _chara.main_h = _new_eq; break;
-    case 1: _chara.sec_h = _new_eq; break;
-    case 2: _chara.armor = _new_eq; break;
-    case 3: _chara.accessoryA = _new_eq; break;
-    case 4: _chara.accessoryB = _new_eq; break;
-    case 5: _chara.accessoryC = _new_eq; break;
+	case 0: _chara.main_h = _new_eq; break;
+	case 1: _chara.sec_h = _new_eq; break;
+	case 2: _chara.armor = _new_eq; break;
+	case 3: _chara.accessoryA = _new_eq; break;
+	case 4: _chara.accessoryB = _new_eq; break;
+	case 5: _chara.accessoryC = _new_eq; break;
 }
 recalc_AC(_chara);
 }
@@ -394,23 +394,79 @@ var _ac = 10 + _chara.dex_m;
 //护甲槽
 if (_chara.armor)
 {
-    var _base = _chara.armor.ac_base[0];
-    var _attr = _chara.armor.ac_base[1];
-    _base += max(0,min(_chara.str_m,_attr.str));
-    _base += min(_chara.dex_m,_attr.dex);
-    _base += max(0,min(_chara.con_m,_attr.con));
-    _base += max(0,min(_chara.int_m,_attr.int));
-    _base += max(0,min(_chara.wis_m,_attr.wis));
-    _base += max(0,min(_chara.cha_m,_attr.cha));
-    _ac = _base;
+	var _base = _chara.armor.ac_base[0];
+	var _attr = _chara.armor.ac_base[1];
+	_base += max(0,min(_chara.str_m,_attr.str));
+	_base += min(_chara.dex_m,_attr.dex);
+	_base += max(0,min(_chara.con_m,_attr.con));
+	_base += max(0,min(_chara.int_m,_attr.int));
+	_base += max(0,min(_chara.wis_m,_attr.wis));
+	_base += max(0,min(_chara.cha_m,_attr.cha));
+	_ac = _base;
 }
 
 //累加其他装备的ac_bon
 var slots = [_chara.main_h,_chara.sec_h,_chara.accessoryA,_chara.accessoryB,_chara.accessoryC];
 for (var i=0;i<array_length(slots);i++)
 {
-    if(slots[i]) _ac += slots[i].ac_bon;
+	if(slots[i]) _ac += slots[i].ac_bon;
 }
 	
 _chara.AC = _ac;
 }
+
+//复制角色数据
+function clone_chara(_chara){
+var c = {};
+c.str = _chara.str;
+c.dex = _chara.dex;
+c.con = _chara.con;
+c.int = _chara.int;
+c.wis = _chara.wis;
+c.cha = _chara.cha;
+
+c.str_m = _chara.str_m;
+c.dex_m = _chara.dex_m;
+c.con_m = _chara.con_m;
+c.int_m = _chara.int_m;
+c.wis_m = _chara.wis_m;
+c.cha_m = _chara.cha_m;
+
+c.main_h = _chara.main_h;
+c.sec_h  = _chara.sec_h;
+c.armor  = _chara.armor;
+c.accessoryA = _chara.accessoryA;
+c.accessoryB = _chara.accessoryB;
+c.accessoryC = _chara.accessoryC;
+
+c.AC = _chara.AC;
+c.HP = _chara.HP;
+c.HP_C = _chara.HP_C;
+c.MP = _chara.MP;
+c.MP_C = _chara.MP_C;
+c.spd = _chara.spd;
+c.PRO_B = _chara.PRO_B;
+
+return c;
+}
+
+//预览装备数据初始化
+function preview_slot_switch(_chara, _slot_index, _new_eq){
+var c = clone_chara(_chara);
+apply_equipment(c, _slot_index, _new_eq);
+return c;
+}
+
+//计算差值
+function calc_attr_delta(_base, _preview){
+return {
+	str : _preview.str - _base.str,
+	dex : _preview.dex - _base.dex,
+	con : _preview.con - _base.con,
+	int : _preview.int - _base.int,
+	wis : _preview.wis - _base.wis,
+	cha : _preview.cha - _base.cha,
+	AC  : _preview.AC  - _base.AC
+};
+}
+

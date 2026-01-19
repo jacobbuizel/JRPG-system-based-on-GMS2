@@ -66,7 +66,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 		{
 			//切换部位
 			e_pos_row += dpkey - upkey;
-	        e_pos_col += lpkey - rpkey;
+			e_pos_col += lpkey - rpkey;
 		
 			//音效
 			if dpkey || upkey || rpkey || lpkey
@@ -75,13 +75,13 @@ if(menu_anm <= 2 && menu_cloes == false)
 			}
 		
 			//确保部位选择框在合法范围内
-	        if (e_pos_row >= 3) e_pos_row = 0;
-	        if (e_pos_row < 0) e_pos_row = 2;
-	        if (e_pos_col >= 2) e_pos_col = 0;
-	        if (e_pos_col < 0) e_pos_col = 1;
+			if (e_pos_row >= 3) e_pos_row = 0;
+			if (e_pos_row < 0) e_pos_row = 2;
+			if (e_pos_col >= 2) e_pos_col = 0;
+			if (e_pos_col < 0) e_pos_col = 1;
 		
 			//确认键（选择装备部位）
-	        if akey && !key_cooldown[0]
+			if akey && !key_cooldown[0]
 			{
 				key_cooldown[0]=1;
 				var _can_enter = true;
@@ -102,7 +102,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 					if _e_slot_is_empty
 					{
 						if !equip_empty
-					    {
+						{
 							//切换到装备选择界面
 							global.sub_menu+=2;
 							audio_play_sound(sfx_select, 9, false);
@@ -235,7 +235,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 				//左键一次跳5行
 				if lpkey
 				{
-				    scr_menu_movement_jump(id,"equip_pos","equip_scroll_a",ds_grid_height(equipment),equipmentEND,5,0,1);
+					scr_menu_movement_jump(id,"equip_pos","equip_scroll_a",ds_grid_height(equipment),equipmentEND,5,0,1);
 				}
 			
 				//音效
@@ -249,25 +249,25 @@ if(menu_anm <= 2 && menu_cloes == false)
 				var _pressed_count = 0;
 				for (var i = 0; i < array_length(_dir_keys); i++)
 				{
-				    if (_dir_keys[i])
+					if (_dir_keys[i])
 					{
 						_pressed_count++;
 					}
 				}
 				if (_pressed_count >= 2)
 				{
-				    wait_time = 30;
+					wait_time = 30;
 				}
 				else if (_pressed_count == 1)
 				{
-				    if (wait_time > 0)
+					if (wait_time > 0)
 					{
 						wait_time--;
 					}
 				}
 				else
 				{
-				    wait_time = 30;
+					wait_time = 30;
 				}
 			
 				//长按快速切换选取
@@ -290,7 +290,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 					//左键一次跳5行
 					if lkey
 					{
-					    scr_menu_movement_jump(id,"equip_pos","equip_scroll_a",ds_grid_height(equipment),equipmentEND,5,0,1);
+						scr_menu_movement_jump(id,"equip_pos","equip_scroll_a",ds_grid_height(equipment),equipmentEND,5,0,1);
 					}
 					if !(_pressed_count >= 2)
 					{
@@ -298,7 +298,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 					}
 					wait_time = 5;
 				}
-	        }
+			}
 		
 			//保持选框在合法范围
 			if equip_pos >= equipmentEND
@@ -362,10 +362,10 @@ if(menu_anm <= 2 && menu_cloes == false)
 				{
 				case MENU_EQUIPMENT_INTERFACE.EQUIP:
 					if (!can_equipment_to_slot(_equipment, _e_slot_index, _chara))
-				    {
-				        audio_play_sound(sfx_deselect, 9, false);
-				        break;
-				    }
+					{
+						audio_play_sound(sfx_deselect, 9, false);
+						break;
+					}
 					//装备
 					//记录旧装备
 					var _old_equip = _slot_map[_e_slot_index];

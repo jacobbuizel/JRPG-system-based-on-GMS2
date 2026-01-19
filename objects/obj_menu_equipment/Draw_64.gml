@@ -3,6 +3,9 @@ var _x = 216;
 var _y = op_border*5+menu_anm;
 var _oy = _y,_ox = _x;
 var _e_slot_index = e_pos_row * 2 + e_pos_col;
+var _chara = 0;
+var _preview_chara = 0;
+var _delta = 0;
 draw_set_font(font0);
 draw_set_valign(fa_top);
 draw_set_halign(fa_left);
@@ -17,38 +20,14 @@ if global.sub_menu == 1
 	draw_rectangle(_x,_y+(pos*(128+op_border)),_x+width-(op_border*2),_y+128+((pos*(128+op_border))),true);
 	
 	//绘制角色图
-	var _chara = 0;
-	_chara = load_chara(global.player[0]);
-	if _chara.portrait
-	{
-		draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
-	}
-	else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-	draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-	_x += 128 + op_border/2;
-	draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
-	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
-	_y += op_border;
-	draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
-		
-	_y+=op_border*3;
-	_x-=128 + op_border/2;
-
 	_chara = 0;
-	_chara = load_chara(global.player[1]);
-	if _chara.portrait
+	for (var i = 0; i < global.totalchara; i++)
 	{
-		draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
+		_chara = load_chara(global.player[i]);
+		//绘制角色图
+		draw_chara_block(_chara,_x,_y,op_border);
+		_y+=op_border*5;
 	}
-	else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-	draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-	_x += 128 + op_border/2;
-	draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
-	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
-	_y += op_border;
-	draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
 }
 //绘制装备栏子菜单
 else if global.sub_menu >= 2
@@ -59,7 +38,28 @@ else if global.sub_menu >= 2
 	draw_sprite_stretched(spr_msgbox,image_index,_x,_y,width/2-op_border*3,height);
 	_x += op_border;
 	_y += op_border;
-	var _chara = load_chara(global.player[menu_level]);
+	_chara = load_chara(global.player[menu_level]);
+	
+	//预览绘制初始化
+	if (global.sub_menu == 3 && (
+		op_option_slot_eq[pos_slot_eq] == MENU_EQUIPMENT_SLOT.UNEQUIP ||
+		op_option_slot_eq[pos_slot_eq] == MENU_EQUIPMENT_SLOT.DISCARD
+	))
+	{
+		_preview_chara = preview_slot_switch(_chara, _e_slot_index,0);
+	}
+	if (global.sub_menu >= 4)
+	{
+		var eq = load_equipment(equip_pos + equip_scroll_a);
+		if (can_equipment_to_slot(eq, _e_slot_index, _chara))
+		{
+			_preview_chara = preview_slot_switch(_chara, _e_slot_index, eq);
+		}
+	}
+	if (_preview_chara != 0)
+	{
+		_delta = calc_attr_delta(_chara, _preview_chara);
+	}
 	draw_text(_x,_y,_chara.c_name);
 	_y += op_border;
 	
@@ -78,15 +78,24 @@ else if global.sub_menu >= 2
 	
 	//绘制属性
 	_y += op_border;
-	draw_menu_chara_attr(_x,_y,"力量",_chara.str,_chara.str_m);_x += op_border*5;
-	draw_menu_chara_attr(_x,_y,"敏捷",_chara.dex,_chara.dex_m);_x += op_border*5;
-	draw_menu_chara_attr(_x,_y,"体质",_chara.con,_chara.con_m);_x -= op_border*10;
+	draw_menu_chara_attr_preview(_x,_y,"力量",_chara.str,_chara.str_m,_delta != 0 ? _delta.str : 0);_x += op_border*5;
+	draw_menu_chara_attr_preview(_x,_y,"敏捷",_chara.dex,_chara.dex_m,_delta != 0 ? _delta.dex : 0);_x += op_border*5;
+	draw_menu_chara_attr_preview(_x,_y,"体质",_chara.con,_chara.con_m,_delta != 0 ? _delta.con : 0);_x -= op_border*10;
 	_y += op_border;
-	draw_menu_chara_attr(_x,_y,"智力",_chara.int,_chara.int_m);_x += op_border*5;
-	draw_menu_chara_attr(_x,_y,"感知",_chara.wis,_chara.wis_m);_x += op_border*5;
-	draw_menu_chara_attr(_x,_y,"魅力",_chara.cha,_chara.cha_m);_x -= op_border*10;
+	draw_menu_chara_attr_preview(_x,_y,"智力",_chara.int,_chara.int_m,_delta != 0 ? _delta.int : 0);_x += op_border*5;
+	draw_menu_chara_attr_preview(_x,_y,"感知",_chara.wis,_chara.wis_m,_delta != 0 ? _delta.wis : 0);_x += op_border*5;
+	draw_menu_chara_attr_preview(_x,_y,"魅力",_chara.cha,_chara.cha_m,_delta != 0 ? _delta.cha : 0);_x -= op_border*10;
 	_y += op_border;
-	draw_text(_x,_y,"AC:"+string(_chara.AC));
+	draw_text(_x,_y,"AC:");
+	var ac_val = _chara.AC;
+	var ac_col = c_white;
+	if (_delta != 0 && _delta.AC != 0)
+	{
+		ac_val += _delta.AC;
+		ac_col = (_delta.AC > 0) ? c_lime : c_red;
+	}
+	draw_text_color(_x + string_width("AC:"), _y, string(ac_val), ac_col, ac_col, ac_col, ac_col, 1);
+	draw_set_color(c_white);
 	_x += op_border*5;
 	draw_text(_x,_y,"HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
 	_x -= op_border*5;
@@ -183,26 +192,26 @@ else if global.sub_menu >= 2
 			draw_rectangle(scrollbar_x1, slider_y1, scrollbar_x2, slider_y2, false);
 		
 			//绘制箭头
-		    var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
+			var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
 			if equip_pos+equip_scroll_a != 0
 			{
-			    // 上箭头（上下浮动）
-			    draw_triangle(
-			        midx,scrollbar_y1-15+arrow_offset,
-			        midx-4,scrollbar_y1-7+arrow_offset,
-			        midx+4,scrollbar_y1-7+arrow_offset,
-			        false
-			    );
+				// 上箭头（上下浮动）
+				draw_triangle(
+					midx,scrollbar_y1-15+arrow_offset,
+					midx-4,scrollbar_y1-7+arrow_offset,
+					midx+4,scrollbar_y1-7+arrow_offset,
+					false
+				);
 			}
 			if equip_pos+equip_scroll_a != ds_grid_height(equipment)-1
 			{
-			    // 下箭头（同样浮动，但反向也行）
-			    draw_triangle(
-			        midx,scrollbar_y2+15-arrow_offset,
-			        midx-4,scrollbar_y2+7-arrow_offset,
-			        midx+4,scrollbar_y2+7-arrow_offset,
-			        false
-			    );
+				// 下箭头（同样浮动，但反向也行）
+				draw_triangle(
+					midx,scrollbar_y2+15-arrow_offset,
+					midx-4,scrollbar_y2+7-arrow_offset,
+					midx+4,scrollbar_y2+7-arrow_offset,
+					false
+				);
 			}
 		}
 	}

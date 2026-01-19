@@ -280,10 +280,10 @@ var mpMapping = [0, 2, 3, 5, 6, 8, 9, 12, 15, 16, 20, 24, 25, 30, 35, 36, 42, 48
 
 // 检查等级是否在有效范围内
 if (level >= 1 && level <= array_length(mpMapping) - 1) {
-    MP = mpMapping[level];
+	MP = mpMapping[level];
 } else {
-    //处理无效等级的情况
-    MP = 2; //或者其他默认值
+	//处理无效等级的情况
+	MP = 2; //或者其他默认值
 }
 
 var MP_C = MP;
@@ -346,20 +346,20 @@ return {
 
 ///@param id
 function add_chara_id(_id) {
-    var _chara = chara_id(_id);
+	var _chara = chara_id(_id);
 	
-    //如果表格有内容，就扩展一行
-    if (ds_grid_get(chara_status, 0, 0) != 0)
+	//如果表格有内容，就扩展一行
+	if (ds_grid_get(chara_status, 0, 0) != 0)
 	{
-        ds_grid_resize(chara_status, chara_status_w, ds_grid_height(chara_status) + 1);
-    }
-    var new_row = ds_grid_height(chara_status) - 1;
+		ds_grid_resize(chara_status, chara_status_w, ds_grid_height(chara_status) + 1);
+	}
+	var new_row = ds_grid_height(chara_status) - 1;
 
-    //把struct的字段写入grid
+	//把struct的字段写入grid
 	ds_grid_set(chara_status, 0, new_row, _id);
-    ds_grid_set(chara_status, 1, new_row, _chara);
+	ds_grid_set(chara_status, 1, new_row, _chara);
 	
-    return true;
+	return true;
 }
 
 //加载角色数据
@@ -368,12 +368,12 @@ function load_chara(_id){
 	var _row = -1;
 	for (var i=0;i<ds_grid_height(chara_status);i++)
 	{
-        if (ds_grid_get(chara_status, 0, i) == _id)
+		if (ds_grid_get(chara_status, 0, i) == _id)
 		{
-            _row = i;
-            break;
-        }
-    }
+			_row = i;
+			break;
+		}
+	}
 	if (_row == -1) return undefined;
 	
 	var _chara = ds_grid_get(chara_status, 1, _row);
@@ -389,4 +389,13 @@ function load_chara(_id){
 	_chara.HP_C = clamp(_chara.HP_C, 0, _chara.HP);
 	_chara.MP_C = clamp(_chara.MP_C, 0, _chara.MP);
 	return _chara;
+}
+
+//角色属性差值结构初始化
+function make_attr_delta() {
+return {
+	str: 0, dex: 0, con: 0,
+	int: 0, wis: 0, cha: 0,
+	AC:  0
+};
 }
