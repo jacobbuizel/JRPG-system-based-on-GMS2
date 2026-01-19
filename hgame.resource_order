@@ -5,7 +5,6 @@
   ],
   "ResourceOrderSettings":[
     {"name":"update_note","order":1,"path":"notes/update_note/update_note.yy",},
-    {"name":"obj_enum","order":1,"path":"objects/obj_enum/obj_enum.yy",},
     {"name":"obj_equip_p","order":1,"path":"objects/obj_equip_p/obj_equip_p.yy",},
     {"name":"obj_menu_equipment","order":1,"path":"objects/obj_menu_equipment/obj_menu_equipment.yy",},
     {"name":"obj_menu_skill","order":2,"path":"objects/obj_menu_skill/obj_menu_skill.yy",},
