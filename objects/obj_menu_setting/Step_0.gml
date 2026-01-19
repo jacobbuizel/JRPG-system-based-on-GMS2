@@ -69,6 +69,7 @@ if global.sub_menu == 1 && menu_wait==0
 	//应用选项
 	if akey && !key_cooldown[0]
 	{
+		scr_setting_save();
 		key_cooldown[0]=1;
 		var _sml = menu_level;
 		switch(menu_level)

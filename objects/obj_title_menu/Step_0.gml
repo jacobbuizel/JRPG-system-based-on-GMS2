@@ -63,6 +63,7 @@ if !roomgoto && global.sub_menu == 0
 		case 3:
 			//设置
 			audio_play_sound(sfx_select,9,false);
+			instance_create_layer(x,y,"Instances",obj_menu_setting);
 			break;
 		case 4:
 			//退出游戏
@@ -102,7 +103,8 @@ if roomgoto && global.warping == 2
 		room_goto(room_CG);
 		break;
 	case 3:
-		//设置
+		//设置 - 保持在标题画面，不跳转
+		roomgoto = false;
 		break;
 	case 4:
 		//退出游戏

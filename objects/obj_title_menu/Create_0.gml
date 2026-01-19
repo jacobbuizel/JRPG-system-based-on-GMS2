@@ -27,6 +27,7 @@ global.bgm = 1;
 global.bgm_v = 1;
 global.sfx_v = 1;
 global.bgs_v = 1;
+global.auto_run = false;
 global.savef = 0;
 
 global.sub_menu = 0;
@@ -41,3 +42,6 @@ if !audio_group_is_loaded(audiogroup_BGS)
 {
 	audio_group_load(audiogroup_BGS);
 }
+
+//加载设置
+scr_setting_load();

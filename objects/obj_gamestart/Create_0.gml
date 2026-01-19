@@ -7,7 +7,6 @@ if !global.gamestart
 	//通用设置
 	global.debug = true;
 	global.message_set_speed = 0.5;
-	global.auto_run = false;
 	//游戏总时间
 	global.game_time_s = 0;
 	global.game_time_m = 0;
