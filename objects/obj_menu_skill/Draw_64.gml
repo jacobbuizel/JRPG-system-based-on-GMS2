@@ -22,21 +22,9 @@ if global.sub_menu == 1
 	for (var i = 0; i < global.totalchara; i++)
 	{
 		_chara = load_chara(global.player[i]);
-		if _chara.portrait
-		{
-			draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
-		}
-		else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-		draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-		_x += 128 + op_border/2;
-		draw_text(_x,_y,string(_chara.c_name)+" 等级"+string(_chara.level)+" "+string(_chara.class_name)+":"+string(_chara.sub_class_name));
-		_y += op_border;
-		draw_text(_x,_y,"AC:"+string(_chara.AC)+" HP:"+string(_chara.HP_C)+"/"+string(_chara.HP));
-		_y += op_border;
-		draw_text(_x,_y,"MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
-		
-		_y+=op_border*3;
-		_x-=128 + op_border/2;
+		//绘制角色图
+		draw_chara_block(_chara,_x,_y,op_border);
+		_y+=op_border*5;
 	}
 }
 else if global.sub_menu == 2
@@ -71,7 +59,7 @@ else if global.sub_menu == 2
 		// 获取当前等级所需的经验值，假设等级是从1开始的
 		var _tnxp = 0;
 		if (_chara.level > 0 && _chara.level <= array_length(tnxpArray)) {
-		    _tnxp = tnxpArray[_chara.level - 1];
+			_tnxp = tnxpArray[_chara.level - 1];
 		}
 
 		// 绘制文本

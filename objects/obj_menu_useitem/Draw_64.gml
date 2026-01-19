@@ -25,20 +25,7 @@ if global.sub_menu == 3
 	for (var i = 0; i < global.totalchara; i++)
 	{
 		_chara = load_chara(global.player[i]);
-		if _chara.portrait
-		{
-			draw_sprite_ext(_chara.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
-		}
-		else draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-		draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-		_x += 128+op_border;
-		draw_text(_x,_y,_chara.c_name+" 等级:"+string(_chara.level)+_chara.class_name+":"+_chara.sub_class_name);
-		_y += op_border;
-		draw_text(_x,_y,"AC:"+string(_chara.AC));
-		_y += op_border;
-		draw_text(_x,_y,"HP:"+string(_chara.HP_C)+"/"+string(_chara.HP)+" MP:"+string(_chara.MP_C)+"/"+string(_chara.MP));
-	
-		_x = _ox + op_border;
-		_y = _oy + op_border*2 + 128;
+		draw_chara_block(_chara,_x,_y,op_border);
+		_y+=op_border*5;
 	}
 }
