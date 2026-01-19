@@ -45,7 +45,7 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 			//左键一次跳5行
 			if lpkey
 			{
-			    scr_menu_movement_jump(id,"item_pos","item_scroll_a",ds_grid_height(inventory),inventoryEND,5,0,1);
+				scr_menu_movement_jump(id,"item_pos","item_scroll_a",ds_grid_height(inventory),inventoryEND,5,0,1);
 			}
 			
 			//音效
@@ -61,7 +61,7 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 			var _pressed_count = 0;
 			for (var i = 0; i < array_length(_dir_keys); i++)
 			{
-			    if (_dir_keys[i])
+				if (_dir_keys[i])
 				{
 					_pressed_count++;
 				}
@@ -69,18 +69,18 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 			// 如果按下两个及以上，算互斥
 			if (_pressed_count >= 2)
 			{
-			    wait_time = 30;
+				wait_time = 30;
 			}
 			else if (_pressed_count == 1)
 			{
-			    if (wait_time > 0)
+				if (wait_time > 0)
 				{
 					wait_time--;
 				}
 			}
 			else
 			{
-			    wait_time = 30;
+				wait_time = 30;
 			}
 			
 			//长按快速切换选取
@@ -103,7 +103,7 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 				//左键一次跳5行
 				if lkey
 				{
-				    scr_menu_movement_jump(id,"item_pos","item_scroll_a",ds_grid_height(inventory),inventoryEND,5,0,1);
+					scr_menu_movement_jump(id,"item_pos","item_scroll_a",ds_grid_height(inventory),inventoryEND,5,0,1);
 				}
 				if !(_pressed_count >= 2)
 				{
@@ -111,7 +111,7 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 				}
 				wait_time = 5;
 			}
-        }
+		}
 		
 		//保持选框在合法范围
 		if item_pos >= inventoryEND
@@ -233,29 +233,29 @@ else if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_
 	// 左右循环切换位数
 	if lpkey
 	{
-	    discard_cursor -= 1;
-	    if (discard_cursor < 0) discard_cursor = 2;
-	    audio_play_sound(sfx_click,9,false);
+		discard_cursor -= 1;
+		if (discard_cursor < 0) discard_cursor = 2;
+		audio_play_sound(sfx_click,9,false);
 	}
 	if rpkey
 	{
-	    discard_cursor += 1;
-	    if (discard_cursor > 2) discard_cursor = 0;
-	    audio_play_sound(sfx_click,9,false);
+		discard_cursor += 1;
+		if (discard_cursor > 2) discard_cursor = 0;
+		audio_play_sound(sfx_click,9,false);
 	}
 	
-    // 上下调整该位数字
-    var digits = [floor(discard_amount/100)%10, floor(discard_amount/10)%10, discard_amount%10];
-    if upkey
-    {
-        digits[discard_cursor] = (digits[discard_cursor] + 1) % 10;
-        audio_play_sound(sfx_click,9,false);
-    }
-    if dpkey
-    {
-        digits[discard_cursor] = (digits[discard_cursor] + 9) % 10; // 循环到9
-        audio_play_sound(sfx_click,9,false);
-    }
+	// 上下调整该位数字
+	var digits = [floor(discard_amount/100)%10, floor(discard_amount/10)%10, discard_amount%10];
+	if upkey
+	{
+		digits[discard_cursor] = (digits[discard_cursor] + 1) % 10;
+		audio_play_sound(sfx_click,9,false);
+	}
+	if dpkey
+	{
+		digits[discard_cursor] = (digits[discard_cursor] + 9) % 10; // 循环到9
+		audio_play_sound(sfx_click,9,false);
+	}
 	
 	// 把互斥键收集到一个数组或列表
 	var _dir_keys = [ukey,dkey,lkey,rkey];
@@ -287,51 +287,51 @@ else if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_
 	}
 	
 	//快速切换上下数字
-    if wait_time <= 0
-    {
+	if wait_time <= 0
+	{
 		if ukey
 		{
-	        digits[discard_cursor] = (digits[discard_cursor] + 1) % 10;
-	        audio_play_sound(sfx_click,9,false);
-	    }
-	    if dkey
-	    {
-	        digits[discard_cursor] = (digits[discard_cursor] + 9) % 10; // 循环到9
-	        audio_play_sound(sfx_click,9,false);
-	    }
+			digits[discard_cursor] = (digits[discard_cursor] + 1) % 10;
+			audio_play_sound(sfx_click,9,false);
+		}
+		if dkey
+		{
+			digits[discard_cursor] = (digits[discard_cursor] + 9) % 10; // 循环到9
+			audio_play_sound(sfx_click,9,false);
+		}
 		wait_time = 5;
 	}
 	
 	discard_amount = digits[0]*100 + digits[1]*10 + digits[2];
 	
-    //确认丢弃
-    if akey && !key_cooldown[0]
+	//确认丢弃
+	if akey && !key_cooldown[0]
 	{
 		key_cooldown[0]=1;
-        var max_amount = _inventory.amount;
-        if discard_amount > max_amount
+		var max_amount = _inventory.amount;
+		if discard_amount > max_amount
 		{
-            discard_amount = max_amount;
+			discard_amount = max_amount;
 		}
 		
 		global.g_msg_name = _inventory.i_name;
 		global.g_msg_amount = discard_amount;
-        for (var i=0; i<discard_amount; i++)
-        {
-            scr_useitem(); //每次减少1
-        }
+		for (var i=0; i<discard_amount; i++)
+		{
+			scr_useitem(); //每次减少1
+		}
 
-        create_msg_box("discard"); //提示丢弃
-        global.sub_menu = 1; //返回上层菜单
+		create_msg_box("discard"); //提示丢弃
+		global.sub_menu = 1; //返回上层菜单
 		pos = 0;
-    }
+	}
 
-    //按B取消
-    if bkey && !key_cooldown[0]
+	//按B取消
+	if bkey && !key_cooldown[0]
 	{
 		key_cooldown[0]=1;
-        global.sub_menu = 2;
-    }
+		global.sub_menu = 2;
+	}
 }
 
 

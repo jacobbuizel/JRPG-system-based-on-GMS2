@@ -31,8 +31,8 @@ if draw_char < msg_l[page]
 //嵌入脚本读取
 if (is_method(msg_scr[page]))
 {
-    msg_scr[page]();
-    msg_scr[page] = 0;
+	msg_scr[page]();
+	msg_scr[page] = 0;
 }
 
 //翻页

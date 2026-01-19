@@ -62,33 +62,33 @@ vs = clamp(vs,0,maxSpeed*0.87);
 if (vs != 0)
 {
 	//先偏移46度进行计算，至于为什么不能是45度，因为斜方向（正45度）移动的时候朝向会抽风
-    var _dir = (direction + 46) mod 360;
-    var _index = floor(_dir / 90);
-    switch (_index)
+	var _dir = (direction + 46) mod 360;
+	var _index = floor(_dir / 90);
+	switch (_index)
 	{
-        case 0: face = 4; break; //右
-        case 1: face = 3; break; //上
-        case 2: face = 2; break; //左
-        case 3: face = 1; break; //下
-    }
+		case 0: face = 4; break; //右
+		case 1: face = 3; break; //上
+		case 2: face = 2; break; //左
+		case 3: face = 1; break; //下
+	}
 }
 
 //防卡死和阻挡物
 if (!variable_instance_exists(id, "block_solid"))
 {
-    block_solid = obj_solid;
+	block_solid = obj_solid;
 }
 if place_meeting(x + hspeed, y, block_solid)
 {
-    if !place_meeting(x + hspeed, y + 1, block_solid)
+	if !place_meeting(x + hspeed, y + 1, block_solid)
 	{
 		y += 1;
 	}
-    else if !place_meeting(x + hspeed, y - 1, block_solid)
+	else if !place_meeting(x + hspeed, y - 1, block_solid)
 	{
 		y -= 1;
 	}
-    else
+	else
 	{
 		hspeed = 0;
 	}

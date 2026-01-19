@@ -117,26 +117,26 @@ if !empty
 		draw_rectangle(scrollbar_x1, slider_y1, scrollbar_x2, slider_y2, false);
 		
 		//绘制箭头
-	    var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
+		var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
 		if item_pos + item_scroll_a != 0
 		{
-		    // 上箭头（上下浮动）
-		    draw_triangle(
-		        midx,scrollbar_y1-15+arrow_offset,
-		        midx-4,scrollbar_y1-7+arrow_offset,
-		        midx+4,scrollbar_y1-7+arrow_offset,
-		        false
-		    );
+			// 上箭头（上下浮动）
+			draw_triangle(
+				midx,scrollbar_y1-15+arrow_offset,
+				midx-4,scrollbar_y1-7+arrow_offset,
+				midx+4,scrollbar_y1-7+arrow_offset,
+				false
+			);
 		}
 		if item_pos + item_scroll_a != ds_grid_height(inventory)-1
 		{
-		    // 下箭头（同样浮动，但反向也行）
-		    draw_triangle(
-		        midx,scrollbar_y2+15-arrow_offset,
-		        midx-4,scrollbar_y2+7-arrow_offset,
-		        midx+4,scrollbar_y2+7-arrow_offset,
-		        false
-		    );
+			// 下箭头（同样浮动，但反向也行）
+			draw_triangle(
+				midx,scrollbar_y2+15-arrow_offset,
+				midx-4,scrollbar_y2+7-arrow_offset,
+				midx+4,scrollbar_y2+7-arrow_offset,
+				false
+			);
 		}
 	}
 }
@@ -184,56 +184,56 @@ if global.sub_menu == 2
 
 if global.sub_menu == 3 && !instance_exists(obj_menu_useitem)
 {
-    _x = (display_get_width()) / 2 - 160;
-    _y = (display_get_height()) / 2 - 150;
+	_x = (display_get_width()) / 2 - 160;
+	_y = (display_get_height()) / 2 - 150;
 	
-    //绘制菜单背景
-    draw_sprite_stretched(spr_msgbox, image_index, _x, _y, 160, 150);
+	//绘制菜单背景
+	draw_sprite_stretched(spr_msgbox, image_index, _x, _y, 160, 150);
 	
-    //绘制选项标题
-    draw_set_font(font0);
-    var _c = c_white;
-    draw_text_color(_x + op_border, _y + op_border, "丢弃数量",_c,_c,_c,_c,1);
+	//绘制选项标题
+	draw_set_font(font0);
+	var _c = c_white;
+	draw_text_color(_x + op_border, _y + op_border, "丢弃数量",_c,_c,_c,_c,1);
 	
-    _y += op_border*1.5;
+	_y += op_border*1.5;
 	
-    //计算每一位数字
-    var digits = [floor(discard_amount/100)%10, floor(discard_amount/10)%10, discard_amount%10];
-    for (var i=0; i<3; i++)
-    {
-        var _dx = _x + op_border*1.24 + i*32;
-        var _dy = _y+32;
-        
+	//计算每一位数字
+	var digits = [floor(discard_amount/100)%10, floor(discard_amount/10)%10, discard_amount%10];
+	for (var i=0; i<3; i++)
+	{
+		var _dx = _x + op_border*1.24 + i*32;
+		var _dy = _y+32;
+		
 	// 高亮框和箭头
 	if (i == discard_cursor)
 	{
-	    draw_set_color(c_white);
-	    //方框
-	    draw_rectangle(_dx-6, _dy-2, _dx+18, _dy+32, true);
-	    //方框中心X
-	    var midx = (_dx-6+_dx+18)/2;
-	    //箭头抖动偏移动画（sin 波，周期60帧，大约1秒）
-	    var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
+		draw_set_color(c_white);
+		//方框
+		draw_rectangle(_dx-6, _dy-2, _dx+18, _dy+32, true);
+		//方框中心X
+		var midx = (_dx-6+_dx+18)/2;
+		//箭头抖动偏移动画（sin 波，周期60帧，大约1秒）
+		var arrow_offset = round(sin(current_time/1000 * pi) * 2); // -2 ~ +2 像素
 
-	    // 上箭头（上下浮动）
-	    draw_triangle(
-	        midx,_dy-15+arrow_offset,
-	        midx-6,_dy-7+arrow_offset,
-	        midx+6,_dy-7+arrow_offset,
-	        false
-	    );
+		// 上箭头（上下浮动）
+		draw_triangle(
+			midx,_dy-15+arrow_offset,
+			midx-6,_dy-7+arrow_offset,
+			midx+6,_dy-7+arrow_offset,
+			false
+		);
 
-	    // 下箭头（同样浮动，但反向也行）
-	    draw_triangle(
-	        midx,_dy+44-arrow_offset,
-	        midx-6,_dy+36-arrow_offset,
-	        midx+6,_dy+36-arrow_offset,
-	        false
-	    );
+		// 下箭头（同样浮动，但反向也行）
+		draw_triangle(
+			midx,_dy+44-arrow_offset,
+			midx-6,_dy+36-arrow_offset,
+			midx+6,_dy+36-arrow_offset,
+			false
+		);
 	}
 
-        //绘制数字
-        draw_set_color(c_white);
-        draw_text(_dx, _dy, string(digits[i]));
-    }
+		//绘制数字
+		draw_set_color(c_white);
+		draw_text(_dx, _dy, string(digits[i]));
+	}
 }

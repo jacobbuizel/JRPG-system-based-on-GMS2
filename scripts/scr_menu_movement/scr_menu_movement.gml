@@ -79,24 +79,24 @@ function scr_menu_movement_jump(_inst,_ref_pos,_ref_scroll_a,_ref_height,_ref_en
 	}
 	
 	//写回
-    if (variable_global_exists(_ref_pos))
+	if (variable_global_exists(_ref_pos))
 	{
-        variable_global_set(_ref_pos, _pos);
-    }
+		variable_global_set(_ref_pos, _pos);
+	}
 	else
 	{
-        variable_instance_set(_inst, _ref_pos, _pos);
-    }
+		variable_instance_set(_inst, _ref_pos, _pos);
+	}
 
 	if (_ref_scroll_a != "" && _ref_scroll_a != undefined)
 	{
-	    if (variable_global_exists(_ref_scroll_a))
+		if (variable_global_exists(_ref_scroll_a))
 		{
-	        variable_global_set(_ref_scroll_a, _scroll_a);
-	    }
+			variable_global_set(_ref_scroll_a, _scroll_a);
+		}
 		else
 		{
-	        variable_instance_set(_inst, _ref_scroll_a, _scroll_a);
-	    }
+			variable_instance_set(_inst, _ref_scroll_a, _scroll_a);
+		}
 	}
 }

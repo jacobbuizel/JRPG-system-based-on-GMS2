@@ -35,9 +35,9 @@ global.noresting = false;
 
 if !audio_group_is_loaded(audiogroup_SFX)
 {
-    audio_group_load(audiogroup_SFX);
+	audio_group_load(audiogroup_SFX);
 }
 if !audio_group_is_loaded(audiogroup_BGS)
 {
-    audio_group_load(audiogroup_BGS);
+	audio_group_load(audiogroup_BGS);
 }

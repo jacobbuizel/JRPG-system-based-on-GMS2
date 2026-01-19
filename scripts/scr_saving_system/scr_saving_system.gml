@@ -23,7 +23,7 @@ global.saveDATA.Sroom_status = ds_grid_write(room_status);
 var _chara_data = [];
 for (var i = 0; i < ds_grid_height(chara_status); i++)
 {
-	var _id     = ds_grid_get(chara_status, 0, i);
+	var _id = ds_grid_get(chara_status, 0, i);
 	var _struct = ds_grid_get(chara_status, 1, i);
 	array_push(_chara_data, {id: _id, data: _struct});
 }

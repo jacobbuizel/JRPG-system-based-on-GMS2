@@ -20,23 +20,23 @@ var _oy = _y, _ox = _x;
 
 for(var i=0;i<18;i++)
 {
-    var s = op_option[i + scroll_a];
-    var slot_index = i + scroll_a;
-    // 补零到2位：00..09，其余按原样
-    var num_str = (slot_index < 10) ? "0" + string(slot_index) : string(slot_index);
+	var s = op_option[i + scroll_a];
+	var slot_index = i + scroll_a;
+	// 补零到2位：00..09，其余按原样
+	var num_str = (slot_index < 10) ? "0" + string(slot_index) : string(slot_index);
 
-    // 找到空格，取后半部分（日期或“空”）
-    var space_idx = string_pos(" ", s);
-    var suffix = "";
-    if (space_idx > 0) {
-        suffix = string_copy(s, space_idx + 1, string_length(s) - space_idx);
-    }
+	// 找到空格，取后半部分（日期或“空”）
+	var space_idx = string_pos(" ", s);
+	var suffix = "";
+	if (space_idx > 0) {
+		suffix = string_copy(s, space_idx + 1, string_length(s) - space_idx);
+	}
 
-    // 组合最终显示文本（不改原数组，只是显示）
-    var display = "存档" + num_str + (suffix != "" ? " " + suffix : "");
+	// 组合最终显示文本（不改原数组，只是显示）
+	var display = "存档" + num_str + (suffix != "" ? " " + suffix : "");
 
-    draw_text(_x, _y, display);
-    _y += op_border;
+	draw_text(_x, _y, display);
+	_y += op_border;
 	//draw_text(_x,_y,op_option[i+scroll_a]);
 	//_y += op_border;
 }
@@ -104,37 +104,17 @@ if op_option[pos+scroll_a] != "存档"+string(pos+scroll_a)+" 空"
 		{
 			if (_chara_data[j].id == p_id)
 			{
-			    c = _chara_data[j].data;
-			    break;
+				c = _chara_data[j].data;
+				break;
 			}
 		}
 		
 		if (c == undefined) continue; //没找到就跳过
 		
-		//绘制立绘/头像
-		if (c.portrait != 0)
-		{
-			draw_sprite_ext(c.portrait,0,_x,_y,0.25,0.25,0,c_white,1);
-		}
-		else
-		{
-			draw_rectangle_color(_x,_y,_x+128,_y+128,c_black,c_black,c_black,c_black,false);
-		}
-		draw_sprite_ext(spr_msge,image_index,_x,_y,0.25,0.25,0,c_white,1);
-		_x += 128 + op_border/2;
-
-		//绘制信息
-		draw_text(_x,_y,c.c_name);
-		_y += op_border;
-		draw_text(_x,_y,"等级"+string(c.level)+c.class_name+":"+c.sub_class_name);
-		_y += op_border;
-		draw_text(_x,_y,"AC:"+string(c.AC)+" HP:"+string(c.HP_C)+"/"+string(c.HP));
-		_y += op_border;
-		draw_text(_x,_y,"MP:"+string(c.MP_C)+"/"+string(c.MP));
+		draw_chara_block(c,_x,_y,op_border);
 
 		//分隔下一个角色
-		_y += op_border*2;
-		_x -= 128 + op_border/2;
+		_y += op_border*5;
 	}
 }
 
@@ -174,7 +154,7 @@ if global.sub_menu >= 2
 if global.sub_menu == 3
 {
 	_x = (display_get_width()) / 2 - 250;
-    _y = (display_get_height()) / 2 - 150;
+	_y = (display_get_height()) / 2 - 150;
 	
 	//绘制菜单背景
 	draw_sprite_stretched(spr_msgbox, image_index, _x, _y, 250, 150);
@@ -187,13 +167,13 @@ if global.sub_menu == 3
 	
 	_y += op_border*1.5;
 	
-    for (var i = 0; i < op_length_2; i++)
-    {
-        _c = c_white;
-        if pos_2 == i
-        {
-            _c = c_yellow;
-        }
-        draw_text_color(_x + 1.5*op_border + 3*op_border*i, _y + op_border, op_option_2[i],_c,_c,_c,_c,1);
-    }
+	for (var i = 0; i < op_length_2; i++)
+	{
+		_c = c_white;
+		if pos_2 == i
+		{
+			_c = c_yellow;
+		}
+		draw_text_color(_x + 1.5*op_border + 3*op_border*i, _y + op_border, op_option_2[i],_c,_c,_c,_c,1);
+	}
 }

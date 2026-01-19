@@ -316,7 +316,7 @@ for(var i=0;i<ds_grid_height(inventory);i++)
 	{
 		//判断物品是否到达上限
 		var _old_amount = ds_grid_get(inventory,1,i);
-        var _new_amount = _old_amount + amount;
+		var _new_amount = _old_amount + amount;
 		
 		if (_new_amount > 999)
 		{
@@ -329,7 +329,7 @@ for(var i=0;i<ds_grid_height(inventory);i++)
 				return true;
 			}
 			//超过上限，不能增加
-	        return false;
+			return false;
 		}
 		else
 		{

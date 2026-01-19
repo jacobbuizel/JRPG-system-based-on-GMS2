@@ -7,11 +7,11 @@ bgm2 = 0;
 
 if !audio_group_is_loaded(audiogroup_BGM)
 {
-    audio_group_load(audiogroup_BGM);
+	audio_group_load(audiogroup_BGM);
 }
 if !audio_group_is_loaded(audiogroup_BGM_2)
 {
-    audio_group_load(audiogroup_BGM_2);
+	audio_group_load(audiogroup_BGM_2);
 }
 
 audio_group_set_gain(audiogroup_BGM_2,0,0);
