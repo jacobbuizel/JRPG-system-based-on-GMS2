@@ -68,7 +68,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.2.213",
+    "IDEVersion":"2024.14.3.217",
   },
   "name":"hgame",
   "resources":[
@@ -142,6 +142,7 @@
     {"id":{"name":"scr_roomsatus","path":"scripts/scr_roomsatus/scr_roomsatus.yy",},},
     {"id":{"name":"scr_saving_system","path":"scripts/scr_saving_system/scr_saving_system.yy",},},
     {"id":{"name":"scr_setting_system","path":"scripts/scr_setting_system/scr_setting_system.yy",},},
+    {"id":{"name":"scr_skill","path":"scripts/scr_skill/scr_skill.yy",},},
     {"id":{"name":"scr_spriting","path":"scripts/scr_spriting/scr_spriting.yy",},},
     {"id":{"name":"scr_string","path":"scripts/scr_string/scr_string.yy",},},
     {"id":{"name":"use_item_1","path":"scripts/use_item_1/use_item_1.yy",},},

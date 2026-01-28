@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_skill",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_skill",
+  "parent":{
+    "name":"for_translate",
+    "path":"folders/Scripts/for_translate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

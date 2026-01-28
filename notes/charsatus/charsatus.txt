@@ -43,6 +43,7 @@ armor			41护甲
 accessoryA		42配饰a
 accessoryB		43配饰b
 accessoryC		44配饰c
+skill_list		技能列表
 以上字段后面的两个数字全部废弃了，因为已经从ds表格转换成struct了，之所以保留是因为麻烦+修复遗留代码会用到
 
 法术等级和消耗MP量

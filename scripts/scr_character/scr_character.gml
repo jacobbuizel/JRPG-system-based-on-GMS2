@@ -288,12 +288,15 @@ if (level >= 1 && level <= array_length(mpMapping) - 1) {
 
 var MP_C = MP;
 
-var main_h = 0 //主手
-var sec_h = 0 //副手
-var armor = 0 //护甲
-var accessoryA = 0 //配饰a
-var accessoryB = 0 //配饰b
-var accessoryC = 0 //配饰c
+var main_h = 0; //主手
+var sec_h = 0; //副手
+var armor = 0; //护甲
+var accessoryA = 0; //配饰a
+var accessoryB = 0; //配饰b
+var accessoryC = 0; //配饰c
+
+//技能列表
+var skill_list = ds_grid_create(skill_w,1);
 
 return {
 		c_name			: c_name,
@@ -341,25 +344,26 @@ return {
 		accessoryA		: accessoryA,
 		accessoryB		: accessoryB,
 		accessoryC		: accessoryC,
+		skill_list		: skill_list
 };
 }
 
 ///@param id
 function add_chara_id(_id) {
-	var _chara = chara_id(_id);
+var _chara = chara_id(_id);
 	
-	//如果表格有内容，就扩展一行
-	if (ds_grid_get(chara_status, 0, 0) != 0)
-	{
-		ds_grid_resize(chara_status, chara_status_w, ds_grid_height(chara_status) + 1);
-	}
-	var new_row = ds_grid_height(chara_status) - 1;
+//如果表格有内容，就扩展一行
+if (ds_grid_get(chara_status, 0, 0) != 0)
+{
+	ds_grid_resize(chara_status, chara_status_w, ds_grid_height(chara_status) + 1);
+}
+var new_row = ds_grid_height(chara_status) - 1;
 
-	//把struct的字段写入grid
-	ds_grid_set(chara_status, 0, new_row, _id);
-	ds_grid_set(chara_status, 1, new_row, _chara);
+//把struct的字段写入grid
+ds_grid_set(chara_status, 0, new_row, _id);
+ds_grid_set(chara_status, 1, new_row, _chara);
 	
-	return true;
+return true;
 }
 
 //加载角色数据
