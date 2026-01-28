@@ -304,7 +304,7 @@ return {
 	on_unequip_scr	: _item.on_unequip_scr,
 	on_attack_scr	: _item.on_attack_scr,
 	on_atkhit_scr	: _item.on_atkhit_scr,
-	on_hit_scr		: _item.on_hit_scr,
+	on_hit_scr		: _item.on_hit_scr
 }
 }
 
