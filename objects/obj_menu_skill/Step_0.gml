@@ -45,6 +45,7 @@ if global.sub_menu == 1 && menu_anm <= 2 && menu_cloes == false
 
 if global.sub_menu == 2
 {
+	//todo:处理技能选择的列表
 	if bkey && !key_cooldown[0]
 	{
 		key_cooldown[0]=1;

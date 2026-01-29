@@ -104,4 +104,6 @@ if global.debug = true
 	_y += 32;
 	draw_text(_x,_y,string(global.sub_menu));
 	_y += 32;
+	_chara_1 = load_chara(global.player[0]);
+	draw_text(_x,_y,"玩家1技能:"+string(ds_grid_get(_chara_1.skill_list,DS_SKILL.NAME,0)));
 }
