@@ -1,6 +1,7 @@
 var _e_slot_index = e_pos_row * 2 + e_pos_col;
 var _e_slot_is_empty = false;
-var _chara = load_chara(global.player[menu_level]);
+var _chara_id = global.player[menu_level];
+var _chara = load_chara(_chara_id);
 var _change_e_id = 0;
 var _slot_map = [
 	_chara.main_h,

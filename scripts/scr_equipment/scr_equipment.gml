@@ -75,6 +75,8 @@ switch _id
 		_durability			= -1;
 		_atk_bon			= 0;
 		_atk_scale			= [1,4,0,{str:1,dex:0,con:0,int:0,wis:0,cha:0}];
+		_on_equip_scr		= [{type:"add_skill",t_id:1001}];
+		_on_unequip_scr		= [{type:"remove_skill",t_id:1001}];
 		break;
 	
 	case 10:
@@ -93,6 +95,8 @@ switch _id
 		_durability			= -1;
 		_atk_bon			= 0;
 		_atk_scale			= [1,8,0,{str:0,dex:1,con:0,int:0,wis:0,cha:0}];
+		_on_equip_scr		= [{type:"add_skill",t_id:1010}];
+		_on_unequip_scr		= [{type:"remove_skill",t_id:1010}];
 		break;
 	
 	case 100:
@@ -351,7 +355,7 @@ return 0;
 //应用装备
 function apply_equipment(_chara, _slot_index, _new_eq){
 //获取当前装备
-var _old_eq = get_equipped_item(_chara, _slot_index);
+var _old_eq = get_equipped_item(_chara,_slot_index);
 
 //卸下旧装备，减去属性
 if (_old_eq)
@@ -362,16 +366,8 @@ if (_old_eq)
 	_chara.int -= _old_eq.attr_mod.int;
 	_chara.wis -= _old_eq.attr_mod.wis;
 	_chara.cha -= _old_eq.attr_mod.cha;
-}
-//装上新装备，增加属性
-if (_new_eq)
-{
-	_chara.str += _new_eq.attr_mod.str;
-	_chara.dex += _new_eq.attr_mod.dex;
-	_chara.con += _new_eq.attr_mod.con;
-	_chara.int += _new_eq.attr_mod.int;
-	_chara.wis += _new_eq.attr_mod.wis;
-	_chara.cha += _new_eq.attr_mod.cha;
+	
+	apply_effect_list(_old_eq.on_unequip_scr,_chara);
 }
 //更新装备槽
 switch (_slot_index)
@@ -383,6 +379,58 @@ switch (_slot_index)
 	case 4: _chara.accessoryB = _new_eq; break;
 	case 5: _chara.accessoryC = _new_eq; break;
 }
+//装上新装备，增加属性
+if (_new_eq)
+{
+	_chara.str += _new_eq.attr_mod.str;
+	_chara.dex += _new_eq.attr_mod.dex;
+	_chara.con += _new_eq.attr_mod.con;
+	_chara.int += _new_eq.attr_mod.int;
+	_chara.wis += _new_eq.attr_mod.wis;
+	_chara.cha += _new_eq.attr_mod.cha;
+	
+	apply_effect_list(_new_eq.on_equip_scr,_chara);
+}
+//重新计算AC
+recalc_AC(_chara);
+}
+
+//应用装备预览
+function apply_equipment_preview(_chara, _slot_index, _new_eq){
+//获取当前装备
+var _old_eq = get_equipped_item(_chara,_slot_index);
+
+//卸下旧装备，减去属性
+if (_old_eq)
+{
+	_chara.str -= _old_eq.attr_mod.str;
+	_chara.dex -= _old_eq.attr_mod.dex;
+	_chara.con -= _old_eq.attr_mod.con;
+	_chara.int -= _old_eq.attr_mod.int;
+	_chara.wis -= _old_eq.attr_mod.wis;
+	_chara.cha -= _old_eq.attr_mod.cha;
+}
+//更新装备槽
+switch (_slot_index)
+{
+	case 0: _chara.main_h = _new_eq; break;
+	case 1: _chara.sec_h = _new_eq; break;
+	case 2: _chara.armor = _new_eq; break;
+	case 3: _chara.accessoryA = _new_eq; break;
+	case 4: _chara.accessoryB = _new_eq; break;
+	case 5: _chara.accessoryC = _new_eq; break;
+}
+//装上新装备，增加属性
+if (_new_eq)
+{
+	_chara.str += _new_eq.attr_mod.str;
+	_chara.dex += _new_eq.attr_mod.dex;
+	_chara.con += _new_eq.attr_mod.con;
+	_chara.int += _new_eq.attr_mod.int;
+	_chara.wis += _new_eq.attr_mod.wis;
+	_chara.cha += _new_eq.attr_mod.cha;
+}
+//重新计算AC
 recalc_AC(_chara);
 }
 
@@ -453,7 +501,7 @@ return c;
 //预览装备数据初始化
 function preview_slot_switch(_chara, _slot_index, _new_eq){
 var c = clone_chara(_chara);
-apply_equipment(c, _slot_index, _new_eq);
+apply_equipment_preview(c, _slot_index, _new_eq);
 return c;
 }
 
@@ -470,3 +518,43 @@ return {
 };
 }
 
+//应用效果列表
+function apply_effect_list(_list, _chara){
+if(_list==undefined)
+{
+	return false;
+}
+for (var i = 0; i < array_length(_list); i++)
+{
+	apply_effect(_list[i], _chara);
+}
+return true;
+}
+
+//应用效果
+function apply_effect(_eff,_chara){
+switch (_eff.type)
+{
+	//装备效果
+	case "add_skill":
+		add_skill_id(_eff.t_id,_chara);
+		break;
+	case "remove_skill":
+		remove_skill_id(_eff.t_id,_chara);
+		break;
+	//其他效果
+	case "message":
+		create_msg_box(_eff.t_id);
+		break;
+	//物品效果
+	case "useitem":
+		scr_useitem();
+		break;
+	case "item_potion":
+		item_potion(_eff.t_id[0],_eff.t_id[1],_eff.t_id[2]);
+		break;
+	case "item_crystal":
+		item_crystal(_eff.t_id);
+		break;
+}
+}
