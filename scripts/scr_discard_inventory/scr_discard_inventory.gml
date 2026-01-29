@@ -19,7 +19,7 @@ else
 	var rowtrm = item_pos + item_scroll_a;
 	for(var i = rowtrm;i<ds_grid_height(inventory)-1;i++)
 	{
-		ds_grid_set_grid_region(inventory,inventory,0,c_row,11,c_row,0,i)
+		ds_grid_set_grid_region(inventory,inventory,0,c_row,inventory_w-1,c_row,0,i)
 		c_row += 1;
 	}
 	ds_grid_resize(inventory,inventory_w,ds_grid_height(inventory)-1);
@@ -61,7 +61,7 @@ else
 		var rowtrm = item_pos + item_scroll_a;
 		for(var i = rowtrm;i<ds_grid_height(inventory)-1;i++)
 		{
-			ds_grid_set_grid_region(inventory,inventory,0,c_row,11,c_row,0,i)
+			ds_grid_set_grid_region(inventory,inventory,0,c_row,inventory_w-1,c_row,0,i)
 			c_row += 1;
 		}
 		ds_grid_resize(inventory,inventory_w,ds_grid_height(inventory)-1);
@@ -100,7 +100,7 @@ else
 	var rowtrm = equip_pos + equip_scroll_a;
 	for(var i = rowtrm;i<ds_grid_height(equipment)-1;i++)
 	{
-		ds_grid_set_grid_region(equipment,equipment,0,c_row,11,c_row,0,i)
+		ds_grid_set_grid_region(equipment,equipment,0,c_row,equipment_w-1,c_row,0,i)
 		c_row += 1;
 	}
 	ds_grid_resize(equipment,equipment_w,ds_grid_height(equipment)-1);

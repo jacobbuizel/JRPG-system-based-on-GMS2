@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_item_script_execute",
+  "%Name":"dis_scr_item_script_execute",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_item_script_execute",
+  "name":"dis_scr_item_script_execute",
   "parent":{
     "name":"rootscr",
     "path":"folders/Scripts/rootscr.yy",

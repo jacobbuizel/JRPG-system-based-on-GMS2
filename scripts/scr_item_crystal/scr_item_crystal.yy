@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"use_item_use",
+  "%Name":"scr_item_crystal",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"use_item_use",
+  "name":"scr_item_crystal",
   "parent":{
-    "name":"use_item",
-    "path":"folders/Scripts/use_item.yy",
+    "name":"itemid",
+    "path":"folders/Scripts/use_item/itemid.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

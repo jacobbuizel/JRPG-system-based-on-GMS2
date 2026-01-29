@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"use_item_1",
+  "%Name":"scr_item_potion",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"use_item_1",
+  "name":"scr_item_potion",
   "parent":{
     "name":"itemid",
     "path":"folders/Scripts/use_item/itemid.yy",

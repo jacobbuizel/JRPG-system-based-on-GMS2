@@ -36,7 +36,7 @@ switch _id
 			type_i : "重要物品",
 			descr : "一个非常重要的袋子，可不要弄丢了哦。",
 			spr : spr_item_i,
-			scr : [use_item_impbag],
+			scr : [{type:"message",t_id:"impbag"}],
 			i_id : 0.2,
 			discardable : 0,
 			consumables : 0
@@ -49,7 +49,7 @@ switch _id
 			type_i : "魔药",
 			descr : "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复4~10的生命值。",
 			spr : spr_item_potion_r,
-			scr : [use_item_1,2,4,2],
+			scr : [{type:"item_potion",t_id:[2,4,2]}],
 			i_id : 1,
 			discardable : 1,
 			consumables : 1
@@ -62,7 +62,7 @@ switch _id
 			type_i : "魔药",
 			descr : "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复8~20的生命值。",
 			spr : spr_item_potion_r1,
-			scr : [use_item_1,4,4,4],
+			scr : [{type:"item_potion",t_id:[4,4,4]}],
 			i_id : 1.1,
 			discardable : 1,
 			consumables : 1
@@ -75,7 +75,7 @@ switch _id
 			type_i : "魔药",
 			descr : "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复16~40的生命值。",
 			spr : spr_item_potion_r2,
-			scr : [use_item_1,8,4,8],
+			scr : [{type:"item_potion",t_id:[8,4,8]}],
 			i_id : 1.2,
 			discardable : 1,
 			consumables : 1
@@ -88,7 +88,7 @@ switch _id
 			type_i : "魔药",
 			descr : "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复30~60的生命值。",
 			spr : spr_item_potion_r3,
-			scr : [use_item_1,10,4,20],
+			scr : [{type:"item_potion",t_id:[10,4,20]}],
 			i_id : 1.3,
 			discardable : 1,
 			consumables : 1
@@ -101,7 +101,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复2的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,2],
+			scr : [{type:"item_crystal",t_id:2}],
 			i_id : 2,
 			discardable : 1,
 			consumables : 1
@@ -114,7 +114,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复4的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,4],
+			scr : [{type:"item_crystal",t_id:4}],
 			i_id : 2.1,
 			discardable : 1,
 			consumables : 1
@@ -127,7 +127,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复6的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,6],
+			scr : [{type:"item_crystal",t_id:6}],
 			i_id : 2.2,
 			discardable : 1,
 			consumables : 1
@@ -140,7 +140,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复8的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,8],
+			scr : [{type:"item_crystal",t_id:8}],
 			i_id : 2.3,
 			discardable : 1,
 			consumables : 1
@@ -153,7 +153,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复10的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,10],
+			scr : [{type:"item_crystal",t_id:10}],
 			i_id : 2.4,
 			discardable : 1,
 			consumables : 1
@@ -166,7 +166,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复12的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,12],
+			scr : [{type:"item_crystal",t_id:12}],
 			i_id : 2.5,
 			discardable : 1,
 			consumables : 1
@@ -179,7 +179,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复14的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,14],
+			scr : [{type:"item_crystal",t_id:14}],
 			i_id : 2.6,
 			discardable : 1,
 			consumables : 1
@@ -192,7 +192,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复16的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,16],
+			scr : [{type:"item_crystal",t_id:16}],
 			i_id : 2.7,
 			discardable : 1,
 			consumables : 1
@@ -205,7 +205,7 @@ switch _id
 			type_i : "奇物",
 			descr : "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复20的法力值。",
 			spr : spr_item_magic_crystal,
-			scr : [use_item_2,20],
+			scr : [{type:"item_crystal",t_id:20}],
 			i_id : 2.8,
 			discardable : 1,
 			consumables : 1
@@ -244,7 +244,7 @@ switch _id
 			type_i : "食品",
 			descr : "一颗熟透了的红苹果。",
 			spr : spr_item_apple,
-			scr : [use_item_apple],
+			scr : [{type:"message",t_id:"apple"},{type:"useitem"}],
 			i_id : 5,
 			discardable : 1,
 			consumables : 1

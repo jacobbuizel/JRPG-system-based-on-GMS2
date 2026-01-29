@@ -204,7 +204,8 @@ else if global.sub_menu == 2 && global.talking != true && menu_anm <= 2 && menu_
 			else
 			{
 				//这里是物品执行用的代码
-				scr_item_script_execute(_inventory.scr);
+				//scr_item_script_execute(_inventory.scr);
+				apply_effect_list(_inventory.scr,undefined);
 			}
 			break;
 		case 1:
