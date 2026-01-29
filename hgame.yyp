@@ -121,7 +121,6 @@
     {"id":{"name":"scr_dice","path":"scripts/scr_dice/scr_dice.yy",},},
     {"id":{"name":"scr_discard_inventory","path":"scripts/scr_discard_inventory/scr_discard_inventory.yy",},},
     {"id":{"name":"scr_draw_menu","path":"scripts/scr_draw_menu/scr_draw_menu.yy",},},
-    {"id":{"name":"scr_enum","path":"scripts/scr_enum/scr_enum.yy",},},
     {"id":{"name":"scr_equipment","path":"scripts/scr_equipment/scr_equipment.yy",},},
     {"id":{"name":"scr_interacting","path":"scripts/scr_interacting/scr_interacting.yy",},},
     {"id":{"name":"scr_item_script_execute","path":"scripts/scr_item_script_execute/scr_item_script_execute.yy",},},

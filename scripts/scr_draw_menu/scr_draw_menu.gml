@@ -36,6 +36,19 @@ draw_text(_tx, _ty,
 );
 }
 
+//obj_menu_equipment选项枚举
+enum MENU_EQUIPMENT_SLOT
+{
+	UNEQUIP,
+	SWITCH,
+	DISCARD
+}
+enum MENU_EQUIPMENT_INTERFACE
+{
+	EQUIP,
+	DISCARD
+}
+
 //绘制装备槽位，仅obj_menu_equipment使用
 function draw_eq_slot(_x,_y,_label,_equip,_disabled){
 draw_text(_x,_y,_label);

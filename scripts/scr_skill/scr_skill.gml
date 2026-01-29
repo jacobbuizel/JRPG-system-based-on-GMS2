@@ -1,3 +1,11 @@
+//技能表格枚举
+enum DS_SKILL
+{
+	NAME = 0,
+	S_ID = 1,
+	SOURCE_COUNT = 2
+}
+
 /// @param id
 function skill_id(_id){
 var _s_name = "???";
