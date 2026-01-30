@@ -106,18 +106,4 @@ if global.debug = true
 	_y += 32;
 	_chara_1 = load_chara(global.player[0]);
 	var _s_empty = true;
-	if(ds_grid_height(_chara_1.skill_list)>0)
-	{
-		_s_empty = false;
-	}
-	else
-	{
-		_s_empty = true;
-	}
-	if(!_s_empty)
-	{
-		draw_text(_x,_y,"玩家1技能:"+string(ds_grid_get(_chara_1.skill_list,DS_SKILL.NAME,ds_grid_height(_chara_1.skill_list)-1)));
-		_y += 32;
-		draw_text(_x,_y,"玩家1总技能数:"+string(ds_grid_height(_chara_1.skill_list)));
-	}
 }

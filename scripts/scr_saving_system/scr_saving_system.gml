@@ -18,14 +18,36 @@ global.saveDATA.Sequipment = ds_grid_write(equipment);
 global.saveDATA.Sequipment_h = ds_grid_height(equipment);
 global.saveDATA.Sroom_status = ds_grid_write(room_status);
 
-//global.saveDATA.Schara_status = ds_grid_write(chara_status);
-
 var _chara_data = [];
 for (var i = 0; i < ds_grid_height(chara_status); i++)
 {
 	var _id = ds_grid_get(chara_status, 0, i);
 	var _struct = ds_grid_get(chara_status, 1, i);
-	array_push(_chara_data, {id: _id, data: _struct});
+	
+	//复制一份 struct（关键）
+	var _save_struct = variable_clone(_struct);
+	
+	//单独处理 skill_list
+	var _skill_grid = _struct.skill_list;
+	var _skill_save = [];
+	
+	if ds_exists(_skill_grid, ds_type_grid)
+	{
+		for (var r = 0; r < ds_grid_height(_skill_grid); r++)
+		{
+			array_push(_skill_save, {
+				s_name : ds_grid_get(_skill_grid, DS_SKILL.NAME, r),
+				s_id : ds_grid_get(_skill_grid, DS_SKILL.S_ID, r),
+				source_count : ds_grid_get(_skill_grid, DS_SKILL.SOURCE_COUNT, r)
+			});
+		}
+	}
+
+	//把“数组版技能”放进存档 struct
+	_save_struct.skill_list = _skill_save;
+
+	//存
+	array_push(_chara_data, {id : _id,data : _save_struct});
 }
 global.saveDATA.Schara_status = _chara_data;
 
