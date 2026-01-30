@@ -359,6 +359,7 @@ if(menu_anm <= 2 && menu_cloes == false)
 			{
 				key_cooldown[0]=1;
 				var _equipment = load_equipment(equip_pos+equip_scroll_a);
+				pos_slot_eq = 0;
 				switch(op_option_eq[pos_eq])
 				{
 				case MENU_EQUIPMENT_INTERFACE.EQUIP:
@@ -407,7 +408,6 @@ if(menu_anm <= 2 && menu_cloes == false)
 						if equip_empty
 						{
 							global.sub_menu-=2;
-							pos_slot_eq = 0;
 						}
 						global.sub_menu--;
 						pos_eq = 0;
