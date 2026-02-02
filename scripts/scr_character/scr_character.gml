@@ -1,5 +1,6 @@
 ///@param id
 function chara_id(_id){
+#region 初始化
 var c_name = "???";
 var race_id = 0;
 var sub_race_id = 0;
@@ -21,10 +22,12 @@ var MP = 2;
 var descr = "???";
 var art = 0;
 var portrait = 0;
-switch _id
+#endregion
+switch(_id)//角色初始数据
 {
 	default:
 		break;
+	#region 罗琳
 	case 1:
 		c_name = "罗琳";
 		race_id = 13;
@@ -48,6 +51,8 @@ switch _id
 		art = spr_rowling_i;
 		portrait = spr_e_player2;
 		break;
+		#endregion
+	#region 丝诺
 	case 2:
 		c_name = "丝诺";
 		race_id = 13;
@@ -71,7 +76,9 @@ switch _id
 		art = spr_snow_i;
 		portrait = 0;
 		break;
+	#endregion
 }
+#region 后处理
 var race = "";
 var sub_race = "";
 switch race_id
@@ -297,54 +304,57 @@ var accessoryC = 0; //配饰c
 
 //技能列表
 var skill_list = ds_grid_create(skill_w,1);
-
+//法术书列表
+var spellbook = false;
+var spellbook_list = ds_grid_create(skill_w,1);
+#endregion
 return {
-		c_name			: c_name,
-		race_id			: race_id,
-		sub_race_id		: sub_race_id,
-		class_id		: class_id,
-		sub_class_id	: sub_class_id,
-		xp				: xp,
-		str				: str,
-		dex				: dex,
-		con				: con,
-		int				: int,
-		wis				: wis,
-		cha				: cha,
-		spd				: spd,
-		alignment_id	: alignment_id,
-		HD				: HD,
-		HDN				: HDN,
-		CR				: CR,
-		MP				: MP,
-		race			: race,
-		sub_race		: sub_race,
-		class_name		: class_name,
-		sub_class_name	: sub_class_name,
-		str_m			: str_m,
-		dex_m			: dex_m,
-		con_m			: con_m,
-		int_m			: int_m,
-		wis_m			: wis_m,
-		cha_m			: cha_m,
-		alignment		: alignment,
-		level			: level,
-		PRO_B			: PRO_B,
-		AC				: AC,
-		AC_C			: AC_C,
-		HP				: HP,
-		HP_C			: HP_C,
-		MP_C			: MP_C,
-		descr			: descr,
-		art				: art,
-		portrait		: portrait,
-		main_h			: main_h,
-		sec_h			: sec_h,
-		armor			: armor,
-		accessoryA		: accessoryA,
-		accessoryB		: accessoryB,
-		accessoryC		: accessoryC,
-		skill_list		: skill_list
+	c_name			: c_name,
+	race_id			: race_id,
+	sub_race_id		: sub_race_id,
+	class_id		: class_id,
+	sub_class_id	: sub_class_id,
+	xp				: xp,
+	str				: str,
+	dex				: dex,
+	con				: con,
+	int				: int,
+	wis				: wis,
+	cha				: cha,
+	spd				: spd,
+	alignment_id	: alignment_id,
+	HD				: HD,
+	HDN				: HDN,
+	CR				: CR,
+	MP				: MP,
+	race			: race,
+	sub_race		: sub_race,
+	class_name		: class_name,
+	sub_class_name	: sub_class_name,
+	str_m			: str_m,
+	dex_m			: dex_m,
+	con_m			: con_m,
+	int_m			: int_m,
+	wis_m			: wis_m,
+	cha_m			: cha_m,
+	alignment		: alignment,
+	level			: level,
+	PRO_B			: PRO_B,
+	AC				: AC,
+	AC_C			: AC_C,
+	HP				: HP,
+	HP_C			: HP_C,
+	MP_C			: MP_C,
+	descr			: descr,
+	art				: art,
+	portrait		: portrait,
+	main_h			: main_h,
+	sec_h			: sec_h,
+	armor			: armor,
+	accessoryA		: accessoryA,
+	accessoryB		: accessoryB,
+	accessoryC		: accessoryC,
+	skill_list		: skill_list
 };
 }
 

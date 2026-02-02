@@ -1,5 +1,6 @@
 /// @param id
 function equipment_id(_id){
+#region 初始化
 var _e_name				= "皇帝的新剑";		//装备名字
 var _weight				= 0;				//装备重量
 var _price				= 0;				//装备价格
@@ -52,13 +53,13 @@ var _on_unequip_scr		= undefined;		//移除时
 var _on_attack_scr		= undefined;		//发动攻击时
 var _on_atkhit_scr		= undefined;		//攻击命中时
 var _on_hit_scr			= undefined;		//受到伤害时
-
-switch _id
+#endregion
+switch(_id)//装备数据
 {
 	default:
 		//保持默认值，不做处理
 		break;
-	
+	#region 短棍
 	case 1:
 		_e_name				= "短棍";
 		_weight				= 2;
@@ -78,7 +79,8 @@ switch _id
 		_on_equip_scr		= [{type:"add_skill",t_id:1001}];
 		_on_unequip_scr		= [{type:"remove_skill",t_id:1001}];
 		break;
-	
+	#endregion
+	#region 轻弩
 	case 10:
 		_e_name				= "轻弩";
 		_weight				= 5;
@@ -98,7 +100,8 @@ switch _id
 		_on_equip_scr		= [{type:"add_skill",t_id:1010}];
 		_on_unequip_scr		= [{type:"remove_skill",t_id:1010}];
 		break;
-	
+	#endregion
+	#region 皮甲
 	case 100:
 		_e_name				= "皮甲";
 		_weight				= 10;
@@ -117,7 +120,8 @@ switch _id
 		_sav_bon			= 0;
 		_ac_base			= [11,{str:0,dex:99,con:0,int:0,wis:0,cha:0}];
 		break;
-	
+	#endregion
+	#region 小木盾
 	case 120:
 		_e_name				= "小木盾";
 		_weight				= 3;
@@ -136,7 +140,8 @@ switch _id
 		_ac_bon				= 1;
 		_sav_bon			= 0;
 		break;
-	
+	#endregion
+	#region 防御护符
 	case 1000:
 		_e_name				= "防御护符";
 		_weight				= 0;
@@ -151,7 +156,8 @@ switch _id
 		_equip_parts		= 4;
 		_ac_bon				= 1;
 		break;
-	
+	#endregion
+	#region 智力护符
 	case 1001:
 		_e_name				= "智力护符";
 		_weight				= 0;
@@ -166,6 +172,8 @@ switch _id
 		_equip_parts		= 4;
 		_attr_mod			= {str:0,dex:0,con:0,int:1,wis:0,cha:0};
 		break;
+	#endregion
+	
 }
 
 //返回数据

@@ -5,31 +5,43 @@ enum DS_SKILL
 	S_ID = 1,
 	SOURCE_COUNT = 2
 }
+enum DS_SPELL
+{
+	NAME = 0,
+	S_ID = 1,
+	ISENALBE = 2
+}
 
 /// @param id
 function skill_id(_id){
+#region 初始化
 var _s_name = "???";
 var _descr = "???";
 //todo:更多技能的详细数据
-switch(_id)
+#endregion
+switch(_id)//技能数据
 {
-	default: 
+	default:
+		//不变
 		break;
-	
+	#region 徒手攻击
 	case 1:
 		_s_name = "徒手攻击";
 		_descr = "直接用拳头、脚踢或肘击痛殴敌人。";
 		break;
-	
+	#endregion
+	#region 挥打
 	case 1001:
 		_s_name = "挥打";
 		_descr = "用短棍痛殴敌人。";
 		break;
-	
+	#endregion
+	#region 射击
 	case 1010:
 		_s_name = "射击";
 		_descr = "用轻弩射击敌人。";
 		break;
+	#endregion
 }
 return {
 	s_name			: _s_name,

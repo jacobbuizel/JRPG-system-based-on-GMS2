@@ -2,7 +2,7 @@
 function scr_msg_game(_msg_id){
 switch(_msg_id)
 {
-	//默认文本
+	#region 默认文本
 	default:
 			create_msg("...");
 		break;
@@ -34,9 +34,9 @@ switch(_msg_id)
 	case "item_full":
 			create_msg(string(load_chara(global.player[0]).c_name)+"不能再获得更多该物品了。");
 		break;
+	#endregion
 	
-		
-	//物品交互文本
+	#region 物品交互文本
 	case "impbag":
 			create_msg("呃...这东西到底哪里重要了啊...",0,"罗琳",spr_e_player2,5);
 			create_msg("这种事情可不要随便问哦，小罗。没准会引火上身呢。",0,"丝诺");
@@ -65,9 +65,9 @@ switch(_msg_id)
 	case "use_item_2_isfull":
 			create_msg(string(global.g_msg_name)+"的MP已满。");
 		break;
+	#endregion
 	
-		
-	//TEST房间npc
+	#region TEST房间npc
 	case "test_npc_1":
 			create_msg("选择分支1",0,"测试选项npc");
 			msg_option("选项1","test_npc_1-1");
@@ -142,6 +142,7 @@ switch(_msg_id)
 			case "test_npc_6-1":
 				create_msg("祝你武运昌隆。",0,"送东西的npc",spr_e_player2,0);
 				break;
-		
+	#endregion
+	
 }
 }
