@@ -76,8 +76,8 @@ switch(_id)//装备数据
 		_durability			= -1;
 		_atk_bon			= 0;
 		_atk_scale			= [1,4,0,{str:1,dex:0,con:0,int:0,wis:0,cha:0}];
-		_on_equip_scr		= [{type:"add_skill",t_id:1001}];
-		_on_unequip_scr		= [{type:"remove_skill",t_id:1001}];
+		_on_equip_scr		= [{type: APP_EFFECT.ADD_SKILL,t_id:1001}];
+		_on_unequip_scr		= [{type: APP_EFFECT.REMOVE_SKILL,t_id:1001}];
 		break;
 	#endregion
 	#region 轻弩
@@ -97,8 +97,8 @@ switch(_id)//装备数据
 		_durability			= -1;
 		_atk_bon			= 0;
 		_atk_scale			= [1,8,0,{str:0,dex:1,con:0,int:0,wis:0,cha:0}];
-		_on_equip_scr		= [{type:"add_skill",t_id:1010}];
-		_on_unequip_scr		= [{type:"remove_skill",t_id:1010}];
+		_on_equip_scr		= [{type: APP_EFFECT.ADD_SKILL,t_id:1010}];
+		_on_unequip_scr		= [{type: APP_EFFECT.REMOVE_SKILL,t_id:1010}];
 		break;
 	#endregion
 	#region 皮甲
@@ -539,29 +539,40 @@ for (var i = 0; i < array_length(_list); i++)
 return true;
 }
 
+//枚举应用效果
+enum APP_EFFECT
+{
+	ADD_SKILL,
+	REMOVE_SKILL,
+	MESSAGE,
+	USEITEM,
+	ITEM_POTION,
+	ITEM_CRYSTAL
+}
+
 //应用效果
 function apply_effect(_eff,_chara){
 switch (_eff.type)
 {
 	//装备效果
-	case "add_skill":
+	case APP_EFFECT.ADD_SKILL:
 		add_skill_id(_eff.t_id,_chara);
 		break;
-	case "remove_skill":
+	case APP_EFFECT.REMOVE_SKILL:
 		remove_skill_id(_eff.t_id,_chara);
 		break;
 	//其他效果
-	case "message":
+	case APP_EFFECT.MESSAGE:
 		create_msg_box(_eff.t_id);
 		break;
 	//物品效果
-	case "useitem":
+	case APP_EFFECT.USEITEM:
 		scr_useitem();
 		break;
-	case "item_potion":
+	case APP_EFFECT.ITEM_POTION:
 		item_potion(_eff.t_id[0],_eff.t_id[1],_eff.t_id[2]);
 		break;
-	case "item_crystal":
+	case APP_EFFECT.ITEM_CRYSTAL:
 		item_crystal(_eff.t_id);
 		break;
 }

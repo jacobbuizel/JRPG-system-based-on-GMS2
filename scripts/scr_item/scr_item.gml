@@ -44,7 +44,7 @@ switch(_id)//物品数据
 		_type_i = "重要物品";
 		_descr = "一个非常重要的袋子，可不要弄丢了哦。";
 		_spr = spr_item_i;
-		_scr = [{type:"message",t_id:"impbag"}];
+		_scr = [{type: APP_EFFECT.MESSAGE,t_id:"impbag"}];
 		_i_id = 0.2;
 		_discardable = 0;
 		_consumables = 0;
@@ -59,7 +59,7 @@ switch(_id)//物品数据
 		_type_i = "魔药";
 		_descr = "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复4~10的生命值。";
 		_spr = spr_item_potion_r;
-		_scr = [{type:"item_potion",t_id:[2,4,2]}];
+		_scr = [{type: APP_EFFECT.ITEM_POTION,t_id:[2,4,2]}];
 		_i_id = 1;
 		_discardable = 1;
 		_consumables = 1;
@@ -74,7 +74,7 @@ switch(_id)//物品数据
 		_type_i = "魔药";
 		_descr = "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复8~20的生命值。";
 		_spr = spr_item_potion_r1;
-		_scr = [{type:"item_potion",t_id:[4,4,4]}];
+		_scr = [{type: APP_EFFECT.ITEM_POTION,t_id:[4,4,4]}];
 		_i_id = 1.1;
 		_discardable = 1;
 		_consumables = 1;
@@ -89,7 +89,7 @@ switch(_id)//物品数据
 		_type_i = "魔药";
 		_descr = "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复16~40的生命值。";
 		_spr = spr_item_potion_r2;
-		_scr = [{type:"item_potion",t_id:[8,4,8]}];
+		_scr = [{type: APP_EFFECT.ITEM_POTION,t_id:[8,4,8]}];
 		_i_id = 1.2;
 		_discardable = 1;
 		_consumables = 1;
@@ -104,7 +104,7 @@ switch(_id)//物品数据
 		_type_i = "魔药";
 		_descr = "这种红色药水在摇晃时都会微微发亮。饮用此药水后，你将恢复30~60的生命值。";
 		_spr = spr_item_potion_r3;
-		_scr = [{type:"item_potion",t_id:[10,4,20]}];
+		_scr = [{type: APP_EFFECT.ITEM_POTION,t_id:[10,4,20]}];
 		_i_id = 1.3;
 		_discardable = 1;
 		_consumables = 1;
@@ -119,7 +119,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复2的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:2}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:2}];
 		_i_id = 2;
 		_discardable = 1;
 		_consumables = 1;
@@ -134,7 +134,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复4的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:4}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:4}];
 		_i_id = 2.1;
 		_discardable = 1;
 		_consumables = 1;
@@ -149,7 +149,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复6的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:6}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:6}];
 		_i_id = 2.2;
 		_discardable = 1;
 		_consumables = 1;
@@ -164,7 +164,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复8的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:8}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:8}];
 		_i_id = 2.3;
 		_discardable = 1;
 		_consumables = 1;
@@ -179,7 +179,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复10的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:10}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:10}];
 		_i_id = 2.4;
 		_discardable = 1;
 		_consumables = 1;
@@ -194,7 +194,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复12的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:12}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:12}];
 		_i_id = 2.5;
 		_discardable = 1;
 		_consumables = 1;
@@ -209,7 +209,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复14的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:14}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:14}];
 		_i_id = 2.6;
 		_discardable = 1;
 		_consumables = 1;
@@ -224,7 +224,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复16的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:16}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:16}];
 		_i_id = 2.7;
 		_discardable = 1;
 		_consumables = 1;
@@ -239,7 +239,7 @@ switch(_id)//物品数据
 		_type_i = "奇物";
 		_descr = "这种奇异的水晶散发着蓝色的微光。吸收水晶中的魔力后，你将恢复20的法力值。";
 		_spr = spr_item_magic_crystal;
-		_scr = [{type:"item_crystal",t_id:20}];
+		_scr = [{type: APP_EFFECT.ITEM_CRYSTAL,t_id:20}];
 		_i_id = 2.8;
 		_discardable = 1;
 		_consumables = 1;
@@ -284,7 +284,7 @@ switch(_id)//物品数据
 		_type_i = "食品";
 		_descr = "一颗熟透了的红苹果。";
 		_spr = spr_item_apple;
-		_scr = [{type:"message",t_id:"apple"},{type:"useitem"}];
+		_scr = [{type: APP_EFFECT.MESSAGE,t_id:"apple"},{type: APP_EFFECT.USEITEM}];
 		_i_id = 5;
 		_discardable = 1;
 		_consumables = 1;
