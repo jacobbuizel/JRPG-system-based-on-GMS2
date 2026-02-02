@@ -144,7 +144,16 @@ else if global.sub_menu >= 2
 			_equipment = load_equipment(i+equip_scroll_a);
 			draw_sprite_ext(_equipment.spr,image_index,_x,_y,0.125,0.125,0,c_white,1);
 			_x += op_border+9;
-			draw_text(_x,_y,_equipment.e_name);
+			//根据当前槽位判断物品是否兼容，不兼容显示为灰色
+			var _item_color = c_white;
+			if (global.sub_menu >= 2)
+			{
+				if (!can_equipment_to_slot(_equipment, _e_slot_index, _chara))
+				{
+					_item_color = c_gray;
+				}
+			}
+			draw_text_color(_x,_y,_equipment.e_name,_item_color,_item_color,_item_color,_item_color,1);
 			_x += op_border*8+10;
 			draw_text(_x,_y,string(_equipment.amount));
 			_x += op_border*3;
@@ -281,7 +290,7 @@ else if global.sub_menu >= 2
 			}
 			draw_text(_x,_y,_equipment.e_name+" "+_rarity+_equipment.type_descr);
 			draw_text(_x+op_border*10,_y,"价格:"+string(_equipment.price)+"GP");
-		
+			
 			_y += op_border;
 			draw_text(_x,_y,string_wrap(_equipment.descr,480));
 		}
