@@ -44,17 +44,6 @@ if f1key
 		global.debug = true;
 	}
 }
-if xkey && global.debug
-{
-	if global.battle
-	{
-		global.battle = false;
-	}
-	else
-	{
-		global.battle = true;
-	}
-}
 if f2key && global.debug
 {
 	var _chara = load_chara(global.player[0]);

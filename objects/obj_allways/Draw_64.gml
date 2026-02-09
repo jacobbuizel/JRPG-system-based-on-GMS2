@@ -23,6 +23,8 @@ if global.debug = true
 	_y += 32;
 	draw_text(_x,_y,"玩家暂停:"+string(global.pause));
 	_y += 32;
+	draw_text(_x,_y,"对话:"+string(global.talking));
+	_y += 32;
 	draw_text(_x,_y,"是否在战斗:"+string(global.battle));
 	if object_exists(obj_player)
 	{	

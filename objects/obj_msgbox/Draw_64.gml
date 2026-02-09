@@ -52,7 +52,11 @@ if akey && wait_akey < 1
 				audio_play_sound(sfx_select,9,false);
 				create_msg_box(option_link_id[option_pos]);
 			}
-			alarm[0]=5;
+			else
+			{
+				global.talking = false;
+			}
+			instance_destroy(self);
 		}
 	}
 	else
@@ -72,7 +76,8 @@ if xckey
 	{
 		if option_num == 0
 		{
-			alarm[0]=5;
+			global.talking = false;
+			instance_destroy(self);
 		}
 	}
 }
