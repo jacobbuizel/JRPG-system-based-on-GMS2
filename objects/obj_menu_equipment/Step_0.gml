@@ -215,13 +215,13 @@ if(menu_anm <= 2 && menu_cloes == false)
 					if sort == 0 || sort == 2
 					{
 						audio_play_sound(sfx_click,9,false);
-						ds_grid_sort(equipment,2,true);
+						ds_grid_sort(equipment,DS_EQUIPMENT.E_ID,true);
 						sort = 1;
 					}
 					else if sort == 1
 					{
 						audio_play_sound(sfx_click,9,false);
-						ds_grid_sort(equipment,2,false);
+						ds_grid_sort(equipment,DS_EQUIPMENT.E_ID,false);
 						sort = 2;
 					}
 				}

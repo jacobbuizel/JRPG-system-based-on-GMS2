@@ -41,7 +41,7 @@ if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_cloes
 			}
 			else
 			{
-				if ds_grid_get(inventory,1,item_pos+item_scroll_a)==1
+				if ds_grid_get(inventory,DS_INVENTORY.AMOUNT,item_pos+item_scroll_a)==1
 				{
 					menu_cloes = true;
 				}
@@ -56,7 +56,7 @@ if global.sub_menu == 3 && global.talking != true && menu_anm <= 2 && menu_cloes
 			}
 			else
 			{
-				if ds_grid_get(inventory,1,item_pos+item_scroll_a)==1
+				if ds_grid_get(inventory,DS_INVENTORY.AMOUNT,item_pos+item_scroll_a)==1
 				{
 					menu_cloes = true;
 				}

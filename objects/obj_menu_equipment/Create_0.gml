@@ -50,7 +50,7 @@ op_option_slot_eq = [
 op_length_slot_eq = array_length(op_option_slot_eq);
 pos_slot_eq = 0;
 
-if(ds_grid_get(equipment,0,0)==0)
+if(ds_grid_get(equipment,DS_EQUIPMENT.NAME,0)==0)
 {
 	equipmentEND = 0;
 	equip_empty = true;

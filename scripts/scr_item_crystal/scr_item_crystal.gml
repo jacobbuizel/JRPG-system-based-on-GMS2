@@ -19,7 +19,7 @@ else
 	_rmp = max(0,min(_rmp,_chara.MP-_chara.MP_C));
 	_chara.MP_C += _rmp;
 	
-	if ds_grid_get(inventory,1,item_pos+item_scroll_a)==1
+	if ds_grid_get(inventory,DS_INVENTORY.AMOUNT,item_pos+item_scroll_a)==1
 	{
 		menu_cloes = true;
 	}

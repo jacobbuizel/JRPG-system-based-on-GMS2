@@ -1,3 +1,12 @@
+//装备表格枚举
+enum DS_EQUIPMENT
+{
+	NAME = 0,
+	AMOUNT = 1,
+	E_ID = 2,
+	CUR_DURABILITY = 3
+}
+
 /// @param id
 function equipment_id(_id){
 #region 初始化
@@ -237,13 +246,13 @@ if (stackable > 1) //情况1，可堆叠装备
 		if(_equipment.e_id == e_id)
 		{
 			//判断并计算堆叠
-			var _old_amount = ds_grid_get(equipment,1,i);
+			var _old_amount = ds_grid_get(equipment,DS_EQUIPMENT.AMOUNT,i);
 			if (_old_amount < stackable)
 			{
 				var _space = stackable - _old_amount;
 				var _add = min(amount, _space);
 					
-				ds_grid_set(equipment,1,i,_old_amount+_add);
+				ds_grid_set(equipment,DS_EQUIPMENT.AMOUNT,i,_old_amount+_add);
 				amount -= _add;
 				if (amount <= 0)
 				{
@@ -264,7 +273,7 @@ while(amount > 0)
 	var _new_amount = min(amount,stackable);
 	amount -= _new_amount;
 	
-	if(ds_grid_get(equipment,0,0)!=0)
+	if(ds_grid_get(equipment,DS_EQUIPMENT.NAME,0)!=0)
 	{
 		ds_grid_resize(equipment,equipment_w,ds_grid_height(equipment)+1);
 	}
@@ -272,10 +281,10 @@ while(amount > 0)
 	var new_row = ds_grid_height(equipment)-1;
 		
 	//填充新组数据
-	ds_grid_set(equipment,0,new_row,e_name);
-	ds_grid_set(equipment,1,new_row,_new_amount);
-	ds_grid_set(equipment,2,new_row,e_id);
-	ds_grid_set(equipment,3,new_row,cur_durability);
+	ds_grid_set(equipment,DS_EQUIPMENT.NAME,new_row,e_name);
+	ds_grid_set(equipment,DS_EQUIPMENT.AMOUNT,new_row,_new_amount);
+	ds_grid_set(equipment,DS_EQUIPMENT.E_ID,new_row,e_id);
+	ds_grid_set(equipment,DS_EQUIPMENT.CUR_DURABILITY,new_row,cur_durability);
 }
 global.g_msg_name = e_name;
 global.g_msg_amount = _amount;
@@ -286,13 +295,13 @@ return true;
 
 //加载装备数据
 function load_equipment(_id){
-var _e_id = ds_grid_get(equipment,2,_id)
+var _e_id = ds_grid_get(equipment,DS_EQUIPMENT.E_ID,_id)
 var _item = equipment_id(_e_id)
 return {
 	e_name			: _item.e_name,
-	amount			: ds_grid_get(equipment,1,_id),
+	amount			: ds_grid_get(equipment,DS_EQUIPMENT.AMOUNT,_id),
 	e_id			: _e_id,
-	cur_durability	: ds_grid_get(equipment,3,_id),
+	cur_durability	: ds_grid_get(equipment,DS_EQUIPMENT.CUR_DURABILITY,_id),
 	durability		: _item.durability,
 	weight			: _item.weight,
 	price			: _item.price,

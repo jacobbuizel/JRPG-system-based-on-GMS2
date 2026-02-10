@@ -26,7 +26,7 @@ op_length = array_length(op_option);
 discard_cursor = 2;
 discard_amount = 1;
 
-if(ds_grid_get(inventory,0,0)==0)
+if(ds_grid_get(inventory,DS_INVENTORY.NAME,0)==0)
 {
 	inventoryEND = 0;
 	empty = true;

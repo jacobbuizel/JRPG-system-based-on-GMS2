@@ -1,10 +1,10 @@
-if(ds_grid_get(inventory,0,0)!=0)
+if(ds_grid_get(inventory,DS_INVENTORY.NAME,0)!=0)
 {
 	inventoryEND = min(ds_grid_height(inventory),17);
 	empty = false;
 }
 
-if(ds_grid_get(inventory,0,0)==0)
+if(ds_grid_get(inventory,DS_INVENTORY.NAME,0)==0)
 {
 	inventoryEND = 0;
 	empty = true;
@@ -24,13 +24,13 @@ if global.sub_menu == 1 && global.talking != true && menu_anm <= 2 && menu_cloes
 				if sort == 0 || sort == 2
 				{
 					audio_play_sound(sfx_click,9,false);
-					ds_grid_sort(inventory,2,true);
+					ds_grid_sort(inventory,DS_INVENTORY.I_ID,true);
 					sort = 1;
 				}
 				else if sort == 1
 				{
 					audio_play_sound(sfx_click,9,false);
-					ds_grid_sort(inventory,2,false);
+					ds_grid_sort(inventory,DS_INVENTORY.I_ID,false);
 					sort = 2;
 				}
 			}

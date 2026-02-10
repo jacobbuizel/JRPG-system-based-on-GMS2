@@ -1,3 +1,11 @@
+//物品表格枚举
+enum DS_INVENTORY
+{
+	NAME = 0,
+	AMOUNT = 1,
+	I_ID = 2
+}
+
 /// @param id
 function item_id(_id){
 #region 初始化
@@ -375,7 +383,7 @@ for(var i=0;i<ds_grid_height(inventory);i++)
 	if(_inventory.i_id == i_id)
 	{
 		//判断物品是否到达上限
-		var _old_amount = ds_grid_get(inventory,1,i);
+		var _old_amount = ds_grid_get(inventory,DS_INVENTORY.AMOUNT,i);
 		var _new_amount = _old_amount + amount;
 		
 		if (_new_amount > 999)
@@ -384,7 +392,7 @@ for(var i=0;i<ds_grid_height(inventory);i++)
 			{
 				//限制获取量
 				amount = 999 - _old_amount;
-				ds_grid_set(inventory,1,i,_inventory.amount+amount);
+				ds_grid_set(inventory,DS_INVENTORY.AMOUNT,i,_inventory.amount+amount);
 				global.g_msg_amount = amount;
 				return true;
 			}
@@ -393,7 +401,7 @@ for(var i=0;i<ds_grid_height(inventory);i++)
 		}
 		else
 		{
-			ds_grid_set(inventory,1,i,_inventory.amount+amount);
+			ds_grid_set(inventory,DS_INVENTORY.AMOUNT,i,_inventory.amount+amount);
 			global.g_msg_amount = amount;
 			return true;
 		}
@@ -406,14 +414,14 @@ if (amount > 999)
 	//限制获取新物品的上限数量
 	amount = 999;
 }
-if(ds_grid_get(inventory,0,0)!=0)
+if(ds_grid_get(inventory,DS_INVENTORY.NAME,0)!=0)
 {
 	ds_grid_resize(inventory,inventory_w,ds_grid_height(inventory)+1);
 }
 var new_item = ds_grid_height(inventory)-1;
-ds_grid_set(inventory,0,new_item,i_name);
-ds_grid_set(inventory,1,new_item,amount);
-ds_grid_set(inventory,2,new_item,i_id);
+ds_grid_set(inventory,DS_INVENTORY.NAME,new_item,i_name);
+ds_grid_set(inventory,DS_INVENTORY.AMOUNT,new_item,amount);
+ds_grid_set(inventory,DS_INVENTORY.I_ID,new_item,i_id);
 
 global.g_msg_amount = amount;
 return true;
@@ -421,12 +429,12 @@ return true;
 
 //加载物品数据
 function load_inventory(_id){
-	var _i_id = ds_grid_get(inventory,2,_id)
+	var _i_id = ds_grid_get(inventory,DS_INVENTORY.I_ID,_id)
 	var _item = item_id(_i_id)
 	return
 	{
 		i_name		: _item.i_name,
-		amount		: ds_grid_get(inventory,1,_id),
+		amount		: ds_grid_get(inventory,DS_INVENTORY.AMOUNT,_id),
 		i_id		: _i_id,
 		
 		weight		: _item.weight,

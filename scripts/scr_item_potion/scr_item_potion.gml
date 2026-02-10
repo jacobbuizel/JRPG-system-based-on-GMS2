@@ -22,7 +22,7 @@ else
 	_rhp = max(0,min(_rhp,_chara.HP-_chara.HP_C));
 	_chara.HP_C+=_rhp;
 	
-	if ds_grid_get(inventory,1,item_pos+item_scroll_a)==1
+	if ds_grid_get(inventory,DS_INVENTORY.AMOUNT,item_pos+item_scroll_a)==1
 	{
 		menu_cloes = true;
 	}
