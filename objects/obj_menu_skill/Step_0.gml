@@ -1,3 +1,6 @@
+var _chara_id = global.player[menu_level];
+var _chara = load_chara(_chara_id);
+
 if menu_anm <= 2 && menu_cloes == false
 {
 	//角色选择子菜单
@@ -34,7 +37,6 @@ if menu_anm <= 2 && menu_cloes == false
 			global.sub_menu = 2;
 			menu_level = pos;
 			//初始化技能列表
-			var _chara = load_chara(global.player[menu_level]);
 			if (ds_grid_get(_chara.skill_list, 0, 0) != 0)
 			{
 				skillEND = min(ds_grid_height(_chara.skill_list), 10);
@@ -62,13 +64,11 @@ if menu_anm <= 2 && menu_cloes == false
 				//右键一次跳5行
 				if rpkey
 				{
-					var _chara = load_chara(global.player[menu_level]);
 					scr_menu_movement_jump(id, "skill_pos", "skill_scroll_a", ds_grid_height(_chara.skill_list), skillEND, 5, 1, 1);
 				}
 				//左键一次跳5行
 				if lpkey
 				{
-					var _chara = load_chara(global.player[menu_level]);
 					scr_menu_movement_jump(id, "skill_pos", "skill_scroll_a", ds_grid_height(_chara.skill_list), skillEND, 5, 0, 1);
 				}
 
@@ -116,7 +116,6 @@ if menu_anm <= 2 && menu_cloes == false
 				if wait_time <= 0
 				{
 					skill_pos += dkey - ukey;
-					var _chara = load_chara(global.player[menu_level]);
 					//右键一次跳5行
 					if rkey
 					{
@@ -138,7 +137,6 @@ if menu_anm <= 2 && menu_cloes == false
 			//保持选框在合法范围
 			if skill_pos >= skillEND
 			{
-				var _chara = load_chara(global.player[menu_level]);
 				if skillEND + skill_scroll_a < ds_grid_height(_chara.skill_list)
 				{
 					skill_scroll_a++;
@@ -152,7 +150,6 @@ if menu_anm <= 2 && menu_cloes == false
 			}
 			if skill_pos < 0
 			{
-				var _chara = load_chara(global.player[menu_level]);
 				if skill_scroll_a > 0
 				{
 					skill_scroll_a--;
@@ -180,7 +177,6 @@ if menu_anm <= 2 && menu_cloes == false
 		{
 			key_cooldown[0]=1;
 			global.sub_menu = 1;
-			pos = 0;
 			audio_play_sound(sfx_deselect,9,false);
 		}
 	}
@@ -219,10 +215,9 @@ if menu_anm <= 2 && menu_cloes == false
 				//施展 - 先做交互，之后再做功能
 				else
 				{
+					var _skill = load_skill(_chara,skill_pos+skill_scroll_a);
 					audio_play_sound(sfx_select,9,false);
-					// TODO: 实现技能施展功能
-					// 这里暂时显示一个消息框提示
-					create_msg_box("skill_use");
+					apply_effect_list(_skill.scr,undefined);
 					global.sub_menu = 2;
 					pos_skill = 0;
 				}

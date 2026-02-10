@@ -17,6 +17,7 @@ function skill_id(_id){
 #region 初始化
 var _s_name = "???";
 var _descr = "???";
+var _scr = undefined;
 //todo:更多技能的详细数据
 #endregion
 switch(_id)//技能数据
@@ -46,8 +47,23 @@ switch(_id)//技能数据
 return {
 	s_name			: _s_name,
 	s_id			: _id,
-	descr			: _descr
+	descr			: _descr,
+	scr				: _scr
 };
+}
+
+//加载技能数据
+function load_skill(_chara,_id){
+var _s_id = ds_grid_get(_chara.skill_list,DS_SKILL.S_ID,_id);
+var _skill = skill_id(_s_id);
+return {
+	s_name			: _skill.s_name,
+	s_id			: _s_id,
+	s_count			: ds_grid_get(_chara.skill_list,DS_SKILL.SOURCE_COUNT,_id),
+	
+	descr			: _skill.descr,
+	scr				: _skill.scr
+}
 }
 
 //增加技能

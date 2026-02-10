@@ -2,6 +2,8 @@
 var _x = 216;
 var _y = op_border*5+menu_anm;
 var _chara = 0;
+var _skill = 0;
+var _chara_skill_list = 0;
 
 var _oy = _y,_ox = _x;
 
@@ -58,7 +60,7 @@ else if global.sub_menu >= 2
 
 	var _list_x = _x;
 	var _list_y = _y;
-	var _chara_skill_list = _chara.skill_list;
+	_chara_skill_list = _chara.skill_list;
 
 	if !skill_empty
 	{
@@ -66,9 +68,8 @@ else if global.sub_menu >= 2
 		for(var i=0; i<skillEND; i++)
 		{
 			_x = _list_x;
-			var _skill_name = ds_grid_get(_chara_skill_list, DS_SKILL.NAME, i + skill_scroll_a);
-			var _skill_count = ds_grid_get(_chara_skill_list, DS_SKILL.SOURCE_COUNT, i + skill_scroll_a);
-			draw_text(_x, _list_y, _skill_name);
+			_skill = load_skill(_chara,i+skill_scroll_a);
+			draw_text(_x, _list_y, _skill.s_name);
 			_list_y += op_space;
 		}
 		
@@ -122,7 +123,6 @@ else if global.sub_menu >= 2
 				);
 			}
 		}
-
 	}
 	else
 	{
@@ -140,8 +140,7 @@ else if global.sub_menu >= 2
 	if !skill_empty
 	{
 		//获取当前选中技能的信息
-		var _skill_id = ds_grid_get(_chara_skill_list,DS_SKILL.S_ID,skill_pos+skill_scroll_a);
-		var _skill = skill_id(_skill_id);
+		_skill = load_skill(_chara,skill_pos+skill_scroll_a)
 		//绘制技能名称
 		draw_text(_x,_y,_skill.s_name);
 		_y += op_border;
