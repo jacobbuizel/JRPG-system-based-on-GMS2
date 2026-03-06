@@ -305,7 +305,7 @@ var accessoryC = 0; //配饰c
 //技能列表
 var skill_list = ds_grid_create(skill_w,1);
 //法术书列表
-var spellbook = false;
+var spellbook = (class_id == 11);
 var spellbook_list = ds_grid_create(skill_w,1);
 #endregion
 return {
@@ -354,7 +354,9 @@ return {
 	accessoryA		: accessoryA,
 	accessoryB		: accessoryB,
 	accessoryC		: accessoryC,
-	skill_list		: skill_list
+	skill_list		: skill_list,
+	spellbook		: spellbook,
+	spellbook_list	: spellbook_list
 };
 }
 
@@ -391,6 +393,16 @@ function load_chara(_id){
 	if (_row == -1) return undefined;
 	
 	var _chara = ds_grid_get(chara_status, 1, _row);
+
+	// backward compatibility for older save data
+	if !variable_struct_exists(_chara, "spellbook")
+	{
+		_chara.spellbook = (_chara.class_id == 11);
+	}
+	if !variable_struct_exists(_chara, "spellbook_list") || !ds_exists(_chara.spellbook_list, ds_type_grid)
+	{
+		_chara.spellbook_list = ds_grid_create(skill_w,1);
+	}
 	
 	//修正运行时的数据（如当前HP、属性调整值的刷新等）
 	_chara.str_m = (_chara.str div 2) - 5;

@@ -9,7 +9,8 @@ enum DS_SPELL
 {
 	NAME = 0,
 	S_ID = 1,
-	ISENALBE = 2
+	ISENALBE = 2,
+	ISENABLE = 2
 }
 
 /// @param id
@@ -53,6 +54,34 @@ return {
 }
 
 //加载技能数据
+
+/// @param id
+function spell_id(_id){
+#region init
+var _s_name = "???";
+var _descr = "???";
+var _scr = undefined;
+#endregion
+switch(_id)
+{
+	default:
+		break;
+	case 2001:
+		_s_name = "Magic Missile";
+		_descr = "Launch a force bolt at the target.";
+		break;
+	case 2002:
+		_s_name = "Magic Shield";
+		_descr = "Raise a short magical barrier.";
+		break;
+}
+return {
+	s_name			: _s_name,
+	s_id			: _id,
+	descr			: _descr,
+	scr				: _scr
+};
+}
 function load_skill(_chara,_id){
 var _s_id = ds_grid_get(_chara.skill_list,DS_SKILL.S_ID,_id);
 var _skill = skill_id(_s_id);
@@ -67,6 +96,20 @@ return {
 }
 
 //增加技能
+
+//加载法术数据
+function load_spell(_chara,_id){
+var _s_id = ds_grid_get(_chara.spellbook_list,DS_SPELL.S_ID,_id);
+var _spell = spell_id(_s_id);
+return {
+	s_name			: _spell.s_name,
+	s_id			: _s_id,
+	is_enable		: ds_grid_get(_chara.spellbook_list,DS_SPELL.ISENALBE,_id) == 1,
+
+	descr			: _spell.descr,
+	scr				: _spell.scr
+}
+}
 function add_skill_id(_id,_chara){
 var _skill = skill_id(_id);
 var _skill_list_h = ds_grid_height(_chara.skill_list);
@@ -95,6 +138,120 @@ return true;
 }
 
 //删除技能
+
+/// @param id
+/// @param chara
+/// @param is_enable*
+function add_spell_id(_id,_chara,_ref_is_enable){
+if argument_count>2
+{
+	var _is_enable = argument[2] ? 1 : 0;
+}
+else var _is_enable = 0;
+
+if !variable_struct_exists(_chara, "spellbook_list") || !ds_exists(_chara.spellbook_list, ds_type_grid)
+{
+	_chara.spellbook_list = ds_grid_create(skill_w,1);
+}
+_chara.spellbook = true;
+
+var _spell = spell_id(_id);
+var _spell_list_h = ds_grid_height(_chara.spellbook_list);
+
+for(var _i=0;_i<_spell_list_h;_i++)
+{
+	if(ds_grid_get(_chara.spellbook_list,DS_SPELL.S_ID,_i) == _id)
+	{
+		if _is_enable
+		{
+			ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_i,1);
+		}
+		return true;
+	}
+}
+
+if (ds_grid_get(_chara.spellbook_list,0,0)!=0)
+{
+	ds_grid_resize(_chara.spellbook_list,skill_w,ds_grid_height(_chara.spellbook_list)+1);
+}
+var _new_spell = ds_grid_height(_chara.spellbook_list)-1;
+ds_grid_set(_chara.spellbook_list,DS_SPELL.NAME,_new_spell,_spell.s_name);
+ds_grid_set(_chara.spellbook_list,DS_SPELL.S_ID,_new_spell,_spell.s_id);
+ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_new_spell,_is_enable);
+return true;
+}
+
+function count_enabled_spell(_chara){
+if !variable_struct_exists(_chara, "spellbook_list") || !ds_exists(_chara.spellbook_list, ds_type_grid)
+{
+	return 0;
+}
+if ds_grid_get(_chara.spellbook_list,DS_SPELL.NAME,0) == 0
+{
+	return 0;
+}
+
+var _count = 0;
+for (var _i = 0; _i < ds_grid_height(_chara.spellbook_list); _i++)
+{
+	if ds_grid_get(_chara.spellbook_list,DS_SPELL.ISENALBE,_i) == 1
+	{
+		_count++;
+	}
+}
+return _count;
+}
+
+function get_spell_enable_limit(_chara){
+if _chara == undefined
+{
+	return 1;
+}
+var _int_m = (_chara.int div 2) - 5;
+if variable_struct_exists(_chara, "int_m")
+{
+	_int_m = _chara.int_m;
+}
+return max(1, _int_m + _chara.level);
+}
+
+/// @param chara
+/// @param row
+/// @param is_enable
+function set_spell_enable_by_row(_chara,_row,_is_enable){
+if !variable_struct_exists(_chara, "spellbook_list") || !ds_exists(_chara.spellbook_list, ds_type_grid)
+{
+	return false;
+}
+if _row < 0 || _row >= ds_grid_height(_chara.spellbook_list)
+{
+	return false;
+}
+if ds_grid_get(_chara.spellbook_list,DS_SPELL.NAME,_row) == 0
+{
+	return false;
+}
+
+var _new_state = _is_enable ? 1 : 0;
+if _new_state == 0
+{
+	ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_row,0);
+	return true;
+}
+
+if ds_grid_get(_chara.spellbook_list,DS_SPELL.ISENALBE,_row) == 1
+{
+	return true;
+}
+
+if count_enabled_spell(_chara) >= get_spell_enable_limit(_chara)
+{
+	return false;
+}
+
+ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_row,1);
+return true;
+}
 function remove_skill_id(_id,_chara){
 if (!ds_exists(_chara.skill_list, ds_type_grid))
 {

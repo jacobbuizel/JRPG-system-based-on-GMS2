@@ -43,8 +43,35 @@ for (var i = 0; i < ds_grid_height(chara_status); i++)
 		}
 	}
 
-	//把“数组版技能”放进存档 struct
+	//把“数组版技能和法术书”放进存档struct
+	var _spell_grid = -1;
+	var _spell_save = [];
+	if variable_struct_exists(_struct, "spellbook_list")
+	{
+		_spell_grid = _struct.spellbook_list;
+	}
+	if ds_exists(_spell_grid, ds_type_grid)
+	{
+		for (var sr = 0; sr < ds_grid_height(_spell_grid); sr++)
+		{
+			array_push(_spell_save, {
+				s_name : ds_grid_get(_spell_grid, DS_SPELL.NAME, sr),
+				s_id : ds_grid_get(_spell_grid, DS_SPELL.S_ID, sr),
+				is_enable : ds_grid_get(_spell_grid, DS_SPELL.ISENALBE, sr)
+			});
+		}
+	}
+
 	_save_struct.skill_list = _skill_save;
+	_save_struct.spellbook_list = _spell_save;
+	if variable_struct_exists(_struct, "spellbook")
+	{
+		_save_struct.spellbook = _struct.spellbook;
+	}
+	else
+	{
+		_save_struct.spellbook = (_struct.class_id == 11);
+	}
 
 	//存
 	array_push(_chara_data, {id : _id,data : _save_struct});

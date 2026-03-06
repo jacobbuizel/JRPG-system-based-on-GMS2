@@ -8,7 +8,7 @@ height = 700;
 op_border = 32;
 op_space = 32;
 
-//长按切换按键
+//角色选框
 pos = 0;
 
 //菜单动画
@@ -21,7 +21,10 @@ global.sub_menu = 1;
 op_length = 2;
 menu_level = 0;
 
-//技能列表相关
+//列表模式: 0 = 技能, 1 = 法术书
+skill_tab = 0;
+
+//技能列表状态
 skill_pos = 0;
 skill_scroll_a = 0;
 skillEND = 0;
@@ -35,9 +38,10 @@ pos_skill = 0;
 
 //获取当前角色的技能列表
 var _chara = load_chara(global.player[menu_level]);
-if (ds_grid_get(_chara.skill_list, 0, 0) != 0)
+var _grid = _chara.skill_list;
+if (ds_grid_get(_grid, 0, 0) != 0)
 {
-	skillEND = min(ds_grid_height(_chara.skill_list), 10);
+	skillEND = min(ds_grid_height(_grid), 10);
 	skill_empty = false;
 }
 else
