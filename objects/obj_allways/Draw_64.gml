@@ -17,7 +17,7 @@ if global.debug = true
 	_y += 32;
 	draw_text(_x,_y,"按f5键快速保存，F6快速读档。按f12重启游戏。");
 	_y += 32;
-	draw_text(_x,_y,"按z键交互。按x键打开或关闭菜单。按c键切换战斗BGM。");
+	draw_text(_x,_y,"按z键交互。按x键打开或关闭菜单。");
 	_y += 32;
 	draw_text(_x,_y,"按v键切换寻路格子显示。");
 	_y += 32;
