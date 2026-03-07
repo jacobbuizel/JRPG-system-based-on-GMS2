@@ -44,6 +44,29 @@ switch(_id)//技能数据
 		_descr = "用轻弩射击敌人。";
 		break;
 	#endregion
+	#region 法术
+	case 2000:
+		_s_name = "燃烧之手";
+		break;
+	case 2001:
+		_s_name = "魅惑人类";
+		break;
+	case 2002:
+		_s_name = "云雾术";
+		break;
+	case 2003:
+		_s_name = "油腻术";
+		break;
+	case 2004:
+		_s_name = "大步奔行";
+		break;
+	case 2005:
+		_s_name = "法师护甲";
+		break;
+	case 2006:
+		_s_name = "魔法飞弹";
+		break;
+	#endregion
 }
 return {
 	s_name			: _s_name,
@@ -54,33 +77,9 @@ return {
 }
 
 //加载技能数据
-
 /// @param id
 function spell_id(_id){
-#region init
-var _s_name = "???";
-var _descr = "???";
-var _scr = undefined;
-#endregion
-switch(_id)
-{
-	default:
-		break;
-	case 2001:
-		_s_name = "Magic Missile";
-		_descr = "Launch a force bolt at the target.";
-		break;
-	case 2002:
-		_s_name = "Magic Shield";
-		_descr = "Raise a short magical barrier.";
-		break;
-}
-return {
-	s_name			: _s_name,
-	s_id			: _id,
-	descr			: _descr,
-	scr				: _scr
-};
+return skill_id(_id);
 }
 function load_skill(_chara,_id){
 var _s_id = ds_grid_get(_chara.skill_list,DS_SKILL.S_ID,_id);
@@ -164,7 +163,11 @@ for(var _i=0;_i<_spell_list_h;_i++)
 	{
 		if _is_enable
 		{
-			ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_i,1);
+			if ds_grid_get(_chara.spellbook_list,DS_SPELL.ISENALBE,_i) != 1
+			{
+				ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_i,1);
+				add_skill_id(_id,_chara);
+			}
 		}
 		return true;
 	}
@@ -178,6 +181,10 @@ var _new_spell = ds_grid_height(_chara.spellbook_list)-1;
 ds_grid_set(_chara.spellbook_list,DS_SPELL.NAME,_new_spell,_spell.s_name);
 ds_grid_set(_chara.spellbook_list,DS_SPELL.S_ID,_new_spell,_spell.s_id);
 ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_new_spell,_is_enable);
+if _is_enable
+{
+	add_skill_id(_id,_chara);
+}
 return true;
 }
 
@@ -233,8 +240,13 @@ if ds_grid_get(_chara.spellbook_list,DS_SPELL.NAME,_row) == 0
 }
 
 var _new_state = _is_enable ? 1 : 0;
+var _spell_id = ds_grid_get(_chara.spellbook_list,DS_SPELL.S_ID,_row);
 if _new_state == 0
 {
+	if ds_grid_get(_chara.spellbook_list,DS_SPELL.ISENALBE,_row) == 1
+	{
+		remove_skill_id(_spell_id,_chara);
+	}
 	ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_row,0);
 	return true;
 }
@@ -250,6 +262,7 @@ if count_enabled_spell(_chara) >= get_spell_enable_limit(_chara)
 }
 
 ds_grid_set(_chara.spellbook_list,DS_SPELL.ISENALBE,_row,1);
+add_skill_id(_spell_id,_chara);
 return true;
 }
 function remove_skill_id(_id,_chara){

@@ -363,6 +363,17 @@ return {
 ///@param id
 function add_chara_id(_id) {
 var _chara = chara_id(_id);
+
+if _id == 2
+{
+	add_spell_id(2000,_chara,0);
+	add_spell_id(2001,_chara,0);
+	add_spell_id(2002,_chara,0);
+	add_spell_id(2003,_chara,0);
+	add_spell_id(2004,_chara,0);
+	add_spell_id(2005,_chara,0);
+	add_spell_id(2006,_chara,0);
+}
 	
 //如果表格有内容，就扩展一行
 if (ds_grid_get(chara_status, 0, 0) != 0)
@@ -402,6 +413,18 @@ function load_chara(_id){
 	if !variable_struct_exists(_chara, "spellbook_list") || !ds_exists(_chara.spellbook_list, ds_type_grid)
 	{
 		_chara.spellbook_list = ds_grid_create(skill_w,1);
+	}
+
+	// 兼容旧存档：确保丝诺默认拥有法术书条目
+	if _id == 2 && ds_grid_get(_chara.spellbook_list,DS_SPELL.NAME,0) == 0
+	{
+		add_spell_id(2000,_chara,0);
+		add_spell_id(2001,_chara,0);
+		add_spell_id(2002,_chara,0);
+		add_spell_id(2003,_chara,0);
+		add_spell_id(2004,_chara,0);
+		add_spell_id(2005,_chara,0);
+		add_spell_id(2006,_chara,0);
 	}
 	
 	//修正运行时的数据（如当前HP、属性调整值的刷新等）

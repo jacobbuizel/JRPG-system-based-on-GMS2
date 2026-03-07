@@ -75,7 +75,7 @@ else if global.sub_menu >= 2
 	{
 		var _enabled_count = count_enabled_spell(_chara);
 		var _enabled_limit = get_spell_enable_limit(_chara);
-		draw_text(_x,_y,"Enabled:"+string(_enabled_count)+"/"+string(_enabled_limit));
+		draw_text(_x,_y,"已准备:"+string(_enabled_count)+"/"+string(_enabled_limit));
 		_y += op_border;
 	}
 	
