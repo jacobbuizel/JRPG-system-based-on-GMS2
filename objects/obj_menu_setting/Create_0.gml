@@ -1,50 +1,28 @@
 depth = -1001;
 
-//高和宽
+//布局
 width = 256;
 height = 32;
-
-//上边框和字符上下间距
 op_border = 32;
 op_space = 32;
 
-//长按切换按键
-wait_time=120;
+//选框和输入
+wait_time_ud = 30;
+wait_time_lr = 15;
 pos = 0;
+menu_wait = 1;
 
-//等待操作
-menu_wait=1;
-
-//声音设置界面
-op_snd = 1;
+//滑块显示段
+slider_segments = 16;
 
 global.pause = true;
 global.sub_menu = 1;
 
-op_option[0,0] = "声音";
-if global.auto_run
-{
-	op_option[0,1] = "自动奔跑:开";
-}
-else
-{
-	op_option[0,1] = "自动奔跑:关";
-}
-op_option[0,2] = "高级设置";
-op_option[0,3] = "返回";
+op_option[0] = "BGM音量";
+op_option[1] = "SFX音量";
+op_option[2] = "BGS音量";
+op_option[3] = "自动奔跑";
+op_option[4] = "恢复默认设置";
+op_option[5] = "返回";
 
-op_option[1,0] = "BGM大小";
-op_option[1,1] = "SFX大小";
-op_option[1,2] = "BGS大小";
-op_option[1,3] = "返回";
-
-op_option[2,0] = "100%";
-op_option[2,1] = "80%";
-op_option[2,2] = "60%";
-op_option[2,3] = "40%";
-op_option[2,4] = "20%";
-op_option[2,5] = "关";
-op_option[2,6] = "返回";
-
-op_length = 0;
-menu_level = 0;
+op_length = array_length(op_option);

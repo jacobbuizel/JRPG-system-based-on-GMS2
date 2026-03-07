@@ -1,5 +1,5 @@
-//保存设置
+// save setting
 scr_setting_save();
 
-//重置子菜单状态
+// reset submenu lock
 global.sub_menu = 0;
