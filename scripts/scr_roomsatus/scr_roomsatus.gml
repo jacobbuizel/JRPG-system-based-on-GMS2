@@ -10,10 +10,8 @@ function reroomsatus(){
 
 globalvar room_status;
 room_status = {
-	// 数据结构版本号。以后如果存档格式升级，可用它做兼容判断。
-	version : 2,
-	// 房间状态数组。每个元素由 room_status_make_room() 创建。
-	rooms : []
+	version : 2,	// 数据结构版本号。以后如果存档格式升级，可用它做兼容判断。
+	rooms : []		// 房间状态数组。每个元素由 room_status_make_room() 创建。
 };
 
 room_status_define_defaults();
