@@ -107,6 +107,27 @@ Use this skill before changing this repository. Treat the project as a GMS2 2024
 - Keep Chinese in-game text and comments consistent with nearby files. Do not rewrite wording unless the task is text/content work.
 - Preserve existing formatting in touched files. This codebase uses mixed semicolon style and GML brace conventions; do not run broad formatters.
 
+## Reserved Instance Variables
+
+GameMaker Studio 2 uses many built-in instance variables that must NOT be used as local or temporary variable names.
+
+Examples include but are not limited to:
+- x, y
+- hspeed, vspeed, speed, direction
+- image_index, image_speed
+- visible, solid
+- id, object_index
+
+Rules:
+- NEVER use built-in instance variable names as local variables.
+- ALWAYS use `_` prefix for parameters and temporary variables (e.g. `_x`, `_y`, `_speed`).
+- If a variable name conflicts with a built-in variable, rename it safely.
+- Treat `x` and `y` as position properties only, never as generic variables.
+
+If a variable name could potentially conflict with a built-in variable, prefer:
+- `_name` for parameters and locals
+- `tmp_name` for temporary values
+
 ## Forbidden Changes
 
 - Do not manually churn `.yy` files, `hgame.yyp`, or `hgame.resource_order` for normal logic edits.
