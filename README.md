@@ -54,4 +54,12 @@
 1. 克隆本仓库：  
    ```bash
    git clone https://github.com/jacobbuizel/JRPG-system-based-on-GMS2.git
+   ```
 2. 使用GameMaker Studio 2(版本 ≥ 2024.13.1)打开hgame.yyp工程文件。
+
+## Codex / Agent Skill
+本仓库包含一个项目专用的 Codex/Agent Skill，用于指导之后安全地修改本 GMS2 项目：
+
+- 路径：`.codex/skills/hgame-gms2-safe-edit/SKILL.md`
+- 建议触发方式：在让 Agent 修改项目代码前说明 `Use $hgame-gms2-safe-edit`
+- Skill 记录了核心系统、GML 风格、`ds_grid` / struct / enum 数据约定，以及禁止随意改动 `.yy` 资源文件、存档系统和不存在/废弃 API 的约束。

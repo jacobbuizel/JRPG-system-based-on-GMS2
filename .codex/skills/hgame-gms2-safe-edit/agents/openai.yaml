@@ -1,0 +1,4 @@
+interface:
+  display_name: "HGame GMS2 Safe Edit"
+  short_description: "Guidance for safe edits in this GMS2 JRPG project"
+  default_prompt: "Use $hgame-gms2-safe-edit before modifying this GameMaker Studio 2 JRPG project."
