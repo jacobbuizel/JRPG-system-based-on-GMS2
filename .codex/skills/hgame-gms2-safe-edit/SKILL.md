@@ -121,6 +121,33 @@ Use this skill before changing this repository. Treat the project as a GMS2 2024
 - Do not remove old-save compatibility checks from `load_chara()` or `obj_charsatus/Step_0.gml`.
 - Do not change save JSON field names or grid widths unless also handling migration.
 
+## Staged Resource Creation
+
+When a new GMS2 script/object/resource is needed, do not directly register it as a real project resource unless explicitly approved.
+
+Preferred workflow:
+
+1. Create staged files using the prefix `NEW_`.
+   - Example: `NEW_scr_potion_system.gml`
+   - Example: `NEW_obj_potion_menu_Create_0.gml`
+   - Example: `NEW_obj_potion_menu_Step_0.gml`
+
+2. Do not modify:
+   - `hgame.yyp`
+   - `hgame.resource_order`
+   - resource tree metadata
+
+3. Tell the user what to create manually in GameMaker IDE.
+   - Example: create a script named `scr_potion_system`
+   - Example: create an object named `obj_potion_menu`
+   - Example: add Create / Step / Draw GUI events as needed
+
+4. After the user creates the resource in GameMaker IDE, move/copy the staged `NEW_` code into the corresponding `.gml` event/script file, or let the user do it own.
+
+5. Remove the `NEW_` prefix only after the IDE-created resource exists.
+
+6. Never treat `NEW_` files as runtime code. They are drafts/templates only.
+
 ## Encoding
 
 All project text files are UTF-8 encoded.
@@ -154,3 +181,14 @@ After editing:
 2. Review `git diff` and confirm no unintended `.yy`, asset, or generated metadata churn.
 3. For save-related changes, reason through new game, old save load, save, reload, and empty-grid cases.
 4. If GameMaker is not available for a full compile, state that limitation clearly in the final response.
+
+## Skill Maintenance
+
+This skill may be updated when the project architecture changes.
+
+Rules:
+- Do not weaken or remove safety rules without explicit user approval.
+- Prefer appending new project facts over rewriting old sections.
+- When code and this skill disagree, inspect the current code and report the mismatch before editing the skill.
+- Mark uncertain observations as unconfirmed.
+- Keep this skill focused on durable project conventions, not one-off task notes.
