@@ -46,6 +46,8 @@ random_movement = 0;
 msg_id = "";
 
 // 房间状态系统：记录 NPC 对话、行为、位置和是否在场。
+// 普通 NPC 建议在 Creation Code 写 rs_id，并把初始 msg_id/npc_default_behavior 写清楚。
+// 复杂剧情变量不要新增零散全局变量，优先放到 room_status 的 custom 里。
 rs_id = "";
 rs_restorable = 0;
 rs_state_ready = false;

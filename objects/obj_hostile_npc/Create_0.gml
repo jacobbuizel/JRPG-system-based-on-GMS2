@@ -52,6 +52,8 @@ follow_timer = 0;
 follow_timer_max = 120;
 
 // 房间状态系统：记录敌对 NPC 的刷新、行为和位置。
+// 没有 Creation Code 的敌对 NPC 会尝试用“注册表默认坐标 + 类型”自动绑定 rs_id。
+// rs_restorable 默认为 20，表示休息刷新时必定重新出现。
 rs_id = "";
 rs_restorable = 20;
 rs_state_ready = false;

@@ -1,5 +1,7 @@
 if !rs_state_ready
 {
+	// 第一次 Step 时把存档状态应用到 NPC。
+	// 如果 removed=true，表示剧情上已经离场，直接销毁实例。
 	if !room_status_apply_npc_state(id,"npc")
 	{
 		instance_destroy();
@@ -43,4 +45,6 @@ if global.talking && npc_behavior == 2
 	scr_npc_talking();
 }
 
+// 每帧记录行为、位置和 msg_id。
+// 默认不会在进房间时恢复位置；需要战斗返回原位时再开启 restore_position。
 room_status_capture_npc_state(id,"npc");

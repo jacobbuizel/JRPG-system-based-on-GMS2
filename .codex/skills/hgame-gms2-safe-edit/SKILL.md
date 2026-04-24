@@ -41,7 +41,7 @@ Use this skill before changing this repository. Treat the project as a GMS2 2024
 - `scripts/scr_saving_system/scr_saving_system.gml` is the central save/load script. Be very conservative here.
 - `scr_saving(_datanum)` writes `savedataN.sav` as JSON through `buffer_create`, `buffer_write`, and `buffer_save`.
 - Inventory and equipment are serialized with `ds_grid_write`; their heights are stored separately.
-- Room status is stored as a versioned struct returned by `room_status_save_data()`. `Sroom_status` may still be a legacy `ds_grid_write` string in old test saves, and `room_status_load_data()` handles that migration path.
+- Room status is stored as a versioned struct returned by `room_status_save_data()`. The active room-state format starts at `version = 2`; legacy grid migration code was intentionally removed because the project had no meaningful old room-state saves yet. Future migrations should be added through `room_status_load_data()` version dispatch.
 - Character data is not saved as raw nested grids. It clones each character struct with `variable_clone`, converts `skill_list` and `spellbook_list` grids into arrays of structs, and writes `global.saveDATA.Schara_status`.
 - `scr_loading(_datanum)` only parses JSON into `global.saveDATA`. Rehydration happens later in object code:
   - `obj_gamestart/Create_0.gml` restores global time and merges saved room state over fresh `reroomsatus()` defaults.

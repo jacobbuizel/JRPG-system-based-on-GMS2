@@ -1,5 +1,7 @@
 if !rs_state_ready
 {
+	// 第一次 Step 时把存档状态应用到敌对 NPC。
+	// 如果 removed=true，表示已经被击败/清除，直接销毁实例。
 	if !room_status_apply_npc_state(id,"hostile_npc")
 	{
 		instance_destroy();
@@ -63,4 +65,5 @@ if global.pause || global.talking
 	path_end();
 }
 
+// 持续记录行为、位置和追踪计时，方便以后接战斗返回、清怪、刷新等逻辑。
 room_status_capture_npc_state(id,"hostile_npc");
