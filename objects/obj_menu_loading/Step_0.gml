@@ -256,6 +256,7 @@ if !roomgoto && global.talking != true
 			
 									Sinventory : 0,
 									Sinventory_h : 0,
+									Sroom_status_version : 0,
 									Sroom_status : 0,
 									Schara_status : 0,
 			
@@ -329,6 +330,7 @@ if !roomgoto && global.talking != true
 			
 								Sinventory : 0,
 								Sinventory_h : 0,
+								Sroom_status_version : 0,
 								Sroom_status : 0,
 								Schara_status : 0,
 			

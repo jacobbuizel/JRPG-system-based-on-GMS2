@@ -44,3 +44,8 @@ random_movement = 0;
 
 //npc对话初始参数
 msg_id = "";
+
+// 房间状态系统：记录 NPC 对话、行为、位置和是否在场。
+rs_id = "";
+rs_restorable = 0;
+rs_state_ready = false;

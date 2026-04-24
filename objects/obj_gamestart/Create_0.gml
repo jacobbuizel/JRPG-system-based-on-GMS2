@@ -39,7 +39,10 @@ if !global.gamestart
 		global.time_h = global.saveDATA.time_h;
 		global.time_day = global.saveDATA.time_day;
 		
-		ds_grid_read(room_status,global.saveDATA.Sroom_status);
+		if variable_struct_exists(global.saveDATA,"Sroom_status")
+		{
+			room_status_load_data(global.saveDATA.Sroom_status);
+		}
 		if room_get_name(room)!=global.saveDATA.room_name
 		{
 			room_goto(asset_get_index(global.saveDATA.room_name));
@@ -61,7 +64,8 @@ if !global.gamestart
 			
 			Sinventory : 0,
 			Sinventory_h : 0,
-			Sroom_status : 0,
+			Sroom_status_version : room_status.version,
+			Sroom_status : room_status_save_data(),
 			Schara_status : 0,
 			
 			room_name : 0,

@@ -40,10 +40,11 @@ Use this skill before changing this repository. Treat the project as a GMS2 2024
 
 - `scripts/scr_saving_system/scr_saving_system.gml` is the central save/load script. Be very conservative here.
 - `scr_saving(_datanum)` writes `savedataN.sav` as JSON through `buffer_create`, `buffer_write`, and `buffer_save`.
-- Inventory, equipment, and room status are serialized with `ds_grid_write`; their heights are stored separately.
+- Inventory and equipment are serialized with `ds_grid_write`; their heights are stored separately.
+- Room status is stored as a versioned struct returned by `room_status_save_data()`. `Sroom_status` may still be a legacy `ds_grid_write` string in old test saves, and `room_status_load_data()` handles that migration path.
 - Character data is not saved as raw nested grids. It clones each character struct with `variable_clone`, converts `skill_list` and `spellbook_list` grids into arrays of structs, and writes `global.saveDATA.Schara_status`.
 - `scr_loading(_datanum)` only parses JSON into `global.saveDATA`. Rehydration happens later in object code:
-  - `obj_gamestart/Create_0.gml` restores global time and `room_status`.
+  - `obj_gamestart/Create_0.gml` restores global time and merges saved room state over fresh `reroomsatus()` defaults.
   - `obj_item_manager/Step_0.gml` rebuilds `inventory` and `equipment` from `ds_grid_read`.
   - `obj_charsatus/Step_0.gml` rebuilds character structs, `skill_list`, and `spellbook_list` grids.
 - Do not change save field names, grid widths, enum columns, or character struct fields without a migration plan and backwards compatibility.
@@ -76,10 +77,15 @@ Use this skill before changing this repository. Treat the project as a GMS2 2024
 
 ### Room State And Instance Data
 
-- `scripts/scr_roomsatus/scr_roomsatus.gml` creates global `room_status` as a grid. Each room uses two rows: `roomid * 2` for state, `roomid * 2 + 1` for restorable chance.
-- Column `0` stores the number of tracked room entries for that room. Entry columns begin at `1`.
-- Room instance creation code reads and writes `room_status` by hard-coded row/column positions. Do not reorder entries casually.
-- Adding room-state entries requires updating `reroomsatus()` and matching the relevant room instance creation code.
+- `scripts/scr_roomsatus/scr_roomsatus.gml` creates global `room_status` as a versioned struct: `{ version, rooms }`.
+- Each room entry stores `room_id`, `room_name`, `room_data`, and an `instances` array. Room-level state should use `room_status_current_set_room_custom()` / `room_status_current_get_room_custom()`.
+- Each tracked instance uses a stable `rs_id` string rather than a grid column. Current tracked types are `"item"`, `"equipment"`, `"npc"`, and `"hostile_npc"`.
+- Room instance Creation Code should set `rs_id = "<stable instance id>"` for tracked placed instances. Item and equipment instances can also set `rs_restorable`.
+- `obj_item_p`, `obj_equip_p`, `obj_npc`, and `obj_hostile_npc` initialize `rs_id`, `rs_restorable`, and `rs_state_ready`, then apply/capture room state through the `room_status_*` helpers during Step/interaction.
+- `obj_hostile_npc` instances without Creation Code can be auto-bound by type and default position when they have a matching registry entry.
+- `restor_roomsatus()` remains as a compatibility wrapper for rest/refresh flows, but it now restores entries from the struct registry instead of the old grid.
+- NPC positions are captured continuously, but default room entry behavior does not restore saved positions unless `restore_position` is set, for example via `room_status_current_set_restore_position()`.
+- For complex NPC or room-specific flags, prefer the generic `custom` helpers over adding one-off grid columns or hard-coded save fields.
 
 ### Menus, Messages, And Interaction
 

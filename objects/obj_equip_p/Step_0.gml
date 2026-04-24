@@ -1,6 +1,11 @@
-if ds_grid_get(room_status,i_room_s,i_room*2) == 1
+if !rs_state_ready
 {
-	instance_destroy();
+	if !room_status_apply_pickup_state(id,"equipment")
+	{
+		instance_destroy();
+		exit;
+	}
+	rs_state_ready = true;
 }
 if place_meeting(x,y,obj_interacting)
 {

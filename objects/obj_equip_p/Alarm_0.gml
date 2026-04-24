@@ -1,8 +1,9 @@
 if !global.talking
 {
+	room_status_capture_pickup_state(id,"equipment");
 	if (add_equipment_id(equip_id.e_id,amount))
 	{
-		ds_grid_set(room_status,i_room_s,i_room*2,1);
+		room_status_current_set_removed(rs_id,true);
 		if !instance_exists(obj_msgbox)
 		{
 			create_msg_box("item_pickup");

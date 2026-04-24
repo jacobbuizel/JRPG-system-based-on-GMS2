@@ -1,4 +1,5 @@
 equip_id = equipment_id(100);
-i_room_s = 8;
+rs_id = "inst_test_1_item_7";
+rs_restorable = 20;
 
 amount = 1;

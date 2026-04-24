@@ -16,7 +16,8 @@ global.saveDATA.Sinventory = ds_grid_write(inventory);
 global.saveDATA.Sinventory_h = ds_grid_height(inventory);
 global.saveDATA.Sequipment = ds_grid_write(equipment);
 global.saveDATA.Sequipment_h = ds_grid_height(equipment);
-global.saveDATA.Sroom_status = ds_grid_write(room_status);
+global.saveDATA.Sroom_status_version = room_status.version;
+global.saveDATA.Sroom_status = room_status_save_data();
 
 var _chara_data = [];
 for (var i = 0; i < ds_grid_height(chara_status); i++)
@@ -24,7 +25,7 @@ for (var i = 0; i < ds_grid_height(chara_status); i++)
 	var _id = ds_grid_get(chara_status, 0, i);
 	var _struct = ds_grid_get(chara_status, 1, i);
 	
-	//复制一份 struct（关键）
+	//复制一份 struct
 	var _save_struct = variable_clone(_struct);
 	
 	//单独处理 skill_list

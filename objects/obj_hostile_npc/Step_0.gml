@@ -1,3 +1,13 @@
+if !rs_state_ready
+{
+	if !room_status_apply_npc_state(id,"hostile_npc")
+	{
+		instance_destroy();
+		exit;
+	}
+	rs_state_ready = true;
+}
+
 if !global.pause && !global.talking
 {
 	scr_npc_behavior();
@@ -52,3 +62,5 @@ if global.pause || global.talking
 {
 	path_end();
 }
+
+room_status_capture_npc_state(id,"hostile_npc");

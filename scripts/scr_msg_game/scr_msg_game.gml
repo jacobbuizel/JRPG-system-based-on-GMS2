@@ -104,7 +104,8 @@ switch(_msg_id)
 		create_msg("第一段对话",
 				method(undefined,function()
 				{
-					ds_grid_set(room_status,1,2,1);
+					room_status_current_set_msg("inst_test_2_npc_5","test_npc_5-1");
+					room_status_current_set_custom("inst_test_2_npc_5","talked",true);
 					if (instance_exists(inst_test_npc_5))
 					{
 						inst_test_npc_5.msg_id = "test_npc_5-1";
@@ -121,7 +122,8 @@ switch(_msg_id)
 				create_msg("前面的道路很危险，请收下这个吧。",
 					method(undefined,function()
 					{
-						ds_grid_set(room_status,1,0,1);
+						room_status_current_set_msg("inst_test_1_npc_6","test_npc_6-1");
+						room_status_current_set_custom("inst_test_1_npc_6","talked",true);
 						if (instance_exists(inst_test_npc_6))
 						{
 							inst_test_npc_6.msg_id = "test_npc_6-1";

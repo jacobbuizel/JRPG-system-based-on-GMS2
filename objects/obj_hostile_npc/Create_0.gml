@@ -50,3 +50,8 @@ follow_path = path_add();
 follow_target = obj_player;
 follow_timer = 0;
 follow_timer_max = 120;
+
+// 房间状态系统：记录敌对 NPC 的刷新、行为和位置。
+rs_id = "";
+rs_restorable = 20;
+rs_state_ready = false;

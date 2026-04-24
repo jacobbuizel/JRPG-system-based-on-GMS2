@@ -62,6 +62,7 @@ if op_option[pos+scroll_a] != "存档"+string(pos+scroll_a)+" 空"
 			
 			Sinventory : 0,
 			Sinventory_h : 0,
+			Sroom_status_version : 0,
 			Sroom_status : 0,
 			Schara_status : 0,
 			

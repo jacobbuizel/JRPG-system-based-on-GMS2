@@ -1,4 +1,5 @@
 inventory_id = item_id(2.5);
-i_room_s = 12;
+rs_id = "inst_test_2_item_12";
+rs_restorable = 10;
 
 amount = 1;
