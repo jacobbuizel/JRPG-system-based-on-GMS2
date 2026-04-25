@@ -50,9 +50,9 @@ return {
 	y : 0,								// 运行时记录位置 y。
 	has_position : false,				// 是否已经记录过运行时位置。
 	restore_position : false,			// 是否在进入房间时恢复运行时位置；默认 false，避免普通进出地图时 NPC 留在随机走动后的位置。
-	npc_default_behavior : 1,			// NPC 默认 AI 行为。
-	npc_default_behavior_a : 4,			// 敌对 NPC 感知/追击行为。
-	npc_behavior : 1,					// NPC 当前行为。
+	npc_default_behavior : NPC_BEHAVIOR.RANDOM_MOVE,			// NPC 默认 AI 行为。
+	npc_default_behavior_a : NPC_BEHAVIOR.OFOLLOW,			// 敌对 NPC 感知/追击行为。
+	npc_behavior : NPC_BEHAVIOR.RANDOM_MOVE,					// NPC 当前行为。
 	msg_id : "",						// 普通 NPC 当前对话文本 id。
 	follow_timer : 0,					// 敌对 NPC 追踪计时。
 	custom : {}							// 扩展字段。复杂剧情变量优先放这里，不要为每个需求加新列。

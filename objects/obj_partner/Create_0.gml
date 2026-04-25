@@ -35,7 +35,7 @@ maxframe = 2;
 sprtime = 5;
 
 //npc默认行为
-npc_default_behavior = 3;
+npc_default_behavior = NPC_BEHAVIOR.FOLLOW;
 npc_behavior = npc_default_behavior;
 //npc阻挡物
 block_solid = obj_solid;

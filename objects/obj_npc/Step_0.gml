@@ -12,11 +12,11 @@ if !rs_state_ready
 
 if !global.pause && !global.talking
 {
-	scr_npc_behavior();
+	npc_behavior_list(npc_behavior);
 	scr_movement();
 	if place_meeting(x,y,obj_interacting)
 	{
-		npc_behavior = 2;
+		npc_behavior = NPC_BEHAVIOR.TALKING;
 		wait_time = 15;
 		random_movement = 0;
 		vx = 0;
@@ -42,7 +42,7 @@ if !global.pause && !global.talking
 
 if global.talking && npc_behavior == 2
 {
-	scr_npc_talking();
+	npc_talking();
 }
 
 // 每帧记录行为、位置和 msg_id。

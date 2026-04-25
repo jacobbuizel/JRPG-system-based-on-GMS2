@@ -1,6 +1,6 @@
 if !global.pause && !global.talking
 {
-	scr_npc_behavior();
+	npc_behavior_list(npc_behavior);
 	scr_movement();
 	//精灵贴图设置
 	sprtime--;

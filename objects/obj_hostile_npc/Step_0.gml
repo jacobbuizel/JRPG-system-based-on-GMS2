@@ -12,7 +12,7 @@ if !rs_state_ready
 
 if !global.pause && !global.talking
 {
-	scr_npc_behavior();
+	npc_behavior_list(npc_behavior);
 	scr_movement();
 	if collision_circle(x,y,256,follow_target,false,true)
 	{
@@ -25,7 +25,7 @@ if !global.pause && !global.talking
 		if place_meeting(x,y,obj_player)
 		{
 			path_end();
-			npc_behavior = 0; //与玩家碰撞后待机
+			npc_behavior = NPC_BEHAVIOR.IDLE; //与玩家碰撞后待机
 		}
 		else
 		{

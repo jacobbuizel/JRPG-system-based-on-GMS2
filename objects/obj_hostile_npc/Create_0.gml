@@ -33,9 +33,9 @@ maxframe = 2;
 sprtime = 5;
 
 //npc默认行为
-npc_default_behavior = 1;
+npc_default_behavior = NPC_BEHAVIOR.RANDOM_MOVE;
 //玩家角色靠近npc的行为
-npc_default_behavior_a = 4;
+npc_default_behavior_a = NPC_BEHAVIOR.OFOLLOW;
 //npc行为初始化
 npc_behavior = npc_default_behavior;
 //npc阻挡物
