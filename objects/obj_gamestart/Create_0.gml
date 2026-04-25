@@ -22,6 +22,8 @@ if !global.gamestart
 	global.noresting = false;
 	global.bgm = 0;
 	global.battle = false;
+	// 战斗结束返回大地图后的全局遇敌冷却，防止多个敌人同时触发软锁。
+	global.battle_touch_cooldown = 0;
 	global.gameover = false;
 	
 	reroomsatus();

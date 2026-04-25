@@ -10,6 +10,9 @@ if !rs_state_ready
 	rs_state_ready = true;
 }
 
+// 战斗返回后，普通 NPC 也需要清理临时位置恢复标记，避免之后切换房间时继续强制回到战斗前坐标。
+battle_apply_return_state_for_entry(rs_id);
+
 if !global.pause && !global.talking
 {
 	npc_behavior_list(npc_behavior);

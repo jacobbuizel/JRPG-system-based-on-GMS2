@@ -50,6 +50,7 @@ follow_path = path_add();
 follow_target = obj_player;
 follow_timer = 0;
 follow_timer_max = 120;
+// 战斗返回后的短暂接触冷却，避免逃跑回地图后立刻再次进战斗。
 battle_touch_cooldown = 0;
 
 // 房间状态系统：记录敌对 NPC 的刷新、行为和位置。

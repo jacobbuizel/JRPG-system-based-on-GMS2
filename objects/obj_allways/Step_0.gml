@@ -66,6 +66,11 @@ if f4key && global.debug
 }
 
 //战斗管理
+// 全局遇敌冷却只控制开战触发，不影响敌人在大地图上的追击/移动。
+if variable_global_exists("battle_touch_cooldown") && global.battle_touch_cooldown > 0
+{
+	global.battle_touch_cooldown--;
+}
 if global.battle
 {
 	audio_group_set_gain(audiogroup_BGM_2,global.bgm_v,0);

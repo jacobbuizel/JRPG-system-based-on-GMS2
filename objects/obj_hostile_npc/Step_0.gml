@@ -10,19 +10,23 @@ if !rs_state_ready
 	rs_state_ready = true;
 }
 
-if variable_global_exists("battle_return_ctx") && is_struct(global.battle_return_ctx)
+// 逃跑或剧情返回后，原敌人会先恢复到离开前的位置，然后清理一次性恢复标记。
+if battle_apply_return_state_for_entry(rs_id)
 {
-	if global.battle_return_ctx.source_rs_id == rs_id
-	{
-		battle_apply_return_state_once();
-		battle_touch_cooldown = 60;
-		follow_timer = 0;
-	}
+	battle_touch_cooldown = 60;
+	follow_timer = 0;
 }
 
+// 接触冷却只影响开战，不影响敌人本身的普通移动/追击。
 if battle_touch_cooldown > 0
 {
 	battle_touch_cooldown--;
+}
+// 全局遇敌冷却用于处理多个敌人同时贴住玩家的情况，防止逃跑后立刻又被其它敌人拖回战斗。
+var _global_battle_touch_cooldown = 0;
+if variable_global_exists("battle_touch_cooldown")
+{
+	_global_battle_touch_cooldown = global.battle_touch_cooldown;
 }
 
 if !global.pause && !global.talking
@@ -41,7 +45,8 @@ if !global.pause && !global.talking
 		{
 			path_end();
 			npc_behavior = NPC_BEHAVIOR.IDLE; //与玩家碰撞后待机
-			if battle_touch_cooldown <= 0 && !global.battle
+			// 真正进入战斗的入口。战斗系统会记录来源房间和 rs_id。
+			if battle_touch_cooldown <= 0 && _global_battle_touch_cooldown <= 0 && !global.battle
 			{
 				battle_start_from_hostile(id);
 				exit;
