@@ -5,10 +5,13 @@
   ],
   "ResourceOrderSettings":[
     {"name":"update_note","order":1,"path":"notes/update_note/update_note.yy",},
+    {"name":"obj_battle_controller","order":1,"path":"objects/obj_battle_controller/obj_battle_controller.yy",},
     {"name":"obj_equip_p","order":1,"path":"objects/obj_equip_p/obj_equip_p.yy",},
     {"name":"obj_menu_equipment","order":1,"path":"objects/obj_menu_equipment/obj_menu_equipment.yy",},
     {"name":"obj_menu_skill","order":2,"path":"objects/obj_menu_skill/obj_menu_skill.yy",},
+    {"name":"room_BATTLE","order":1,"path":"rooms/room_BATTLE/room_BATTLE.yy",},
     {"name":"dis_scr_item_script_execute","order":1,"path":"scripts/dis_scr_item_script_execute/dis_scr_item_script_execute.yy",},
+    {"name":"scr_battle_system","order":4,"path":"scripts/scr_battle_system/scr_battle_system.yy",},
     {"name":"scr_draw_menu","order":2,"path":"scripts/scr_draw_menu/scr_draw_menu.yy",},
     {"name":"scr_equipment","order":1,"path":"scripts/scr_equipment/scr_equipment.yy",},
     {"name":"scr_menu_movement","order":2,"path":"scripts/scr_menu_movement/scr_menu_movement.yy",},

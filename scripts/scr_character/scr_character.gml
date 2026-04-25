@@ -22,6 +22,7 @@ var MP = 2;
 var descr = "???";
 var art = 0;
 var portrait = 0;
+var size = 1;
 #endregion
 switch(_id)//角色初始数据
 {
@@ -348,6 +349,7 @@ return {
 	descr			: descr,
 	art				: art,
 	portrait		: portrait,
+	size			: size,
 	main_h			: main_h,
 	sec_h			: sec_h,
 	armor			: armor,
@@ -413,6 +415,10 @@ function load_chara(_id){
 	if !variable_struct_exists(_chara, "spellbook_list") || !ds_exists(_chara.spellbook_list, ds_type_grid)
 	{
 		_chara.spellbook_list = ds_grid_create(skill_w,1);
+	}
+	if !variable_struct_exists(_chara, "size")
+	{
+		_chara.size = 1;
 	}
 
 	// 兼容旧存档：确保丝诺默认拥有法术书条目

@@ -10,6 +10,21 @@ if !rs_state_ready
 	rs_state_ready = true;
 }
 
+if variable_global_exists("battle_return_ctx") && is_struct(global.battle_return_ctx)
+{
+	if global.battle_return_ctx.source_rs_id == rs_id
+	{
+		battle_apply_return_state_once();
+		battle_touch_cooldown = 60;
+		follow_timer = 0;
+	}
+}
+
+if battle_touch_cooldown > 0
+{
+	battle_touch_cooldown--;
+}
+
 if !global.pause && !global.talking
 {
 	npc_behavior_list(npc_behavior);
@@ -26,6 +41,11 @@ if !global.pause && !global.talking
 		{
 			path_end();
 			npc_behavior = NPC_BEHAVIOR.IDLE; //与玩家碰撞后待机
+			if battle_touch_cooldown <= 0 && !global.battle
+			{
+				battle_start_from_hostile(id);
+				exit;
+			}
 		}
 		else
 		{

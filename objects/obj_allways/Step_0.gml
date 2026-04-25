@@ -3,9 +3,9 @@ if esckey game_end();
 //游戏重启键
 if f12key game_restart();
 //保存
-if f5key scr_saving(0);
+if f5key && !global.battle scr_saving(0);
 //读档
-if f6key && file_exists("savedata0.sav")
+if f6key && !global.battle && file_exists("savedata0.sav")
 {
 	audio_play_sound(sfx_select,9,false);
 	roomgoto = true;

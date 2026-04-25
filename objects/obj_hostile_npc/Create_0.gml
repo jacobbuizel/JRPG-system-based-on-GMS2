@@ -50,6 +50,7 @@ follow_path = path_add();
 follow_target = obj_player;
 follow_timer = 0;
 follow_timer_max = 120;
+battle_touch_cooldown = 0;
 
 // 房间状态系统：记录敌对 NPC 的刷新、行为和位置。
 // 没有 Creation Code 的敌对 NPC 会尝试用“注册表默认坐标 + 类型”自动绑定 rs_id。
